@@ -1,0 +1,4 @@
+Scrieti un program in C in care procesul initial (parintele) citeste de la tasta tura un numar intreg pozitiv N (reprezentand numarul de procese ce vor fi create intr-un lant), un nume de FIFO (fara spatii) si un text (un sir de caractere). Programul va crea un lant de N procese, fiecare proces avand un singur copil, cu exceptia ultimului.
+Dupa ce lantul de procese este creat, parintele creeaza un FIFO cu numele specif icat si scrie in el textul citit.
+Ultimul proces din lant (copilul cel mai adanc) deschide acelasi FIFO pentru cit ire si afiseaza pe ecran continutul citit din el.
+Programul nu trebuie sa aiba erori de compilare, warnings sau probleme de memori e de orice natura.

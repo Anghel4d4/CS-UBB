@@ -1,0 +1,82 @@
+/* ensure page is black and centers the form */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    background: #242424;
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+/* the white-on-dark “card” */
+.form-container {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* title styling */
+.form-title {
+    text-align: center;
+    margin: 0 0 1.5rem;
+    font-size: 1.75rem;
+}
+
+/* spacing of each label+input */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: #ddd;
+}
+
+/* full-width inputs */
+.form-group input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #2a2a2a;
+    color: #eee;
+    box-sizing: border-box;
+}
+
+/* button styling */
+.form-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #646cff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.form-button:hover {
+    background: #535bf2;
+}
+
+/* status messages */
+.status {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+.status.success {
+    color: #8f8;
+}
+.status.error {
+    color: #f88;
+}

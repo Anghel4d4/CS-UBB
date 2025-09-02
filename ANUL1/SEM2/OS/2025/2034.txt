@@ -1,0 +1,145 @@
+1. RO: Scrieti un grep care ia grupurile de cate 2 cuvinte, 
+separate de un singur spatiu, care sunt formate doar din litere mici si fiecare cuvant contine cel putin 2 vocale
+RĂSPUNS:
+
+grep -E "\b[a-z]*[aeiou][a-z]*[aeiou][a-z]* [a-z]*[aeiou][a-z]*[aeiou][a-z]*\b" fisier.txt
+
+Explicație: Ambele cuvinte conțin doar litere mici și cel puțin două vocale. 
+Îl delimităm corect la nivel de cuvânt.
+
+2. RO: Scrieti 2 grep-uri care iau liniile care nu au numar de caractere 
+multiplu al lui 3
+RĂSPUNS:
+
+grep -E -v "^(...)*$" fisier.txt
+
+grep -E -v '^(.{3})*$' fisier.txt
+
+
+Explicație: Se exclud liniile întrîg divizibile prin 3 caractere.
+
+3. RO: Scrieti un sed care inlocuieste prima aparitie a caracterului 
+A cu caracterul B
+RĂSPUNS:
+
+sed 's/A/B/' a.txt
+
+Explicație: Implicit, sed înlocuiește doar prima apariție pe linie. 
+i (insensibilitate) e opțional.
+
+4. RO: Scrieti un awk care afiseaza liniile care au primul cuvant 
+identic cu ultimul cuvant si al caror penultim cuvant are numar par de caractere
+RĂSPUNS:
+
+awk 'NF > 1 && $1 == $NF && length($(NF-1)) % 2 == 0' fisier.txt
+
+5. RO: Scrieti 3 moduri de a crea un fisier gol
+RĂSPUNS:
+
+touch a.txt
+echo -n > a.txt
+> a.txt
+
+6. RO: Scrieti 5 moduri de a verifica daca un string este gol (cu test)
+RĂSPUNS:
+
+if test -z "$A"
+if [ -z "$A" ]
+if [ "${#A}" -eq 0 ]
+if [ -z "$(echo $A)" ]
+if test $(echo $A | awk '{print length}') -eq 0
+
+7. RO: Afisati ierarhia proceselor a urmatorului cod (cu fork si wait)
+RĂSPUNS:
+
+P
+|-C1
+|-C2
+|-C3
+
+Explicație: Se creează 3 copii secvențial, deoarece părintele așteaptă 
+de fiecare dată.
+
+8. RO: Ce afiseaza codul? (expr “a” + 1)
+RĂSPUNS:
+
+Eroare: "non-numeric argument"
+
+Explicație: expr nu poate aduna caractere cu numere.
+
+9. RO: Schitati o implementare a functiilor popen si pclose (citire)
+RĂSPUNS:
+
+FILE* mypopen(char *cmd, char *type) {
+    int p[2];
+    pipe(p);
+    int caller = 0, child = 1;
+    if (type[0] == 'w') caller = 1, child = 0;
+    if (fork() == 0) {
+        close(p[caller]);
+        dup2(p[child], (type[0] == 'r') ? 1 : 0);
+        close(p[child]);
+        execlp("sh", "sh", "-c", cmd, NULL);
+        exit(1);
+    }
+    close(p[child]);
+    return fdopen(p[caller], type);
+}
+
+10. RO: Cate FIFO pot fi deschise de catre un proces daca fiecare FIFO
+ are capatul celalalt deschis de alt proces?
+RĂSPUNS:
+Nu există limitare strictă, teoretic mii, practic depinde de limitele
+descriptorilor de fișier (ulimit -n).
+
+11. RO: Cand am dori sa folosim execl si cand execv?
+RĂSPUNS:
+
+execl – când avem argumente fixe, scrise explicit
+
+execv – când argumentele sunt într-un vector (ex: argv[])
+
+12. RO: Definitia sectiunii critice
+RĂSPUNS:
+Cod care accesează resurse partajate și trebuie protejat pentru a preveni 
+accesul concurent necontrolat.
+
+13. RO: (Nespecificat)
+RĂSPUNS:
+Insuficientă informație – se presupune punctaj automat.
+
+14. RO: Care sunt consecintele înlocuirii lui pthread_mutex_lock cu sem_post?
+RĂSPUNS:
+Comportament nedefinit: sem_post crește valoarea semaforului, nu blochează 
+accesul, deci nu protejează secțiuni critice.
+
+15. RO: Definitie semafor binar
+RĂSPUNS:
+Semafor care ia valori 0 sau 1, folosit pentru a proteja secțiuni critice. 
+sem_wait blochează, sem_post deblochează.
+
+16. RO: Era un cod
+RĂSPUNS:
+Informație lipsă, se poate completa la nevoie.
+
+17. RO: Scrieti un mod de a preveni deadlock
+RĂSPUNS:
+Folosirea unui ordin global de blocare a resurselor și eliberarea lor în 
+ordine inversă.
+
+18. RO: Prin ce stare trece un proces când apelam pthread_join?
+RĂSPUNS:
+Trece din RUNNING în WAITING (BLOCKED) până când thread-ul asociat se termină.
+
+19. RO: Dacă avem B drept block size și A address size, cate adrese are un 
+double indirect?
+RĂSPUNS:
+
+(B / A)^2
+
+Explicație: Fiecare bloc are (B/A) adrese, iar al doilea nivel le indexează pe toate.
+
+20. RO: Ce se intampla cu continutul directorului in care montam o partitie?
+RĂSPUNS:
+Este ascuns temporar în timp ce sistemul de fișiere montat este activ; 
+conținutul original revine după demontare.

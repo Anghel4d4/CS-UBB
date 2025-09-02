@@ -1,0 +1,31 @@
+1 – „Dati o expresie regulata care accepta siruri formate doar din caracterele 1 si 0 si care contin cel mult doua aparitii ale caracterului 1.”
+
+2 – „Scrieti patru comenzi GREP care afiseaza toate liniile unui fisier text.”
+
+3 – „Se considera un fisier text care contine pe fiecare linie cuvinte (secvente nevide de litere mari sau mici) separate prin SPATII. Scrieti doua comenzi SED care sa stearga DOAR prima litera mica din cel de-al doilea cuvant de pe fiecare linie a acestui fisier.”
+
+4 – „Scrieti o comanda AWK care afiseaza suma tuturor campurilor numerice care sunt mai mari decat 50, de pe toate liniile.”
+
+5 – „Scrieti in doua moduri o linie de comanda in care programul B se executa doar daca programul A nu s-a executat cu succes.”
+
+6 – „Scrieti un script Shell care ia dintr-un fisier a.txt perechi de nume de fisiere si il redenumeste pe primul intr-al doilea doar daca al doilea fisier nu exista.”
+
+exam-ew07.txt – „Considerand ca apelul fork se executa cu succes, cate procese va crea programul de mai jos, excluzand procesul parinte initial? Justificati raspunsul.”
+
+exam-ew08.txt – „Scrieti un apel exec care executa programul si argumentele date ca argumente programului ./a de mai jos (ex: ./a ls -l /etc/passwd).”
+
+exam-ew09.txt – „Cum restaurati stdout dupa o redirectionare temporara cu dup2?”
+
+exam-ew10.txt – „Explicati ce se intampla daca un proces incearca sa citeasca dintr-un pipe gol al carui capat de citire a fost inchis de toate celelalte procese.”
+
+exam-ew13.txt – „Explicati programul de mai jos si explicati cum puteti schimba numarul cabinelor de vot.”
+
+exam-ew16.txt – „Dati valori pentru T, N1, N2 (toate strict pozitive) pentru care programul de mai jos se termina corect, stiind ca fiecare iteratie a buclei creeaza doua fire de executie pentru functia f1 (care asteapta la b1) si un fir pentru functia f2 (care asteapta la b2).”
+
+exam-ew17.txt – „Ce puteti face ca programator pentru a preveni deadlock-urile? Justificati raspunsul.”
+
+exam-ew18.txt – „Care este diferenta dintre politicile de planificare SJF si FIFO/FCFS?”
+
+exam-ew19.txt – „Un proces are urmatoarea lista de zone de memorie nealocata: 32, 44, 98. Cum va arata lista dupa doua apeluri malloc(33) stiind ca se foloseste algoritmul Next Fit?”
+
+exam-ew20.txt – „Ce se intampla cu un link hard cand este sters fisierul spre care puncteaza?”

@@ -1,0 +1,97 @@
+/* 1. Full-screen centering */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+}
+
+/* 2. Card styles */
+.config-form-container {
+    max-width: 360px;
+    width: 100%;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 3. Title and form fields */
+.config-form-title {
+    margin: 0 0 12px;
+    font-size: 1.3rem;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* 4. Button and messages (unchanged) */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #4a90e2;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+    background-color: #357ae8;
+}
+
+button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+.success-message,
+.error-message {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.success-message {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+}
+
+.error-message {
+    background-color: #fbe9e7;
+    color: #c62828;
+}

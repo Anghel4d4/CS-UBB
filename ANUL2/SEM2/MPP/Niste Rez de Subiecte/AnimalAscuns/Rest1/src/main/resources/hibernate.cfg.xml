@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
+        <property name="hibernate.connection.url">jdbc:sqlite:game.db</property>
+
+        <!-- Hibernate dialect for SQLite -->
+        <property name="hibernate.dialect">org.hibernate.community.dialect.SQLiteDialect</property>
+
+        <!-- Validate schema without modifying it -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Hibernate behavior -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Mapping for entities -->
+        <mapping class="Animal.Domain.Player"/>
+        <mapping class="Animal.Domain.Game"/>
+        <mapping class="Animal.Domain.Guess"/>
+        <mapping class="Animal.Domain.Configuration"/>
+    </session-factory>
+</hibernate-configuration>

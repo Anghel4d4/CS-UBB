@@ -1,0 +1,152 @@
+1. RO: Dați o expresie regulară care acceptă orice număr impar de cuvinte separate prin spații, fiecare cuvânt având număr impar de litere.
+RĂSPUNS:
+
+<\(..)*.\> (<\(..)*.\> <\(..)*.\>)*
+
+Explicație: Fiecare cuvânt are formă impară (două caractere repetate plus unul), iar gruparea asigură un număr impar de cuvinte.
+
+2. RO: Dați patru comenzi care afișează numărul de linii goale dintr-un fișier.
+RĂSPUNS:
+
+grep -E -c "^$" a.txt
+grep -E -v -c ".+" a.txt
+grep -E -v -c ".{1,}" a.txt
+grep -E -v -c "..*" a.txt
+
+Explicație: Toate caută linii fără caractere, prin potrivirea inversă a liniilor ne-goale.
+
+3. RO: Scrieți o comandă SED care afișează liniile dintr-un fișier ștergând din ele primul, al treilea, al cincilea, al șaptelea, etc spații.
+RĂSPUNS CORECTAT:
+
+sed -E ':a;s/^(([^ ]* ){1}[^ ]*) //;ta' test.txt
+
+Explicație: Se folosesc etichete și substituiri recurente pentru a elimina doar spațiile de pe poziții impare.
+
+4. RO: Scrieți o comandă AWK care afișează produsul ultimului câmp al liniilor de pe poziții impare care au număr impar de câmpuri.
+RĂSPUNS:
+
+awk 'BEGIN { p = 1 } { if (NF % 2 == 1 && NR % 2 == 1) p *= $NF } END { print p }' nrs.txt
+
+Explicație: Se verifică numărul de câmpuri (NF) și numărul liniei (NR), apoi se îmnmulțește ultimul câmp.
+
+5. RO: Dați patru moduri prin care ieșirea standard a unui proces poate fi redirectată.
+RĂSPUNS:
+
+command > a.txt
+command >> a.txt
+command | another_command
+command | tee a.txt
+
+Explicație: Se folosesc redirecționări simple, append, pipe și tee pentru duplicare.
+
+6. RO: Scrieți trei condiții Shell UNIX care verifică existența unui fișier.
+RĂSPUNS:
+
+if [ -e $file ]
+if [ $(ls $file 2>&1 | grep -E -c "No such file") -eq 0 ]
+if $(ls $file2 2>&1 | grep -E -q "No such file")
+
+Explicație: Prima este standard POSIX, celelalte verifică indirect prin mesajele de eroare.
+
+7. RO: Desenați ierarhia proceselor create de codul de mai jos, incluzând procesul părinte.
+RĂSPUNS:
+
+P
+|
++- C1
+
+Explicație: execlp înlocuiește procesul curent, deci fork() nu se mai execută niciodată.
+
+8. RO: Adăugați codul C necesar pentru ca instrucțiunea de mai jos să nu se blocheze așteptând la intrarea standard.
+RĂSPUNS:
+
+int fd = open("a.txt", O_RDWR);
+dup2(fd, 0);
+execlp("cat", "cat", NULL);
+
+Explicație: Se redirecționează stdin dintr-un fișier pentru ca cat să aibă input.
+
+9. RO: Schițați o implementare a funcțiilor popen și pclose, doar pentru cazul în care outputul comenzii e citit în codul C.
+RĂSPUNS:
+
+FILE *popen_read(const char *cmd) {
+    int pipefd[2];
+    pipe(pipefd);
+    if (fork() == 0) {
+        close(pipefd[0]);
+        dup2(pipefd[1], 1);
+        execlp("sh", "sh", "-c", cmd, NULL);
+    }
+    close(pipefd[1]);
+    return fdopen(pipefd[0], "r");
+}
+int pclose_read(FILE *f) {
+    int status;
+    wait(&status);
+    fclose(f);
+    return status;
+}
+
+10. RO: Câte FIFO-uri poate deschide pentru citire un proces, dacă FIFO-urile sunt și vor fi întotdeauna folosite de alte procese doar pentru citire?
+RĂSPUNS:
+Zero.
+Explicație: Un proces nu poate deschide o FIFO doar pentru citire dacă nimeni nu o deschide pentru scriere (se blochează).
+
+11. RO: Când ați folosi un FIFO în locul unui pipe?
+RĂSPUNS:
+FIFO se folosește când procesele nu au un strămoș comun, deci nu pot comunica prin pipe anonim (care e doar în memorie).
+
+12. RO: Ce este o "secțiune critică"?
+RĂSPUNS:
+O secțiune critică este o parte de cod unde se accesează resurse partajate, necesitând sincronizare pentru a evita conflictele.
+
+13. RO: Când ați folosi un mutex în locul unui rwlock?
+RĂSPUNS:
+Când folosim condiționale (pthread_cond_wait) sau când toate firele efectuează operații de scriere (non-paralele), mutex este mai potrivit.
+
+14. RO: Care va fi efectul înlocuirii apelurilor la pthread_mutex_lock cu apeluri la sem_wait?
+RĂSPUNS:
+
+Folosind sem_wait în loc de mutex_lock dar păstrând mutex_unlock => comportament nedefinit.
+
+Folosind semafor binar => similar mutex.
+
+Semafor generic => pot trece mai multe fire simultan => risc de acces concurent neprotejat.
+
+15. RO: Ce face pthread_cond_wait cu mutex-ul primit ca argument?
+RĂSPUNS:
+Eliberează mutex-ul când așteaptă semnalul, apoi îl reia automat când condiția este îndeplinită.
+
+16. RO: Schițați o soluție pentru problema producător-consumator.
+RĂSPUNS:
+Se folosesc 2 semafoare:
+
+empty pentru a ști dacă e spațiu
+
+full pentru a ști dacă sunt date
+în combinație cu un mutex pentru protejarea bufferului partajat.
+
+17. RO: Ce puteți face ca programator pentru a preveni deadlock-urile?
+RĂSPUNS:
+
+Stabilește un ordin de blocare a resurselor
+
+Folosește timeout
+
+Evită ciclurile de așteptare circulară
+
+18. RO: Prin ce tranziție de stare va trece un proces când apelează pthread_cond_wait? Justificați răspunsul.
+RĂSPUNS:
+Trece din starea RUNNING → WAITING, deoarece așteaptă un semnal pentru a putea continua.
+
+19. RO: Ce conține un fișier de tip director în sistemul de fișiere Linux?
+RĂSPUNS:
+Conține intrări de directoare (nume + inode) pentru fișierele și subdirectoarele pe care le conține.
+
+20. RO: Explicați diferența dintre un link simbolic și un link hard.
+RĂSPUNS:
+
+Link simbolic: un fișier special care conține calea către alt fișier (poate fi rupt)
+
+Link hard: referință directă la același inode; nu poate face referințe la directoare sau la fișiere din alte partiții.
+

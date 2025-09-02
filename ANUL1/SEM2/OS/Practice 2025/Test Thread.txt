@@ -1,0 +1,11 @@
+Scrieți un program în C care citește de la tastatură (nu din argumente) un număr N, urmat de N² numere ce reprezintă elementele unei matrice pătrate de dimensiune N x N. Apoi se citește un alt număr întreg K.
+
+Pentru fiecare element din matrice se va crea un thread. Fiecare thread calculează media valorilor vecinilor aflați la o distanță de cel mult K elemente pe verticală și pe orizontală (fără diagonale). Această medie este apoi scăzută din valoarea elementului curent.
+
+Daca, în urma acestei operații, valoarea asociată unui element devine negativă, thread-ul asociat afișează un mesaj și se oprește — nu mai modifică vecinii.
+
+La final, ultimul thread care rămâne activ va afișa un mesaj în limba spaniolă.
+
+Programul trebuie să fie eficient din punctul de vedere al timpului de execuție și să trateze în mod corect toate cazurile excepționale. Soluția trebuie să utilizeze mecanisme de sincronizare corespunzătoare.
+
+Compilați cu toate warning-urile activate. Aveți grijă la alocările de memorie.

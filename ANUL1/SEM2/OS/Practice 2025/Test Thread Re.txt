@@ -1,0 +1,6 @@
+Implementați un program care simulează următoarea metaforă folosind thread-uri și mecanisme de sincronizare.
+
+Un grup de 10 pasageri merg în excursie cu avionul.
+Urcarea în avion se face pe o scară pe care încap maximum 3 persoane, dar urcarea începe doar după ce toți pasagerii au ajuns lângă avion.
+
+Când toți pasagerii sunt în avion, pilotul decolează.

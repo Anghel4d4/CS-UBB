@@ -1,0 +1,379 @@
+1 RO: Dati o expresie regulara care accepta stringuri formate doar din caracterele 1 si 0 si care contin secventa 0110 sau secventa 1001.
+
+	^[01]*(0110|1001)[01]$
+
+
+2 RO: Scrieți două comenzi GREP care numără liniile goale dintr-un fișier text.
+
+	grep -c '^$' file.txt
+	grep -E -c '^[[:space:]]*$' file.txt
+
+
+3 RO: Fiecare linie conține cuvinte formate din litere, separate prin spații. 
+Scrieți două comenzi SED care interschimbă primul cuvânt cu ultimul pe fiecare linie.
+
+	sed -E 's/^([a-z]+)( .* )([a-z]+)$/\3\2\1/g' file.txt
+	sed -E 's/^([^ ]+)( .* )([^ ]+)$/\3\2\1/g' file.txt
+
+4. RO: Scrieţi o comandă AWK care afișează produsul primului și ultimului câmp de pe fiecare linie dacă ambele sunt întregi.
+	
+	awk '($1 ~ /^[0-9]+$/ && $NF ~ /^[0-9]+$/){print $1 *$NF}' file.txt
+
+5. RO: Două moduri de a rula B doar dacă A are succes
+
+
+	A && B
+	If A; then B; fi
+
+	Unde A si B sunt doua comenzi daca A returneaza 0 adica sa efectua B are loc,
+	pentru cazul 2 Daca are loc se executa comanda dintre then si fi
+
+6.RO: Script shell ce citește perechi de fișiere din a.txt și copiază primul în al doilea.
+	
+	while read src dest; do
+		cp "src" "dest"
+	done < a.txt
+
+7.RO: fork într-un while + wait. Câte procese fiu sunt create
+	
+	int main() { P0
+         while(wait(NULL) < 0) 1.P0  2.P0,(wait retunreaza pidul (iesim din bucla) <-|
+            if(fork() == 0) { 1. P0->C1                                              |
+                exit(0); 1. C1 moare                                                 |
+            }                        ------------------------------------------------
+         }
+         return 0;
+    	}
+  
+	1 PROCES FIU E CREAT C1
+}
+
+8.Scrieti un apel exec care execute programul si argumentele date ca argumente programului 
+./a de mai jos (ex: ./a ls -l /etc/passwd)
+
+	int main(int argc, char** argv) {
+        
+		execvp(argv[1],&argv[1]);
+        return 0;
+    }
+
+
+9.Trimiteți șirul "Hello\nWorld\n" către comanda wc -l folosind popen în modul scriere.
+	#include <stdio.h>
+
+int main() {
+    FILE* f = popen("wc -l", "w");
+    if (f == NULL) {
+        perror("popen");
+        return 1;
+    }
+
+    fputs("Hello\nWorld\n", f);
+    pclose(f);
+
+    return 0;
+}
+
+
+#include <stdio.h>
+
+int main() {
+    FILE* f = popen("echo -e \"Hello\\nWorld\" | wc -l", "r");
+    if (f == NULL) {
+        perror("popen");
+        return 1;
+    }
+
+    char = buffer[128];
+
+    if (fgets(buffer,(sizeof(buffer),f) != NULL){
+	print("Output: %s", buffer);
+	{
+    pclose(f);
+
+    return 0;
+}
+
+
+10. RO: Adăugați codul sursă necesar la fragmentul de cod de mai jos pentru ca "Hello from child!" 
+să fie scris în pipe de către procesul copil, 
+iar procesul părinte să citească și să afișeze acest mesaj la consolă.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    int p[2]; // p[0] for read, p[1] for write (descirpotrii)
+    pipe(p);
+    char buf[100];
+
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0) { // Child process
+        close(p[0]);
+	write(p[1],"Hello child!\n",strlen("Hello from child!\n));
+	close(p[1]);
+	_exit(EXIT_SUCCES);
+    } else { // Parent process
+	close(p[1]);
+	read(p[0],buf,sizeof(buf));
+        printf("Parintele a citit: %s", buf);
+
+	close(p[0]);
+        // Adauga cod aici / Add code here
+    }
+
+    return 0;
+}
+
+  
+părinte → scrie, copil → citește din pipe0
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    int p[2]; // p[0] for read, p[1] for write (descirpotrii)
+    pipe(p);
+    char buf[100];
+
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0) { // Child process
+        close(p[1]);
+	write(p[0],buf,sizeof(buf));
+	printf("copilul printeaza: %s",buf);
+	close(p[0]);
+	_exit(0);
+    } else { // Parent process
+	close(p[0]);
+	write(p[1], "Salut de la parinte",strlen("Salut de al parinte")+1);
+	close(p[1]);
+	wait(NULL);
+        printf("Parintele a citit: %s", buf);
+
+	close(p[0]);
+        // Adauga cod aici / Add code here
+    }
+
+    return 0;
+}
+
+
+11 RO: Discutati durata de executie a programului de mai jos in functie de tipul 
+fisierului abc si alte aspecte relevante.
+
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int f;
+    char c;
+    f = open("abc", O_RDONLY);
+    if(f >= 0) {
+        read(f, &c, 1);
+        close(f);
+    }
+    return 0;
+}
+
+durata de executie depinde de:
+	daca fisierul abc exista sau nu daca nu exista returneaza -1 
+daca exista se face citirea
+	dimensiunea nu conteaza deoarece se citeste un singur byte
+	tipul fisieurlui conteaza, deoarec daca e un fisier simplu aceasa opertiune poate
+	dyra milisecnde
+	daca e create cu mkfifo e un pipe, timpul de executie e mai mare
+	deoarece ar trebui sa astepte ca alt porces sa deschide pipeul pentru 
+scirere,deasemenea poate fi blocat	
+	poate afecta si locatia fisierului pe hdd sdd sau ram
+	
+12.RO: Protejați secțiunea critică din programul de mai jos.
+
+int n = 0;
+pthread_mutex_t mx = PTHREAD_MUTEX_INITIALIZER;
+void* f(void* v){
+    pthread_mutex_lock(&mx);
+    if(n < 500) {
+        n++;
+    }
+    pthread_mutex_unlock(&mx);
+    return NULL;
+}
+
+int main(){ 
+    pthread_t t;
+    pthread_create(&t, NULL, f, NULL);
+    pthread_join(t, NULL);
+    return 0;
+}
+
+
+13RO: Asigurați-vă că maximum 3 persoane votează deodată.
+
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#define TOTAL 100
+sem_t sem_v;
+
+void* person(void* args){
+    sem_wait(&sem_v);
+
+    printf("Person %ld voting...\n", (long)args);
+    sleep(1);  // Simulează timpul de vot
+	
+    sem_post(&sem_v);
+    return NULL;
+}
+
+int main(){
+    pthread_t t[TOTAL];
+    
+    sem_init(&sem, 0,3);
+    for(long i = 0; i < TOTAL; i++) {
+        pthread_create(&t[i], NULL, person, (void*)i);
+    }
+
+    for(int i = 0; i < TOTAL; i++) {
+        pthread_join(t[i], NULL);
+    }
+	
+    sem_destroy(&sem_v);
+    return 0;
+}
+
+14. RO: Ce face funcția pthread_cond_wait cu mutexul primit ca argument?
+
+   Elibereaz amutexul primit ca argument si se pune in asteptare blocand threadul in asteptare
+	 pe conditie, cand conditita e semnalata de pthread_cond_signal insemana ca
+		reia mutexul continue executia
+
+
+15.Cum ar fi afectată funcționarea unui program dacă toate mutex-urile s-ar înlocui cu 
+ rwlock-uri și toate apelurile pthread_mutex_lock s-ar înlocui cu pthread_rwlock_wrlock? Justificaţi răspunsul.
+
+Dacă înlocuim toate mutex-urile dintr-un program cu rwlock-uri (pthread_rwlock_t) și t
+oate apelurile pthread_mutex_lock cu pthread_rwlock_wrlock, programul va funcționa, 
+dar cu performanțe mai slabe și fără beneficii suplimentare.
+
+Funcțional, pthread_rwlock_wrlock se comportă similar cu un mutex: oferă acces exclusiv 
+unui singur thread la un moment dat. Cu toate acestea, rwlock-urile sunt concepute 
+pentru a permite acces simultan în modul de citire (rdlock), dar dacă folosim doar wrlock, 
+acest avantaj este anulat.
+
+
+16.RO: Dați valori distincte pentru T, N1, N2, N3 (toate strict pozitive) pentru care 
+programul de mai jos se termină corect.
+
+#include <pthread.h>
+
+pthread_barrier_t b1, b2, b3;
+
+void* f1(void* a) { pthread_barrier_wait(&b1); return NULL; }
+void* f2(void* a) { pthread_barrier_wait(&b2); return NULL; }
+void* f3(void* a) { pthread_barrier_wait(&b3); return NULL; }
+
+int main() {
+    int T, N1, N2, N3;
+
+    pthread_t t[T][3];
+
+    pthread_barrier_init(&b1, NULL, N1);
+    pthread_barrier_init(&b2, NULL, N2);
+    pthread_barrier_init(&b3, NULL, N3);
+
+    for (int i = 0; i < T; i++) {
+        pthread_create(&t[i][0], NULL, f1, NULL);
+        pthread_create(&t[i][1], NULL, f2, NULL);
+        pthread_create(&t[i][2], NULL, f3, NULL);
+    }
+
+    for (int i = 0; i < T; i++) {
+        pthread_join(t[i][0], NULL);
+        pthread_join(t[i][1], NULL);
+        pthread_join(t[i][2], NULL);
+    }
+
+    pthread_barrier_destroy(&b1);
+    pthread_barrier_destroy(&b2);
+    pthread_barrier_destroy(&b3);
+
+    return 0;
+}
+
+
+T = 5
+N1 = 5
+N2 = 5
+N3 = 5
+
+17.RO: Ce puteţi face ca programator pentru a preveni deadlock-urile? Justificaţi răspunsul.
+
+Penteu a preveni deadlockul trebuie sa ne asiguram ca nu se formeaza un ciclu de 
+asteptare intre treaduri. Olutie eficienta este o ordine in cod folosind mutex
+daca un un thread trebuie sa blocheze doi mutexi el trebuie sa o faca mereu in 
+aceeasi ordine, mai putem folosi un singur lock pentru sectiuni mari de cod reducand
+resursele partajate
+
+18. RO: Care este diferența dintre politicile de planificare SJF și STCF?
+
+ SJF short job first, ruleaza mai intii cel mu scurt ca timp de executie job, o problema
+este ca e non-preemtiv odata inceput ruleaza un job pana a final,
+poate cauza starvation in cazul mai multor joburi intercative
+
+ STCF shortest time to completion first
+ este preemitv si daca vine mai "tarziu" un proces care e mai scurt ca timp de executie
+acesta opreste din eecutie pe cel curent si ruleaza pe acel mai scurt
+este mai echitabil
+
+19.Un proces are următoarea listă de zone de memorie nealocată: 32, 44, 98.
+Cum va arăta lista după două apeluri malloc(33) ș⭢tiind că se folosește algoritmul Worst Fit?
+
+situatia curenta : [32, 44, 98]
+
+worstfit va lua mereu cel mai amre block de memorie in care incape resursa
+
+1.malloc(33)
+alegem cea mai mare zona de mem din cele car sunt > 33
+Alegem 98
+alocam 33 deci => 98-33 = 65
+
+2.malloc(33)
+alegem cea mai mare zona de mem din cele car sunt > 33
+Alegem 65
+alocam 33 deci => 65-33 = 32
+
+rez final [32,44,32]
+
+
+20.RO: Cum diferă un link hard de unul simbolic?
+
+Un hard link este o referinta directa la continutul fisieurului (inodul-sau), atat
+referinta cat si fisierul original for avea acelasi inode. Daca fisierul original
+spre ex e sters (unlink()) atunci continutul oricum ramane accesibil pe hard
+dearece a ramas acea referinta la inod, pentru a sterge complet, trebuie sterse toate
+referintele pana refference count este egal cu 0
+
+Un simbolic link difera prin faptul ca nu este o referinta si un fisier special ce nu detine
+continutul fisierului orginal ci pathul catre acel fisier.Daca stergem fisierul original
+nu mai putem accesa resursa deoarece vom avea un broken link
+Deasemenea putem crea un symbolic link intre doua fisiere din doua partitii diferite

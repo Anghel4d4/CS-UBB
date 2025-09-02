@@ -1,0 +1,185 @@
+1.  Dați o expresie regulată care acceptă o expresie aritmetică formată din oricâte adunări și scăderi 
+(fără paranteze) de numere ne-negative multiple de 3.
+
+^([369]*[0369])([+-][369]*[0369])*$ 
+
+
+2.Dați patru comenzi care afișează numărul de linii goale dintr-un fișier.
+
+	grep -c "^$" file.txt
+	grep -Ec "^$" file.txt
+	awk 'NF == 0' file.txt | wc -l
+	sed -n '/^$/p' file.txt | wc -l
+	wc -l <(grep '^$' file.txt)
+
+3.Scrieți o comandă SED care afișează liniile unui fișier, interschimbând pe 
+fiecare linie primul A mare cu primul B mare.
+
+	sed -E 's/^([^A]*)(A)([^B]*)(B)/\1B\3A/g' file.txt
+
+4.Scrieți o comandă AWK care afișează suma câmpurilor de pe poziția egală cu 
+numărul liniei curente.
+
+	awk '{ if (NF >= NR) sum += $(NR) } END { print sum }' file.txt
+
+
+5.Cum puteți redirecționa în linia de comandă ieșirea de eroare 
+(stderr) prin pipe către un alt program?
+
+	ls /etc /nonexistent 2>&1 | grep "No such"
+„Pentru a redirecționa stderr prin pipe către un alt program, s
+e folosește 2>&1 plasat înainte de |. Aceasta face ca atât stdout cât și stderr să fie trimise prin pipe.”
+comandă 2>&1 | alt_program
+
+6.Scrieți trei condiții shell UNIX care verifică existența unui fișier.
+
+if [ -e /path/to/file ]; then
+  echo "exist."
+else
+  echo "fail."
+fi
+if [ -f /path/to/file ]; then
+  echo "exist."
+else
+  echo "fail."
+fi
+if test -e nume_fisier; then
+  echo "exist ."
+else
+  echo "fail."
+fi
+
+
+7.Care este numărul maxim de procese create de codul de mai jos care vor 
+exista simultan, incluzând procesul părinte?
+int main() {
+    fork();
+    fork();
+    fork();
+    return 0;
+}
+  R/S :8 procese
+
+
+
+8.Adăugați liniile de cod necesare pentru ca instrucțiunea de mai jos să 
+suprascrie conținutul unui fișier b.txt. Nu modificați instrucțiunea.
+execlp("ls", "ls", "/etc", NULL);
+
+
+int fd = open("b.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+dup2(fd, 1);  // redirect stdout to b.txt
+close(fd);
+
+execlp("ls", "ls", "/etc", NULL);
+
+
+9.De ce nu e recomandat să comunicați bidirecțional printr-un singur FIFO?
+
+Nu e recomandat de folosit fifo deoarece este unidirectional,
+adica poate fi folosit ori pentru cititre ori scriere nu in acelasi timp pentru ambele
+daca procesul A scrie si B vrea si el sa scrie in acelasi timp apare deadlock
+
+10.Câte FIFO-uri poate deschide pentru citire un proces, dacă FIFO-urile sunt și vor 
+fi întotdeauna folosite de alte procese doar pentru citire?
+
+Zero, Cand un proces incearca sa deschida fifo pentru cititre sistemul blocheaza apelul
+open pana cand un alt proces deschide acelasi fifo pentru scriere
+
+
+11.Când ai folosi execvp în locul lui execlp?
+
+Folosești execvp când ai argumentele într-un vector (array de stringuri)
+	Când ai argumentele într-un char* argv[]
+
+Folosești execlp când ai argumentele "scrise de mână", adică în listă, separate.
+ NULL)	Când știi exact ce argumente vrei
+
+
+12.O resursă critică este o zonă de memorie sau o componentă a sistemului care nu 
+trebuie accesată simultan de mai multe fire de execuție (threads) sau procese, 
+pentru a evita comportamente imprevizibile sau coruperea datelor.
+
+
+13.De ce un thread trebuie să reverifice condiția la ieșirea din apelul pthread_cond_wait?
+pthread_cond_wait() poate provoca "spurious wakeups", adică treziri false.
+
+
+De aceea, threadul trebuie să reverifice condiția folosind while pentru a 
+se asigura că ea este cu adevărat îndeplinită înainte de a continua.
+
+
+14.Care va fi efectul înlocuirii apelurilor la pthread_mutex_lock cu apeluri 
+la sem_wait? Justificați răspunsul.
+
+Înlocuirea pthread_mutex_lock cu sem_wait poate fi corectă doar dacă semaforul 
+este inițializat cu valoarea 1 și este folosit exclusiv ca un mutex binar.
+
+Dacă inițializezi semaforul cu o valoare diferită de 1 → mai mulți threads pot intra în același timp 
+corupere a datelor.
+
+se poate duce la deadlock
+
+
+15.Definiți ce e un semafor binar și explicați-i funcționarea.
+
+
+Un semafor binar este un tip special de semafor care poate avea doar două valori: 0 sau 1.
+
+Valoarea 1 înseamnă că resursa este disponibilă
+
+Valoarea 0 înseamnă că resursa este ocupată
+
+Este echivalent funcțional cu un mutex,
+
+sem_init(&sem, 0, 1);
+→ Inițializează semaforul cu valoarea 1 
+
+sem_wait(&sem);
+→ Dacă valoarea e 1, o decrementează la 0 și thread-ul intră în secțiunea critică
+→ Dacă valoarea este 0, thread-ul se blochează până când altul face sem_post
+
+sem_post(&sem);
+→ Incrementează valoarea semaforului (de la 0 la 1), permițând altui thread să intre 
+în secțiunea critică
+
+
+16.Cum puteți incrementa valoarea unui semafor?
+
+incrementam folosind sem_post()
+dacă semaforul avea valoarea 0, după sem_post() va avea 1.
+
+Dacă era 1 → devine 2.
+Dacă era 2 → devine 3.
+
+
+17 Ce puteți face ca programator pentru a preveni deadlock-urile? Justificaţi răspunsul.
+
+Pentru a preveni deadlock-urile, programatorul trebuie să se asigure că mutex-urile 
+sunt blocate într-o ordine globală fixă și eliberate corespunzător.
+O bună proiectare și revizuire a accesului concurent este esențială pentru evitarea 
+deadlock-ului.
+
+18.rin ce tranziție de stare va trece un proces când apelează pthread_barrier_wait? 
+Justificaţi răspunsul
+
+Când un thread apelează pthread_barrier_wait, el trece din starea Running în starea 
+Blocked (așteptare), până când numărul total de threaduri specificat ajung la barieră.
+Apoi, toate threadurile sunt deblocate și redevin active. Aceasta este o metodă de 
+sincronizare între threaduri.
+
+
+19.Considerând că dimensiunea unui bloc este B și dimensiunea unei adrese este A,
+ câte blocuri de date sunt adresate de indirectarea triplă a unui i-nod?
+
+Numărul total de blocuri de date adresabile prin indirectare triplă este:
+
+(B/A)^3
+
+
+20.Ce se întâmplă cu conținutul unui director în care e montată o partiție?
+
+
+Când o partiție este montată într-un director (de exemplu /mnt), conținutul 
+acelui director devine temporar inaccesibil, fiind „mascat” de sistemul de 
+fișiere al partiției montate.dupa devine din nou accesibil.
