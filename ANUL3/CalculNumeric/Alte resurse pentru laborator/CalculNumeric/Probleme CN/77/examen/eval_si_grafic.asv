@@ -1,0 +1,25 @@
+function eval_si_grafic(x, f, fd, t)
+% x - nodurile
+% f - valorile in noduri
+% fd - derivate necesare algoritmului pentru coeficienti
+% t - punctele in care se cer valorile functiei
+
+[a,b,c,d] = splineCubic(x, f, fd);
+
+n = length(x);
+x = x(:); 
+t = t(:);
+k = ones(size(t));
+for j = 2:n-1
+    k(x(j) <= t) = j;
+    %daca x(j)<=t atunci k(1) primeste j
+end
+
+% Evaluare interpolant
+s = t - x(k);
+valpct = d(k) + s.*(c(k) + s.*(b(k) + s.*a(k)));
+
+display(valpct);
+
+plot(x, f, 'o', t, valpct, '.');
+legends('noduri','spline');

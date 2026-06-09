@@ -1,0 +1,476 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Monday, June 05, 2017 23:41:38}
+%TCIDATA{LastRevised=Thursday, June 08, 2017 15:09:56}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Subiectul 3}
+
+\begin{problem}
+\label{Gautschip3.34}Consider\u{a}m problema de interpolare Hermite:
+determina\c{t}i $H_{2n-1}f\in P_{2n-1}$ astfel \^{\i}nc\^{a}t
+\begin{equation}
+\left(  H_{2n-1}f\right)  \left(  \tau_{\nu}\right)  =f\left(  \tau_{\nu
+}\right)  ,~\left(  H_{2n-1}f\right)  ^{\prime}\left(  \tau_{\nu}\right)
+=f^{\prime}\left(  \tau_{\nu}\right)  ,~\nu=1,2,\dots,n. \tag{(*)}%
+\label{fstea}%
+\end{equation}
+Prin analogie cu formula lui Lagrange, polinomul care rezolv\u{a} \ref{fstea}
+se poate scrie cu ajutorul polinoamelor fundamentale de interpolare
+Hermite\ $h_{\nu,0}$, $h_{\nu,1}$ sub forma%
+\[
+\left(  H_{2n-1}f\right)  (t)=\sum_{\nu=1}^{n}\left[  h_{\nu,0}(t)f_{\nu
+}+h_{\nu,1}\left(  t\right)  f_{\nu}^{\prime}\right]  .
+\]
+
+
+\begin{enumerate}
+\item[(a)] C\u{a}uta\c{t}i $h_{\nu,0}$ \c{s}i $h_{\nu,1}\left(  t\right)  $
+sub forma
+\[
+h_{\nu,0}\left(  t\right)  (t)=\left(  a_{\nu}+b_{\nu}t\right)  \ell_{\nu}%
+^{2}(t),~h_{\nu,1}\left(  t\right)  \left(  t\right)  =\left(  c_{\nu}+d_{\nu
+}t\right)  \ell_{\nu}^{2}(t),
+\]
+unde $\ell_{\nu}$ sunt polinoamele fundamentale de interpolare Lagrange.
+Determina\c{t}i constantele $a_{\nu}$, $b_{\nu}$, $c_{\nu}$, $d_{\nu}$.
+
+\item[(b)] Ob\c{t}ine\c{t}i formula de cuadratur\u{a}
+\[
+\int_{a}^{b}f(t)w(t)\mathrm{d}\,t=\sum_{\nu=1}^{n}\left[  \lambda_{\nu
+}f\left(  \tau_{\nu}\right)  +\mu_{\nu}f^{\prime}\left(  \tau_{\nu}\right)
+\right]  +R_{n}(f)
+\]
+cu proprietatea $R_{n}\left(  f\right)  =0$ pentru orice $f\in\mathbb{P}%
+_{2n-1}$.
+
+\item[(c)] Ce condi\c{t}ii trebuie impuse asupra polinomului nodurilor
+$\omega_{n}(t)=\prod\limits_{\nu=1}^{n}\left(  t-t_{\nu}\right)  $ (sau asupra
+nodurilor $\tau_{\nu}$) astfel ca $\mu_{\nu}=0$ pentru $\nu=1,2,\dots,n$?
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Polinoamele $h_{\nu,0}$ trebuie s\u{a} verifice%
+\[
+h_{\nu,0}\left(  \tau_{\nu}\right)  =1,~h_{\nu,0}^{\prime}\left(  \tau_{\nu
+}\right)  =0,
+\]
+iar condi\c{t}iile  $h_{\nu,0}(\tau_{%
+%TCIMACRO{\U{3bc} }%
+%BeginExpansion
+\mu
+%EndExpansion
+})=h_{\nu,0}^{\prime}(\tau_{%
+%TCIMACRO{\U{3bc} }%
+%BeginExpansion
+\mu
+%EndExpansion
+})=0$, $\mu\neq\nu$, sunt automat verificate datorit\u{a} formei lui
+$h_{\nu,0}$. Astfel,%
+\[
+a_{\nu}+b_{\nu}\tau_{\nu}=1,~b_{\nu}+\left(  a_{\nu}+b_{\nu}\tau_{\nu}\right)
+\cdot2\ell_{\nu}\left(  \tau_{\nu}\right)  \ell_{\nu}^{\prime}\left(
+\tau_{\nu}\right)  =0,
+\]
+adic\u{a},%
+\begin{align*}
+a_{\nu}+b_{\nu}\tau_{\nu} &  =1,\\
+b_{\nu}+2\ell_{\nu}^{\prime}\left(  \tau_{\nu}\right)   &  =0.
+\end{align*}
+Rezolv\^{a}nd sistemul cu necunoscutele $a_{\nu}$ \c{s}i  $b_{\nu}$ \c{s}i
+\^{\i}nlocuind \^{\i}n  $h_{\nu,0}$ se ob\c{t}ine%
+\[
+h_{\nu,0}(t)=\left[  1-2(t-\tau_{\nu})\ell_{\nu}^{\prime}(\tau_{\nu})\right]
+\ell_{\nu}^{2}(t),\quad\nu=1,2,\dots,n.
+\]
+Analog, $h_{\nu,1}$ satisface%
+\[
+h_{\nu,1}\left(  \tau_{\nu}\right)  =0,~h_{\nu,1}^{\prime}\left(  \tau_{\nu
+}\right)  =1
+\]
+din care se ob\c{t}ine
+\[
+c_{\nu}+d_{\nu}\tau_{\nu}=0,~d_{\nu}+(c_{\nu}+d_{\nu}\tau_{\nu})\cdot
+2\ell_{\nu}(\tau_{\nu})\ell_{\nu}^{\prime}(\tau_{\nu})=1,
+\]
+adic\u{a},
+\[
+c_{\nu}+d_{\nu}\tau_{\nu}=0,\quad d_{\nu}=1.
+\]
+Astfel, $c_{\nu}=-\tau_{\nu}$ \c{s}i\
+\[
+h_{\nu,1}(t)=(t-\tau_{\nu})\ell_{\nu}^{2}(t),\quad\nu=1,2,\dots,n.
+\]
+Derivata polinomului fundamental \^{\i}n $\tau_{\nu}$ este%
+\[
+\ell_{\nu}^{\prime}(\tau_{\nu})=\sum_{\mu\neq\nu}\frac{1}{\tau_{\nu}-\tau
+_{\mu}}.
+\]
+
+
+\item[(b)] Formula de cuadratur\u{a} se ob\c{t}ine integr\^{a}nd termen cu
+termen%
+\[
+\int_{a}^{b}f(t)w(t)\mathrm{d}\,t=\int_{a}^{b}p(t)w(t)\mathrm{d}\,t+R_{n}(f),
+\]
+Gradul de exactitate este $2n-1$. Utiliz\^{a}nd punctul (a), se ob\c{t}ine%
+\begin{align*}
+\int_{a}^{b}p(t)w(t)\mathrm{d}\,t &  =\int_{a}^{b}\sum_{\nu=1}^{n}\left[
+h_{\nu,0}(t)f_{\nu}+h_{\nu,1}\left(  t\right)  f_{\nu}^{\prime}\right]
+w(t)\mathrm{d}\,t\\
+&  =\sum_{\nu=1}^{n}\left[  f_{\nu}\int_{a}^{b}h_{\nu}(t)w(t)\mathrm{d}%
+\,t+f_{\nu}^{\prime}\int_{a}^{b}k_{\nu}\left(  t\right)  w(t)\mathrm{d}%
+\,t\right]  .
+\end{align*}
+Deci%
+\[
+\lambda_{\nu}=\int_{a}^{b}h_{\nu,0}(t)w(t)\mathrm{d}\,t,\quad\mu_{\nu}%
+=\int_{a}^{b}h_{\nu,1}\left(  t\right)  w(t)\mathrm{d}\,t,\quad\nu
+=1,2,\dots,n.
+\]
+
+
+\item[(b)] Pentru ca to\c{t}i coeficien\c{t}ii $\mu$ s\u{a} fie nuli, trebuie
+s\u{a} avem
+\[
+\int_{a}^{b}h_{\nu,1}\left(  t\right)  w(t)\mathrm{d}\,t=0,\quad\nu
+=1,2,\dots,n.
+\]
+sau, pe baza lui (a), observ\^{a}nd c\u{a} $\ell_{\nu}(t)=\frac{\omega_{n}%
+(t)}{(t-\tau_{\nu})\omega_{n}^{\prime}(\tau_{\nu})}$,%
+\[
+\frac{1}{\omega_{n}^{\prime}(\tau_{\nu})}\int_{a}^{b}\frac{\omega_{n}%
+(t)}{(t-\tau_{\nu})\omega_{n}^{\prime}(\tau_{\nu})}\omega_{n}(t)w(t)\mathrm{d}%
+\,t=0,\quad\nu=1,2,\dots,n.
+\]
+adic\u{a},%
+\[
+\int_{a}^{b}\ell_{\nu}(t)\omega_{n}(t)w(t)\mathrm{d}\,t=0,\quad\nu
+=1,2,\dots,n.
+\]
+Deoarece $\{\ell_{\nu}(t)\}_{\nu=1}^{n}$ formeaz\u{a} o baz\u{a} a lui
+$\mathbb{P}_{n-1}$ ($\ell_{\nu}$ sunt liniar independente \c{s}i genereaz\u{a}
+$\mathbb{P}_{n-1}$), $\omega_{n}$ trebuie s\u{a} fie ortogonal pe $[a,b]$
+\^{\i}n raport cu $w(t)=1$ pe toate polinoamele de grad mai mic, adic\u{a},
+$\omega_{n}(t)=\pi_{n}(t;w)$. Se ob\c{t}ine o formul\u{a} de cuadratur\u{a} gaussian\u{a}.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Implementa\c{t}i \^{\i}n MATLAB o metod\u{a} hibrid\u{a}
+Newton+\^{\i}njum\u{a}t\u{a}\c{t}ire pentru rezolvarea ecua\c{t}iei $f(x)=0$,
+$f\in C^{1}$. Testa\c{t}i pentru $f(x)=J_{0}(x)$, pe intervalul $[0,4]$ \c{s}i
+compara\c{t}i cu metoda lui Newton pentru $x_{0}=0.01$.
+\end{problem}
+
+
+\begin{verbatim}
+function [xFinal,ni]=Newtonsafevb(f,fd,a,b,tol,nitmax,varargin)
+% NEWTSAFEVB - root-finder using hybrid Newton-Bisection method to always maintain bracket
+%
+% [xFinal, xN, errorN, ni]=Newtonsafe(f,fd,a,b,tol,nitmax,varargin)
+%
+% f, fd - returns the function and its derivative
+% a,b: initial bracket
+% tol: stopping condition for error f(x) <= tol or |b-a|<tol*b
+%
+% xFinal: final value
+% xN: vector of intermediate iterates
+% errorN: vector of errors
+if nargin<6, nitmax=50; end
+% initialize the problem
+h = b-a;
+fa = f(a,varargin{:});
+fb = f(b,varargin{:});
+if ( sign(fa) == sign(fb) )
+    error('function must be bracketed to begin with' );
+end
+c = a ; % start on the left side (could also choose the middle
+fc = f(c,varargin{:}); df=fd(c,varargin{:}) ;
+%xN(1) = c;
+%errorN(1,:) = [ abs(fc) h ];
+% begin iteration until convergence or Maximum Iterations
+ni=1;
+for i = 1:nitmax
+    % try a Newton step
+    c = c - fc/df;
+    % if not in bracket choose bisection
+    if ( ~(a <= c && b >= c) )
+        c = a + h/2;
+    end
+    % Evaluate function and derivative at new c
+    fc = f(c,varargin{:}); df=fd(c,varargin{:});
+    % check and maintain bracket
+    if ( sign(fc) ~= sign(fb) )
+        a=c;
+        fa=fc;
+    else
+        b = c;
+        fb = fc;
+    end
+    h = b-a;
+    % calculate errors and track solutions
+    absError = abs(fc);
+    relError = h;
+    % check if converged
+    if ( absError < tol || relError < tol*b ) %succes
+        xFinal=c; ni=i; return;
+    end
+end
+% clean up
+error('Maximum iterations exceeded' );
+
+\end{verbatim}
+
+Test
+\begin{verbatim}
+%testsub3
+g = @(x) besselj(0,x);
+gd = @ (x) -besselj(1, x);
+[z2,ni2]=Newton(g,gd,0.01,tol)
+[z5, ni5]=Newtonsafevb(g,gd,0,4,tol)
+\end{verbatim}
+Rezultate:
+\begin{verbatim}
+z2 =
+200.2772
+ni2 =
+5
+z5 =
+2.4048
+ni5 =
+4
+\end{verbatim}
+
+\newpage
+
+\section*{Subiectul 4}
+
+\begin{problem}
+\label{Gautschip3.46}
+
+\begin{enumerate}
+\item[(a)] Utiliza\c{t}i metoda coeficien\c{t}ilor nedetermina\c{t}i pentru a
+ob\c{t}ine formula de cuadratur\u{a} (cu gradul de exactitate $d\geq2$) de
+forma
+\[
+\int_{0}^{1}y(s)\mathrm{d}\,s\approx ay(0)+by(1)-c\left[  y^{\prime
+}(1)-y^{\prime}(0)\right]  +R(f).
+\]
+
+
+\item[(b)] Transforma\c{t}i formula de la (a) \^{\i}ntr-o formul\u{a} pentru a
+aproxima $\int_{x}^{h+x}f(t)\mathrm{d}\,t$.
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} de integrare repetat\u{a} bazat\u{a}
+pe formula de la (b) pentru a aproxima $\int_{a}^{b}f(t)\mathrm{d}\,t$.
+Interpreta\c{t}i rezultatul.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Pun\^{a}nd $y(s)=1$, $y(s)=s$, $y(s)=s^{2}$, din condi\c{t}iile de
+exactitate se ob\c{t}ine%
+\begin{align*}
+a+b+0c &  =1\\
+0a+b-0c &  =\frac{1}{2}\\
+0a+b-2c &  =\frac{1}{3}%
+\end{align*}
+Solu\c{t}ia este: $a=\frac{1}{2},b=\frac{1}{2},c=\frac{1}{12}$, adic\u{a},%
+\[
+\int_{0}^{1}y(s)\mathrm{d}\,s=\frac{1}{2}\left[  y(0)+y(1)\right]  -\frac
+{1}{12}\left[  y^{\prime}(1)-y^{\prime}(0)\right]  +R(f)
+\]%
+\[
+R(f)=\frac{f^{(4)}(\xi)}{4!}\int_{0}^{1}s^{2}(s-1)^{2}\mathrm{d}\,s=\frac
+{1}{720}f^{(4)}(\xi)
+\]
+: 
+
+\item[(b)] Schimbarea de variabil\u{a} $t=x+hs$, $dt=hds$ ne conduce la%
+\begin{align*}
+\int_{x}^{x+h}f(t)\mathrm{d}\,t &  =h\int_{0}^{1}\left(  x+hs\right)
+\mathrm{d}\,s=\frac{h}{2}\left[  f(x)+f(x+h)\right]  \\
+&  -\frac{h^{2}}{12}\left[  f^{\prime}(x+h)-f^{\prime}(h)\right]  +\frac
+{h^{4}}{720}f^{(4)}\left(  \zeta\right)  .
+\end{align*}
+
+
+\item[(c)] Pun\^{a}nd $h=(b-a)/n$, $x_{k}=a+kh$, $f_{k}=f(x_{k})$,
+$f_{k}^{\prime}=f^{\prime}(x_{k})$, $k=0,1,\dots,n$, ob\c{t}inem folosind (b),
+c\u{a}%
+\begin{align*}
+\int_{a}^{b}f(t)\mathrm{d}\,t &  =\sum_{k=0}^{n-1}\int_{x_{k}}^{x_{k}%
++h}f(t)\mathrm{d}\,t\approx\frac{h}{2}\left[  \left(  f_{0}+f_{1}\right)
++\left(  f_{1}+f_{2}\right)  +\cdots\right.  \\
+&  +\left.  \left(  f_{n-1}+f_{n}\right)  \right]  -\frac{h^{2}}{12}\left[
+\left(  f_{1}^{\prime}-f_{0}^{\prime}\right)  +\left(  f_{2}^{\prime}%
+-f_{10}^{\prime}\right)  +\cdots+\left(  f_{n}^{\prime}-f_{n-1}^{\prime
+}\right)  \right]  \\
+&  =h\left(  \frac{1}{2}f_{0}+f_{1}+\cdots+f_{n-1}+\frac{1}{2}f_{n}\right)
+-\frac{h^{2}}{12}\left[  f^{\prime}(b)-f^{\prime}(a)\right]  .
+\end{align*}
+Restul%
+\[
+R_{n}(f)=\frac{(b-a)^{4}}{720n^{3}}f^{(4)}(\zeta)
+\]
+Interpretare regula trapezelor cu o  \textquotedblleft corec\c{t}ie la
+capete\textquotedblright. Corec\c{t}ia aproximeaz\u{a} eroarea \^{\i}n formula
+trapezelor:%
+\[
+-\frac{b-a}{12}h^{2}f^{\prime\prime}(\xi)\approx-\frac{h^{2}}{12}\left[
+f^{\prime}(b)-f^{\prime}(a)\right]  .
+\]
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Implementa\c{t}i \^{\i}n MATLAB o metod\u{a} hibrid\u{a}
+secant\u{a}+\^{\i}njum\u{a}t\u{a}\c{t}ire pentru rezolvarea ecua\c{t}iei
+$f(x)=0$. Testa\c{t}i pentru $f(x)=1-\frac{2}{x^{2}-2x+2}$. C\^{a}te
+itera\c{t}ii sunt necesare? Compara\c{t}i cu metoda secantei \c{s}i a \^{\i}njum\u{a}t\u{a}\c{t}irii.
+\end{problem}
+
+\bigskip
+\begin{verbatim}
+function [z,ni]=secantsafe(f,a,b,tol)
+% SECANTSAFE - safe secant method = secant + bisection
+% call z=secantsafe(f,a,b,tol)
+
+% The method uses three points a, b, and c. The points a and b are the next 
+% points xk and xk?1 in the secant method approximation. 
+% The points b and c form a sign change interval (proper bracket) for the root. 
+% The idea behind the method is that if the secant method produces an
+% undesirable approximation, we take the midpoint of the sign change interval 
+% (next bisection iterate) as our next approximation.
+
+% Let fa = f(a), fb = f(b) and fc = f(c) which must satisfy
+% Conditions:
+% 1. fa, fb, fc ~= 0,
+% 2. sign(fb) ~= sign(fc) (sign change interval)
+% 3. |fb| <= |fc|.
+
+fa=f(a); fb=f(b);
+if fa==0
+    z=a; return;
+end
+if fb==0
+    z=b; return;
+end
+if sign(fa)==sign(fb)
+    error('f(a) and f(b) must have different sign')
+end
+c=a; fc=fa;
+ni=0;
+while 1 %forever
+    ni=ni+1;
+    if abs(fc) < abs(fb) %swap b and c
+        t = c; c = b; b = t;
+        t = fc; fc = fb; fb = t;
+        % In this case, a and b may no longer
+        % be a pair of secant iterates, and we must set a = c.
+        a = c; fa = fc;
+    end
+    if abs(b-c) <= tol, break; end %success
+    dm = (c-b)/2;
+    df = (fa-fb);
+    if df == 0
+        ds = dm;
+    else
+        ds = -fb*(a-b)/df;
+    end
+    if (sign(ds)~=sign(dm) || abs(ds) > abs(dm))%bisection or secant
+        dd = dm;
+    else
+        dd = ds;
+    end
+    if abs(dd) < tol
+        dd = 0.5*sign(dm)*tol;
+    end
+    % New iterate b+dd
+    d = b + dd;
+    fd = f(d);
+    if fd == 0
+        b = d; c = d; fb = fd; fc = fd;
+        break;
+    end
+    a = b; b = d;
+    fa = fb; fb = fd;
+    if sign(fb) == sign(fc)
+        c = a; fc = fa;
+    end
+end
+z=(b+c)/2;
+\end{verbatim}
+
+Test
+
+\begin{verbatim}
+f=@(x) 1-2./(x.^2-2*x+2);
+%[-10,1]
+[z1,ni1]=secantsafe(f,-10,1,1e-8)
+[z2,ni2]=Bisection(f,-10,1,1e-8)
+[z3,ni3]=secant(f,-10,1,1e-8)
+\end{verbatim}
+
+Rezultate
+
+\begin{verbatim}
+z1 =
+-1.9747e-09
+ni1 =
+11
+z2 =
+-1.6298e-09
+ni2 =
+31
+Error using secant (line 28)
+numarul maxim de iteratii depasit
+Error in testsecantsafe2 (line 5)
+[z3,ni3]=secant(f,-10,1,1e-8) 
+\end{verbatim}
+
+\end{document}

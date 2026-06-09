@@ -1,0 +1,8 @@
+function a = epsilonMin()
+    x = epsilon();
+    a = x;
+    while (x>0)
+        prev = x;
+        x = x / 2;
+    end
+end

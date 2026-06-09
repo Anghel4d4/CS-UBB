@@ -1,0 +1,34 @@
+function x=rezolvaGauss(A,b)
+%rezolva sistemul A*x=b prin metoda eliminarii Gauss cu pivotare pe liniei
+[n, m]=size(A);
+A=[A, b];%constuim matricea extinsa
+if(n~=m)
+    error('Matricea nu e patratica')
+end
+x=zeros(n,1);
+%7:Ep <-> Ei - interschimba linia p cu linia i
+%A([p,i],:)=A([i,p],:) -> interschimba liniile i si p din A MATLAB
+%10:mji = Aji/Aii
+%11:(Ej-mjiEi)->Ej
+%mji = A(j,i)/A(i,i) MATLAB
+%A(j,:)=A(j,:)-mji*A(i,:) MATLAB
+for i = 1:n-1
+    p=1;
+    while A(p, i) == 0 && p ~= n+1
+        p=p+1;
+    end
+    if(p == n+1)
+        error('nu exista solutie unica');
+    end
+    if (p ~= i)
+        A([p,i],:)=A([i,p],:);
+    end
+    for j = i+1:n
+        mji = A(j,i)/A(i,i);
+        A(j,:)=A(j,:)-mji*A(i,:);
+    end
+end
+if A(m,n) == 0
+    error('Nu exista solutie unica');
+else
+    

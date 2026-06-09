@@ -1,0 +1,84 @@
+function [fout,mpts] = merge(f, varargin)
+
+if numel(f) > 1
+    error('chebfun:merge:quasimatrix','MERGE does not handle chebfun quasimatrices')
+end
+
+fout = f;
+
+% Has preference structure been provided?
+if nargin>1 && isstruct(varargin{end})
+    nin = nargin-1;
+    pref = varargin{end};
+else
+    nin = nargin;
+    pref = chebfunpref;
+end
+
+% Deal with input arguments:
+if nin == 1;
+    bkpts = 2:f.nfuns;
+else % Index of endpoints was provided
+    bkpts = varargin{1};
+    if isempty(bkpts)
+        return;
+    elseif ischar(bkpts) % bkpts = 'all'
+        bkpts = 2:f.nfuns;
+    else
+        bkpts = unique(bkpts);
+        if  bkpts(1) < 1 || bkpts(end) > f.nfuns+1 || any(round(bkpts)~=bkpts)
+            error('chebfun:merge:bkpts','Break points must be integers between 2 and length(ends)-1')
+        end
+        if bkpts(1)==1, bkpts = bkpts(2:end); end
+        if ~isempty(bkpts) && bkpts(end)==length(f.ends), bkpts = bkpts(1:end-1); end
+    end
+    if nin > 2 % Maximum degree was provided
+        pref.splitting = true;
+        pref.splitdegree = varargin{2};
+        if nin > 3 % Tolerance was provided
+            pref.eps = varargin{3};
+        end
+    end
+end
+
+if ~pref.splitting
+    maxn = pref.maxdegree+1; 
+else
+    maxn = pref.splitdegree+1; 
+end
+
+pref.exps = {0,0}; % This prevets a call to FINDEXPS when merging!
+
+scl.v = f.scl;
+scl.h = hscale(f);
+mpts = [];
+
+for k = bkpts  
+    
+    xk = f.ends(k);
+    j = find(xk == fout.ends,1,'first');
+    
+    % Prevent merging if there are impulses or chebfun lengths add to more
+    % than maxn
+    if ~any(f.imps(2:end,k),1) && length(fout.funs(j-1))+length(fout.funs(j)) < 1.2*maxn
+        %v = feval(f, [xk, xk+eps(xk), xk-eps(xk)]);
+        v(1) = f.imps(1,k);
+        v(2) = f.funs(k-1).vals(end);
+        v(3) = f.funs(k).vals(1);
+        % Prevent merging if there are jumps (very loose tolerance) OR
+        % EXPONENTS
+        if  norm(v(1) - v(2:3),inf) < 1e7*pref.eps*f.scl && ~(any(fout.funs(j-1).exps)||any(fout.funs(j).exps))
+            [mergedfun, hpy] = getfun(@(x) feval(fout,x),  ... 
+                               [fout.ends(j-1), fout.ends(j+1)], pref, scl);
+            % merging successful                  
+            if hpy 
+                mpts = [mpts k];
+                fout.funs = [fout.funs(1:j-2) mergedfun fout.funs(j+1:end)];
+                fout.ends = [fout.ends(1:j-1) fout.ends(j+1:end)];
+                fout.imps = [fout.imps(:,1:j-1) fout.imps(:,j+1:end)];
+                fout.nfuns = fout.nfuns - 1;
+            end
+        end
+    end
+    
+end

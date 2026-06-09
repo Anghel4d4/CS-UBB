@@ -1,0 +1,198 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1250">
+<title>P3_341.html</title>
+<!-- Created by Maple 15.01, Windows 7 -->
+</head>
+<a name="MapleAutoBookmark1" />
+
+<body bgcolor="FFFFFF">
+<p align="left"><font color="#000000" size="3" face="Times New Roman">P3-35</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_1.gif" width="46" height="13" alt="restart; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_2.gif" width="107" height="13" alt="with(CurveFitting); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_3.gif" width="576" height="13" alt="[ArrayInterpolation, BSpline, BSplineCurve, Interactive, LeastSquares, PolynomialInterpolation, RationalInterpolation, Spline, ThieleInterpolation]" align="center" border="0"><br><img src="images/P3_34_4.gif" width="576" height="13" alt="[ArrayInterpolation, BSpline, BSplineCurve, Interactive, LeastSquares, PolynomialInterpolation, RationalInterpolation, Spline, ThieleInterpolation]" align="center" border="0"></td>
+<td width='5%' align='center'>(1)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">(a)</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_5.gif" width="258" height="28" alt="`assign`(xd, [-1, 0, 1]); 1; `assign`(yd, map(proc (t) options operator, arrow; cos(`+`(`*`(`/`(1, 2), `*`(t, `*`(Pi))))) end proc, xd)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_6.gif" width="84" height="13" alt="[-1, 0, 1]" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_7.gif" width="76" height="13" alt="[0, 1, 0]" align="center" border="0"></td>
+<td width='5%' align='center'>(2)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_8.gif" width="227" height="13" alt="`assign`(s3n, Spline(xd, yd, t, endpoints = natural)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_9.gif" width="213" height="71" alt="piecewise(`<`(t, 0), `+`(`-`(`*`(`/`(1, 2), `*`(`^`(t, 3)))), `-`(`*`(`/`(3, 2), `*`(`^`(t, 2)))), 1), `+`(`*`(`/`(1, 2), `*`(`^`(t, 3))), `-`(`*`(`/`(3, 2), `*`(`^`(t, 2)))), 1))" align="center" border="0"></td>
+<td width='5%' align='center'>(3)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">(b)</font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_10.gif" width="294" height="13" alt="`assign`(P, PolynomialInterpolation(xd, yd, t, form = Lagrange)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_11.gif" width="114" height="13" alt="`+`(`-`(`*`(`+`(t, 1), `*`(`+`(t, `-`(1))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(4)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_12.gif" width="229" height="16" alt="`assign`(normspline, int(`*`(`^`(diff(s3n, `$`(t, 2)), 2)), t = -1 .. 1)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_13.gif" width="80" height="13" alt="normspline = 6" align="center" border="0"></td>
+<td width='5%' align='center'>(5)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_14.gif" width="206" height="16" alt="`assign`(normlag, int(`*`(`^`(diff(P, `$`(t, 2)), 2)), t = -1 .. 1)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_15.gif" width="70" height="13" alt="8" align="center" border="0"></td>
+<td width='5%' align='center'>(6)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman">(d)</font>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_16.gif" width="254" height="28" alt="`assign`(s3h, Spline(xd, yd, t, endpoints = [`+`(`*`(`/`(1, 2), `*`(Pi))), `+`(`-`(`*`(`/`(1, 2), `*`(Pi))))])); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_17.gif" width="313" height="71" alt="piecewise(`<`(t, 0), `+`(`*`(`+`(`-`(2), `*`(`/`(1, 2), `*`(Pi))), `*`(`^`(t, 3))), `*`(`+`(`-`(3), `*`(`/`(1, 2), `*`(Pi))), `*`(`^`(t, 2))), 1), `+`(`*`(`+`(2, `-`(`*`(`/`(1, 2), `*`(Pi)))), `*`(`^`..." align="center" border="0"></td>
+<td width='5%' align='center'>(7)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_18.gif" width="148" height="13" alt="read "InterpHermitem.m"; 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_19.gif" width="260" height="28" alt="`assign`(H, HermitePol(xd, [0, 0, 1], t, proc (t) options operator, arrow; cos(`+`(`*`(`/`(1, 2), `*`(t, `*`(Pi))))) end proc)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_20.gif" width="233" height="28" alt="`+`(`*`(`+`(t, 1), `*`(`^`(`+`(t, `-`(1)), 2))), `-`(`*`(`/`(1, 4), `*`(`+`(t, `-`(1)), `*`(`+`(t, 1), `*`(t, `*`(Pi)))))))" align="center" border="0"></td>
+<td width='5%' align='center'>(8)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_21.gif" width="190" height="16" alt="`assign`(nsc, int(`*`(`^`(diff(s3h, `$`(t, 2)), 2)), t = -1 .. 1)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_22.gif" width="398" height="37" alt="`+`(`/`(`*`(`/`(1, 3), `*`(`^`(`+`(`-`(6), Pi), 3))), `*`(`+`(`*`(3, `*`(Pi)), `-`(12)))), `-`(`/`(`*`(`/`(1, 3), `*`(`^`(`+`(`-`(`*`(2, `*`(Pi))), 6), 3))), `*`(`+`(`*`(3, `*`(Pi)), `-`(12))))), `/`(..." align="center" border="0"></td>
+<td width='5%' align='center'>(9)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_23.gif" width="72" height="13" alt="simplify(%); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_24.gif" width="90" height="19" alt="`+`(`*`(2, `*`(`^`(Pi, 2))), `-`(`*`(12, `*`(Pi))), 24)" align="center" border="0"></td>
+<td width='5%' align='center'>(10)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_25.gif" width="183" height="16" alt="`assign`(nsh, int(`*`(`^`(diff(H, `$`(t, 2)), 2)), t = -1 .. 1)); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_26.gif" width="241" height="61" alt="`+`(`/`(`*`(`/`(1, 3), `*`(`^`(`+`(4, `-`(`*`(`/`(3, 2), `*`(Pi)))), 3))), `*`(`+`(6, `-`(`*`(`/`(3, 2), `*`(Pi)))))), `-`(`/`(`*`(`/`(1, 3), `*`(`^`(`+`(`-`(8), `*`(`/`(3, 2), `*`(Pi))), 3))), `*`(`+..." align="center" border="0"></td>
+<td width='5%' align='center'>(11)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_27.gif" width="72" height="13" alt="simplify(%); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_28.gif" width="98" height="28" alt="`+`(`*`(`/`(3, 2), `*`(`^`(Pi, 2))), `-`(`*`(12, `*`(Pi))), 32)" align="center" border="0"></td>
+<td width='5%' align='center'>(12)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"><img src="images/P3_34_29.gif" width="125" height="13" alt="evalf(nsc); 1; evalf(nsh); 1" align="center" border="0"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="center"><table width='100%'>
+<tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_30.gif" width="71" height="13" alt="6.040096958" align="center" border="0"></td>
+</tr></font>&nbsp;</p>
+<p align="center"><tr>
+<td valign="top" align="center"><font color="#0000ff" size="3" face="Times New Roman"><img src="images/P3_34_31.gif" width="71" height="13" alt="9.105294756" align="center" border="0"></td>
+<td width='5%' align='center'>(13)</td>
+</tr>
+</table></font>&nbsp;</p>
+<p align="left"><table>
+<tr>
+<td valign="top" align="center"><font color="#78000e" size="3" face="Courier New"><strong>&gt; </strong></font></td>
+<td valign="top"></td>
+</tr>
+</table>&nbsp;</p>
+<p align="left"><font color="#000000" size="3" face="Times New Roman"></font>&nbsp;</p>
+</body>
+</html>

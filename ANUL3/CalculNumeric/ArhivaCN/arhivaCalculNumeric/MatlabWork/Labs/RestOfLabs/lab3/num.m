@@ -1,0 +1,4 @@
+function num(n)
+p=poly(1:n);
+q=p+rand(1,n+1)*1e-03;
+r=roots(q)

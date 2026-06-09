@@ -1,0 +1,327 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>cap2ProblemaPractica</title>
+      <meta name="generator" content="MATLAB 7.7">
+      <meta name="date" content="2014-04-26">
+      <meta name="m-file" content="cap2ProblemaPractica"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content"><pre class="codeinput"><span class="comment">%problema 2.38</span>
+clc
+alfa = 1/sqrt(2);
+A = zeros(21, 21);
+B = zeros(21, 1);
+
+<span class="comment">%ecuatii</span>
+<span class="comment">%jonc 2</span>
+<span class="comment">%1: f2 = f6</span>
+A(1,2) = 1;
+A(1,6) = -1;
+<span class="comment">%2: f3  =10</span>
+A(2,3) = 1;
+B(2) = 10;
+
+<span class="comment">%jonc 3</span>
+<span class="comment">%3: alfa*f1 = f4 + alfa*f5</span>
+A(3,1) = alfa;
+A(3,4) = -1;
+A(3,5) = -1*alfa;
+<span class="comment">%4: alfa*f1 + f3 + alfa*f5 = 0</span>
+A(4,1) = alfa;
+A(4,3) = 1;
+A(4,5) = alfa;
+
+<span class="comment">%jonc 4</span>
+<span class="comment">%5: f4 = f8</span>
+A(5,4) = 1;
+A(5,8) = -1;
+<span class="comment">%6: f7 = 0</span>
+A(6,7) = 1;
+
+<span class="comment">%jonc 5</span>
+<span class="comment">%7: alfa*f5 + f6 = alfa*f9 + f10</span>
+A(7,5) = alfa;
+A(7,6) = 1;
+A(7,9) = -1*alfa;
+A(7,10) = -1;
+<span class="comment">%8: alfa*f5 + f7 + alfa*f9 = 15</span>
+A(8,5) = alfa;
+A(8,7) = 1;
+A(8,9) = alfa;
+B(8) = 15;
+
+<span class="comment">%jonc 6</span>
+<span class="comment">%9: f10 = f14</span>
+A(9,10) = 1;
+A(9,14) = -1;
+<span class="comment">%10: f11 = 20</span>
+A(10,11) = 1;
+B(10) = 20;
+
+<span class="comment">%jonc 7</span>
+<span class="comment">%11: f8 + alfa*f9 = f12 + alfa*f13</span>
+A(11, 8) = 1;
+A(11, 9) = alfa;
+A(11, 12) = -1;
+A(11,13) = -1*alfa;
+<span class="comment">%12: alfa*f9 + f11 + alfa*f13 = 0</span>
+A(12, 9) = alfa;
+A(12,11) = 1;
+A(12,13) = alfa;
+
+<span class="comment">%jonc 8</span>
+<span class="comment">%13: f12 = f16</span>
+A(13, 12) = 1;
+A(13, 16) = -1;
+<span class="comment">%14: f15 = 0</span>
+A(14, 15) = 1;
+
+<span class="comment">%jonc 9</span>
+<span class="comment">%15: alfa*f13 + f14 = alfa*f17 + f18</span>
+A(15,13) = alfa;
+A(15,14) = 1;
+A(15,17) = -1*alfa;
+A(15,18) = -1;
+<span class="comment">%16: alfa*f13 + f15 + alfa*f17 = 25</span>
+A(16,13) = alfa;
+A(16,15) = 1;
+A(16,17) = alfa;
+B(16) = 25;
+
+<span class="comment">%jonc 10</span>
+<span class="comment">%17: f18 = f21</span>
+A(17, 18) = 1;
+A(17, 21) = -1;
+<span class="comment">%18: f19 = 30</span>
+A(18,19) = 1;
+B(18) = 30;
+
+<span class="comment">%jonc 11</span>
+<span class="comment">%19: f16 + alfa*f17 = f20</span>
+A(19,16) = 1;
+A(19,17) = alfa;
+A(19,20) = -1;
+<span class="comment">%20: alfa*f17 + f19 + alfa*f20 = 0</span>
+A(20,17) = alfa;
+A(20,19) = 1;
+A(20,20) = alfa;
+
+<span class="comment">%jonc 12</span>
+<span class="comment">%21: alfa*f20 + f21 = 0</span>
+A(21,20) = alfa;
+A(21,21) = 1;
+
+f = A\B;
+
+fprintf(<span class="string">'Fortele membre rezultate sunt urmatoarele:\n'</span>);
+<span class="keyword">for</span> index = 1:length(f)
+    fprintf(<span class="string">'forta %2.0f = %2.5f\n'</span>,index,f(index));
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Fortele membre rezultate sunt urmatoarele:
+forta  1 = -64.25293
+forta  2 = 22.83158
+forta  3 = 10.00000
+forta  4 = -80.86737
+forta  5 = 50.11080
+forta  6 = 22.83158
+forta  7 = 0.00000
+forta  8 = -80.86737
+forta  9 = -28.89759
+forta 10 = 78.69895
+forta 11 = 20.00000
+forta 12 = -101.73474
+forta 13 = 0.61332
+forta 14 = 78.69895
+forta 15 = 0.00000
+forta 16 = -101.73474
+forta 17 = 34.74202
+forta 18 = 54.56632
+forta 19 = 30.00000
+forta 20 = -77.16842
+forta 21 = 54.56632
+</pre><p class="footer"><br>
+            Published with MATLAB&reg; 7.7<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+%problema 2.38
+clc
+alfa = 1/sqrt(2);
+A = zeros(21, 21);
+B = zeros(21, 1);
+
+%ecuatii
+%jonc 2
+%1: f2 = f6
+A(1,2) = 1;
+A(1,6) = -1;
+%2: f3  =10
+A(2,3) = 1;
+B(2) = 10;
+
+%jonc 3
+%3: alfa*f1 = f4 + alfa*f5
+A(3,1) = alfa;
+A(3,4) = -1;
+A(3,5) = -1*alfa;
+%4: alfa*f1 + f3 + alfa*f5 = 0
+A(4,1) = alfa;
+A(4,3) = 1;
+A(4,5) = alfa;
+
+%jonc 4
+%5: f4 = f8
+A(5,4) = 1;
+A(5,8) = -1;
+%6: f7 = 0
+A(6,7) = 1;
+
+%jonc 5
+%7: alfa*f5 + f6 = alfa*f9 + f10
+A(7,5) = alfa;
+A(7,6) = 1;
+A(7,9) = -1*alfa;
+A(7,10) = -1;
+%8: alfa*f5 + f7 + alfa*f9 = 15
+A(8,5) = alfa;
+A(8,7) = 1;
+A(8,9) = alfa;
+B(8) = 15;
+
+%jonc 6
+%9: f10 = f14
+A(9,10) = 1;
+A(9,14) = -1;
+%10: f11 = 20
+A(10,11) = 1;
+B(10) = 20;
+
+%jonc 7
+%11: f8 + alfa*f9 = f12 + alfa*f13
+A(11, 8) = 1;
+A(11, 9) = alfa;
+A(11, 12) = -1;
+A(11,13) = -1*alfa;
+%12: alfa*f9 + f11 + alfa*f13 = 0
+A(12, 9) = alfa;
+A(12,11) = 1;
+A(12,13) = alfa;
+
+%jonc 8
+%13: f12 = f16
+A(13, 12) = 1;
+A(13, 16) = -1;
+%14: f15 = 0
+A(14, 15) = 1;
+
+%jonc 9
+%15: alfa*f13 + f14 = alfa*f17 + f18
+A(15,13) = alfa;
+A(15,14) = 1;
+A(15,17) = -1*alfa;
+A(15,18) = -1;
+%16: alfa*f13 + f15 + alfa*f17 = 25
+A(16,13) = alfa;
+A(16,15) = 1;
+A(16,17) = alfa;
+B(16) = 25;
+
+%jonc 10
+%17: f18 = f21
+A(17, 18) = 1;
+A(17, 21) = -1;
+%18: f19 = 30
+A(18,19) = 1;
+B(18) = 30;
+
+%jonc 11
+%19: f16 + alfa*f17 = f20
+A(19,16) = 1;
+A(19,17) = alfa;
+A(19,20) = -1;
+%20: alfa*f17 + f19 + alfa*f20 = 0
+A(20,17) = alfa;
+A(20,19) = 1;
+A(20,20) = alfa;
+
+%jonc 12
+%21: alfa*f20 + f21 = 0
+A(21,20) = alfa;
+A(21,21) = 1;
+
+f = A\B;
+
+fprintf('Fortele membre rezultate sunt urmatoarele:\n');
+for index = 1:length(f)
+    fprintf('forta %2.0f = %2.5f\n',index,f(index));
+end
+
+
+##### SOURCE END #####
+-->
+   </body>
+</html>

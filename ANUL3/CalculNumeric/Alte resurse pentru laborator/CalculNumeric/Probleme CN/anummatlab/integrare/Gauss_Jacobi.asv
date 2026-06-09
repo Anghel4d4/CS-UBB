@@ -1,0 +1,15 @@
+function [g_nodes,g_coeff]=Gauss_Jacobi(n,a,b)
+%Gauss-Jacobi - noduri si coeficienti Gauss-Jacobi
+
+k1=0:n-1;
+k2=1:n-1;
+%rec. relation coeffs
+bet=[2^(a+b+1)*beta(a+1,b+1), 4*k2.*.(k2+a)*(k2+a+b).*...
+        (k2+b)./(2*k2+a+b-1)./(2*k2+a+b).^2./(2*k2+a+b+1)];
+if a==b
+    alpha=zeros(1,n);
+else
+    alpha1=(b^2-a^2)/(a+b);
+    alpha=[alpha1,(b^2-a^2)./(2*k+a+b)./(2*k+a+b+2)];
+end
+[g_nodes,g_coeff]=Gaussquad(alpha,bet);

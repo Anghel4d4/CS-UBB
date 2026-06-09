@@ -1,0 +1,49 @@
+function [a,b,c,d]=splineCubic(x,f,der)
+%determina coeficientii spline-ului cubic
+%x - abscisele
+%f - ordonatele
+%der - informatii despre derivate:
+%      [f''(a), f''(b)] pentru spline cu derivate secunde
+
+n = length(x);
+
+%sortare noduri
+if any(diff(x)<0)
+    [x,ind]=sort(x); 
+else
+    ind=1:n; 
+end
+y = f(ind); 
+x = x(:);
+y = y(:);
+
+%obtin ecuatiile 2 ... n-1
+dx = diff(x);
+ddiv = diff(y)./dx; % raportul
+ds = dx(1:end-1);
+dd = dx(2:end);
+dp = 2*(ds+dd);
+md = 3*(dd.*ddiv(1:end-1) + ds.*ddiv(2:end));
+
+%spline deBoor in punctul a
+    x31 = x(3)-x(1);
+    dp1 = dx(2);    
+    vd1 = x31;    
+    md1 = ((dx(1)+2*x31)*dx(2)*ddiv(1)+dx(1)^2*ddiv(2))/x31;   
+%spline cu derivate de ord 2 in punctul b
+    dpn = 2;    
+    vdn = 1;   
+    mdn = 3*ddiv(end)+0.5*dx(end)*der(2);
+
+
+%construiesc sistemul rar
+dp = [dp1;dp;dpn];
+dp1 = [0;vd1;dd];
+dm1 = [ds;vdn;0];
+md = [md1;md;mdn];
+A = spdiags([dm1,dp,dp1],-1:1,n,n);
+m = A\md;
+d = y(1:end-1);
+c = m(1:end-1);
+a = [(m(2:end)+m(1:end-1)-2*ddiv)./(dx.^2)];
+b = [(ddiv-m(1:end-1))./dx-dx.*a];

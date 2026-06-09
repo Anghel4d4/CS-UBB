@@ -1,0 +1,38 @@
+function solutie = rezolvaNewtonRaphson(f, fd, st, dr, eps)
+
+NMAX = 100000;
+% rezolva aproximativ ecuatia f(x) = 0 cu precizia eps, 
+% fd este derivata lui f 
+% st limita stanga a intervalului
+% dr limita dreapta a intervalului
+% NMAX - numarul maxim de iteratii, poate fi dat si ca argument
+
+poz=0;
+sol=[];
+for t=st:dr
+    i = 1;
+    succes = false;
+    x_vechi  = t;
+
+    while i<NMAX
+         x_nou = x_vechi - f(x_vechi)/fd(x_vechi);
+        if(abs(x_vechi-x_nou)<eps) 
+          succes = true;
+          if ( any( abs(sol-0.0001)<=x_nou ))
+          else
+            poz=poz+1;
+            sol(poz) = x_nou;
+          end;
+          break;
+        end;
+         x_vechi = x_nou;
+        i = i+1;
+    end;
+end;
+
+if ~succes 
+    error('Nu am gasit solutia (e posibil ca ecuatia nu are solutie)');
+end
+% daca s-au facut NMAX iteratii si solutia nu a fost gasita, raportam ca nu
+
+solutie=sol;

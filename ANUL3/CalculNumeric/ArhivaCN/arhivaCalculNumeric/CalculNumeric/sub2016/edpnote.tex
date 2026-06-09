@@ -1,0 +1,265 @@
+\documentclass{book}%
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX Book.cst}
+%TCIDATA{Created=Wednesday, June 22, 2016 12:12:49}
+%TCIDATA{LastRevised=Wednesday, June 22, 2016 15:11:06}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Standard LaTeX Book">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+
+\frontmatter
+\title{Metode numerice pentru ecua\c{t}ii diferen\c{t}iale}
+\author{Radu Tr\^{\i}mbi\c{t}a\c{s}}
+\date{The Date}
+\maketitle
+\tableofcontents
+
+\chapter*{Preface}
+
+\markboth{PREFACE}{PREFACE}This is the preface. It is an unnumbered chapter.
+The \verb|markboth| TeX field at the beginning of this paragraph sets the
+correct page heading for the Preface portion of the document. The preface does
+not appear in the table of contents.
+
+\chapter{Introduction}
+
+The introduction is entered using the usual chapter tag. Since the
+introduction chapter appears before the \verb|mainmatter| TeX field, it is an
+unnumbered chapter. The primary difference between the preface and the
+introduction in this shell document is that the introduction will appear in
+the table of contents and the page headings for the introduction are
+automatically handled without the need for the \verb|markboth| TeX field. You
+may use either or both methods to create chapters at the beginning of your
+document. You may also delete these preliminary chapters.
+
+\mainmatter
+
+
+\part{Ecua\c{t}ii cu derivate par\c{t}iale}
+
+\chapter{Introducere}
+
+\begin{example}
+Microprocesorul 8086 fabricat de Intel Corp. \^{\i}n anii 1970 rula la 5 MHz
+\c{s}i necesita mai pu\c{t}in de 5 W putere. Ast\u{a}zi, cu vitez\u{a}
+crescut\u{a} cu un factor de c\^{a}teva sute, microprocesoarele disipeaz\u{a}
+peste 50 W. Pentru a evita deteriorarea procesorului din cauza temperaturii
+excesive, este esen\c{t}ial s\u{a} se distribuie c\u{a}ldura utiliz\^{a}nd
+radiatoare \c{s}i ventilatoare. Considera\c{t}iile de r\u{a}cire sunt un
+obstacol constant \^{\i}n calea legii lui Moore referitoare la viteza de
+prelucrare mai mare. Disiparea \^{\i}n timp a c\u{a}ldurii este modelat\u{a}
+bine printr-o EDP parabolic\u{a}. C\^{a}nd c\u{a}ldura atinge un echilibru, o
+ecua\c{t}ie eliptic\u{a} este mai potrivit\u{a} pentru modelarea
+distribu\c{t}iei st\u{a}rii de echilibru. Aplica\c{t}ia practic\u{a} \ref{RC8}
+de la pagina ??? ne arat\u{a} cum putem modela o configura\c{t}ie simpl\u{a}
+de disipare a c\u{a}ldurii utiliz\^{a}nd o EDP eliptic\u{a} cu condi\c{t}ii
+termice convective pe frontier\u{a}.
+\end{example}
+
+O EDP este o ecua\c{t}ie diferen\c{t}ial\u{a} cu mai mult de o variabil\u{a}
+independent\u{a}. Domeniul fiind vast, vom limita discu\c{t}ia la ecua\c{t}ii
+\^{\i}n dou\u{a} variabile independente, de forma
+\begin{equation}
+Au_{xx}+Bu_{xy}+Cu_{yy}+F(u_{x},u_{y},u,x,y)=0, \label{ec8.1}%
+\end{equation}
+unde derivatele par\c{t}iale sunt notate prin indicii $x$ \c{s}i $y$ pentru
+variabilele independente, iar $u$ desemneaz\u{a} solu\c{t}ia. Dac\u{a} una din
+variabile reprezint\u{a} timpul, ca \^{\i}n ecua\c{t}ia c\u{a}ldurii, vom nota
+variabilele independente cu $x$ \c{s}i $t$.
+
+\^{I}n fubc\c{t}ie de termenul dominant din (\ref{ec8.1}), solu\c{t}iile pot
+avea propriet\u{a}\c{t}i diverse. EDP de ordinul al doilea cu dou\u{a}
+variabile independente se clasific\u{a} astfel:
+
+\begin{enumerate}
+\item parabolice, dac\u{a} $B^{2}-4AC=0$
+
+\item hiperbolice, dac\u{a} $B^{2}-4AC>0$
+
+\item eliptice, dac\u{a} $B^{2}-4AC<0$
+\end{enumerate}
+
+Diferen\c{t}a practic\u{a} este c\u{a} ecua\c{t}iile parabolice \c{s}i
+hiperbolice sunt definite \^{\i}ntr-o regiune deschis\u{a}. Condi\c{t}iile pe
+frontier\u{a} pentru o variabil\u{a}---\^{\i}n cele mai multe cazuri
+timpul---sunt specificate la un cap\u{a}t al regiunii, iar solu\c{t}ia se
+ob\c{t}ine dep\u{a}rt\^{a}ndu-ne de acea frontier\u{a}. Ecua\c{t}iile
+eliptice, pe de alt\u{a} parte, se specific\u{a} d\^{a}nd condi\c{t}ii pe
+\^{\i}ntreaga frontier\u{a} a unei regiuni \^{\i}nchise. Vom studia exemple de
+fiecare tip \c{s}i vom ilustra metodele numerice de rezolvare.
+
+\chapter{Ecua\c{t}ii parabolice}
+
+The \emph{heat equation}%
+\begin{equation}
+u_{t}=Du_{xx} \label{ec8.2}%
+\end{equation}
+represents temperature $x$ measured along a one-dimensional homogeneous
+rod.The constant $D>0$ is called the \emph{diffusion coefficient},
+representing the thermal diffusivity of the material making up the rod. The
+heat equation models the spread of heat from regions of higher concentration
+to regions of lower concentration. The independent variables are $x$ and $t$.
+
+We use the variable $t$ instead of $y$ in (\ref{ec8.2}) because it represents
+time. From the foregoing classification, we have $B^{2}-4AC=0$, so the heat
+equation is parabolic. The so-called heat equation is an example of a
+\emph{diffusion equation}, which models the diffusion of a substance. In
+materials science, the same equation is known as Fick's second law and
+describes diffusion of a substance within a medium.
+
+Similar to the case of ODEs, the PDE (\ref{ec8.2}) has infinitely many
+solutions, and extra conditions are needed to pin down a particular solution.
+Chapters 6 and 7 treated the solution of ODEs, where initial conditions or
+boundary conditions were used, respectively. In order to properly pose a PDE,
+various combinations of initial and boundary conditions can be used.
+
+For the heat equation, a straightforward analysis suggests which conditions
+should be required. To specify the situation uniquely, we need to know the
+initial temperature distribution along the rod and what is happening at the
+ends of the rod as time progresses.
+
+The properly posed heat equation on a finite interval has the form%
+\begin{equation}
+\left\{
+\begin{array}
+[c]{ll}%
+u_{t}=Du_{xx}, & \forall t\in\lbrack a,b],t\geq0\\
+u(x,0)=f(x), & \forall t\in\lbrack a,b]\\
+u(a,t)=l(t), & \forall t\geq0\\
+u(b,t)=r(t), & \forall t\geq0
+\end{array}
+\right.  \label{ec8.3}%
+\end{equation}
+where the rod extends along the interval $a\leq x\leq b$. The diffusion
+coefficient $D$ governs the rate of heat transfer. The function $f(x)$ on
+$[a,b]$ gives the initial temperature distribution along the rod, and $l(t)$,
+$r(t)$ for $t\geq0$ give the temperature at the ends. Here, we have used a
+combination of initial conditions $f(x)$ and boundary conditions $l(t)$ and
+$r(t)$ to specify a unique solution of the PDE.
+
+\section{Metoda diferen\c{t}elor progresive(Forward Difference Method)}
+
+The use of finite difference methods to approximate the solution of a partial
+differential equation follows the direction established in the previous two
+chapters. The idea is to lay down a grid in the independent variables and
+discretize the PDE. The continuous problem is changed into a discrete problem
+of a finite number of equations. If the PDE is linear, the discrete equations
+are linear and can be solved by the methods of Chapter 2.
+
+To discretize the heat equation on the time interval $[0,T]$, we consider a
+grid, or mesh, of points as shown in Figure \ref{fig8.1}. The closed circles
+represent values of the solution $u(x,t)$ already known from the initial and
+boundary conditions, and the open circles are mesh points that will be filled
+in by the method.We will denote the exact solution by $u(x_{i},t_{j})$ and its
+approximation at $(x_{i},t_{j})$ by $w_{ij}$. Let $M$ and $N$ be the total
+number of steps in the $x$ and $t$ directions, and let $h=(b-a)/M$ and $k=T/N$
+be the step sizes in the $x$ and $t$ directions.%
+
+%TCIMACRO{\FRAME{ftbphFU}{6.9962cm}{5.0522cm}{0pt}{\Qcb{Mesh for the Finite
+%Difference Method. The filled circles represent known initial and boundary
+%conditions. The open circles represent unknown values that must be
+%determined.}}{\Qlb{fig8.1}}{fig8_1mesh.png}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "F";
+%width 6.9962cm;  height 5.0522cm;  depth 0pt;  original-width 3.6357in;
+%original-height 2.6143in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";
+%filename '../../../carti/carteanum/subspeciale/EDP/fig8_1mesh.png';file-properties "XNPEU";}%
+%}}%
+%BeginExpansion
+\begin{figure}
+[ptbh]
+\begin{center}
+\includegraphics[
+natheight=2.614300in,
+natwidth=3.635700in,
+height=5.0522cm,
+width=6.9962cm
+]%
+{../../../carti/carteanum/subspeciale/EDP/fig8_1mesh.png}%
+\caption{Mesh for the Finite Difference Method. The filled circles represent
+known initial and boundary conditions. The open circles represent unknown
+values that must be determined.}%
+\label{fig8.1}%
+\end{center}
+\end{figure}
+%EndExpansion
+
+
+The discretization formulas from Chapter 5 can be used to approximate
+derivatives in the $x$ and $t$ directions. For example, applying the
+centered-difference formula for the second derivative to the $x$ variable
+yields
+\begin{equation}
+u_{xx}(x,t)\approx\frac{1}{h^{2}}\left(  u(x+h,t)-2u(x,t)+u(x-h,t)\right)
+,\label{ec8.4}%
+\end{equation}
+with error $h^{2}u_{xxxx}(c_{1},t)/12$; and the forward-difference formula for
+the first derivative used for the time variable gives%
+\begin{equation}
+u_{t}(x,t)\approx\frac{1}{k}\left(  u(x,t+k)-u(x,t)\right)  ,\label{ec8.5}%
+\end{equation}
+with error $ku_{tt}(x,c_{2})/2$, where $x-h<c_{1}<x+h$ and $t<c_{2}<t+h$.
+Substituting into the heat equation at the point $(x_{i},t_{j})$ yields%
+\begin{equation}
+\frac{D}{h^{2}}\left(  w_{i+1,j}-2w_{ij}+w_{i-1,j}\right)  \approx\frac{1}%
+{k}\left(  w_{i,j+1}-w_{ij}\right)  \label{ec8.6}%
+\end{equation}
+with the local truncation errors given by $O(k)+O(h^{2})$. Just as in our
+study of ordinary differential equations, the local truncation errors will
+give a good picture of the total errors, as long as the method is stable. We
+will investigate the stability of the Finite Difference Method after
+presenting the implementation details.
+
+\appendix
+
+
+\chapter{The First Appendix}
+
+The appendix fragment is used only once. Subsequent appendices can be created
+using the Chapter Section/Body Tag.
+
+\backmatter
+
+
+\chapter{Afterword}
+
+The back matter often includes one or more of an index, an afterword,
+acknowledgements, a bibliography, a colophon, or any other similar item. In
+the back matter, chapters do not produce a chapter number, but they are
+entered in the table of contents. If you are not using anything in the back
+matter, you can delete the back matter TeX field and everything that follows it.
+\end{document}

@@ -1,0 +1,239 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Monday, June 05, 2017 23:41:38}
+%TCIDATA{LastRevised=Thursday, June 08, 2017 14:53:49}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Subiectul 3}
+
+\begin{problem}
+\label{Gautschip3.34}Consider\u{a}m problema de interpolare Hermite:
+determina\c{t}i $H_{2n-1}f\in P_{2n-1}$ astfel \^{\i}nc\^{a}t
+\begin{equation}
+\left(  H_{2n-1}f\right)  \left(  \tau_{\nu}\right)  =f\left(  \tau_{\nu
+}\right)  ,~\left(  H_{2n-1}f\right)  ^{\prime}\left(  \tau_{\nu}\right)
+=f^{\prime}\left(  \tau_{\nu}\right)  ,~\nu=1,2,\dots,n. \tag{(*)}%
+\label{fstea}%
+\end{equation}
+Prin analogie cu formula lui Lagrange, polinomul care rezolv\u{a} \ref{fstea}
+se poate scrie cu ajutorul polinoamelor fundamentale de interpolare
+Hermite\ $h_{\nu,0}$, $h_{\nu,1}$ sub forma%
+\[
+\left(  H_{2n-1}f\right)  (t)=\sum_{\nu=1}^{n}\left[  h_{\nu,0}(t)f_{\nu
+}+h_{\nu,1}\left(  t\right)  f_{\nu}^{\prime}\right]  .
+\]
+
+
+\begin{enumerate}
+\item[(a)] C\u{a}uta\c{t}i $h_{\nu,0}$ \c{s}i $h_{\nu,1}\left(  t\right)  $
+sub forma
+\[
+h_{\nu,0}\left(  t\right)  (t)=\left(  a_{\nu}+b_{\nu}t\right)  \ell_{\nu}%
+^{2}(t),~h_{\nu,1}\left(  t\right)  \left(  t\right)  =\left(  c_{\nu}+d_{\nu
+}t\right)  \ell_{\nu}^{2}(t),
+\]
+unde $\ell_{\nu}$ sunt polinoamele fundamentale de interpolare Lagrange.
+Determina\c{t}i constantele $a_{\nu}$, $b_{\nu}$, $c_{\nu}$, $d_{\nu}$.
+
+\item[(b)] Ob\c{t}ine\c{t}i formula de cuadratur\u{a}
+\[
+\int_{a}^{b}f(t)w(t)\mathrm{d}\,t=\sum_{\nu=1}^{n}\left[  \lambda_{\nu
+}f\left(  \tau_{\nu}\right)  +\mu_{\nu}f^{\prime}\left(  \tau_{\nu}\right)
+\right]  +R_{n}(f)
+\]
+cu proprietatea $R_{n}\left(  f\right)  =0$ pentru orice $f\in\mathbb{P}%
+_{2n-1}$.
+
+\item[(c)] Ce condi\c{t}ii trebuie impuse asupra polinomului nodurilor
+$\omega_{n}(t)=\prod\limits_{\nu=1}^{n}\left(  t-t_{\nu}\right)  $ (sau asupra
+nodurilor $\tau_{\nu}$) astfel ca $\mu_{\nu}=0$ pentru $\nu=1,2,\dots,n$?
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Polinoamele $h_{\nu,0}$ trebuie s\u{a} verifice%
+\[
+h_{\nu,0}\left(  \tau_{\nu}\right)  =1,~h_{\nu,0}^{\prime}\left(  \tau_{\nu
+}\right)  =0,
+\]
+iar condi\c{t}iile  $h_{\nu,0}(\tau_{%
+%TCIMACRO{\U{3bc} }%
+%BeginExpansion
+\mu
+%EndExpansion
+})=h_{\nu,0}^{\prime}(\tau_{%
+%TCIMACRO{\U{3bc} }%
+%BeginExpansion
+\mu
+%EndExpansion
+})=0$, $\mu\neq\nu$, sunt automat verificate datorit\u{a} formei lui
+$h_{\nu,0}$. Astfel,%
+\[
+a_{\nu}+b_{\nu}\tau_{\nu}=1,~b_{\nu}+\left(  a_{\nu}+b_{\nu}\tau_{\nu}\right)
+\cdot2\ell_{\nu}\left(  \tau_{\nu}\right)  \ell_{\nu}^{\prime}\left(
+\tau_{\nu}\right)  =0,
+\]
+adic\u{a},%
+\begin{align*}
+a_{\nu}+b_{\nu}\tau_{\nu} &  =1,\\
+b_{\nu}+2\ell_{\nu}^{\prime}\left(  \tau_{\nu}\right)   &  =0.
+\end{align*}
+Rezolv\^{a}nd sistemul cu necunoscutele $a_{\nu}$ \c{s}i  $b_{\nu}$ \c{s}i
+\^{\i}nlocuind \^{\i}n  $h_{\nu,0}$ se ob\c{t}ine%
+\[
+h_{\nu,0}(t)=\left[  1-2(t-\tau_{\nu})\ell_{\nu}^{\prime}(\tau_{\nu})\right]
+\ell_{\nu}^{2}(t),\quad\nu=1,2,\dots,n.
+\]
+Analog, $h_{\nu,1}$ satisface%
+\[
+h_{\nu,1}\left(  \tau_{\nu}\right)  =0,~h_{\nu,1}^{\prime}\left(  \tau_{\nu
+}\right)  =1
+\]
+din care se ob\c{t}ine
+\[
+c_{\nu}+d_{\nu}\tau_{\nu}=0,~d_{\nu}+(c_{\nu}+d_{\nu}\tau_{\nu})\cdot
+2\ell_{\nu}(\tau_{\nu})\ell_{\nu}^{\prime}(\tau_{\nu})=1,
+\]
+adic\u{a},
+\[
+c_{\nu}+d_{\nu}\tau_{\nu}=0,\quad d_{\nu}=1.
+\]
+Astfel, $c_{\nu}=-\tau_{\nu}$ \c{s}i\
+\[
+h_{\nu,1}(t)=(t-\tau_{\nu})\ell_{\nu}^{2}(t),\quad\nu=1,2,\dots,n.
+\]
+Derivata polinomului fundamental \^{\i}n $\tau_{\nu}$ este%
+\[
+\ell_{\nu}^{\prime}(\tau_{\nu})=\sum_{\mu\neq\nu}\frac{1}{\tau_{\nu}-\tau
+_{\mu}}.
+\]
+
+
+\item[(b)] Formula de cuadratur\u{a} se ob\c{t}ine integr\^{a}nd termen cu
+termen%
+\[
+\int_{a}^{b}f(t)w(t)\mathrm{d}\,t=\int_{a}^{b}p(t)w(t)\mathrm{d}\,t+R_{n}(f),
+\]
+Gradul de exactitate este $2n-1$. Utiliz\^{a}nd punctul (a), se ob\c{t}ine%
+\begin{align*}
+\int_{a}^{b}p(t)w(t)\mathrm{d}\,t &  =\int_{a}^{b}\sum_{\nu=1}^{n}\left[
+h_{\nu,0}(t)f_{\nu}+h_{\nu,1}\left(  t\right)  f_{\nu}^{\prime}\right]
+w(t)\mathrm{d}\,t\\
+&  =\sum_{\nu=1}^{n}\left[  f_{\nu}\int_{a}^{b}h_{\nu}(t)w(t)\mathrm{d}%
+\,t+f_{\nu}^{\prime}\int_{a}^{b}k_{\nu}\left(  t\right)  w(t)\mathrm{d}%
+\,t\right]  .
+\end{align*}
+Deci%
+\[
+\lambda_{\nu}=\int_{a}^{b}h_{\nu,0}(t)w(t)\mathrm{d}\,t,\quad\mu_{\nu}%
+=\int_{a}^{b}h_{\nu,1}\left(  t\right)  w(t)\mathrm{d}\,t,\quad\nu
+=1,2,\dots,n.
+\]
+
+
+\item[(b)] Pentru ca to\c{t}i coeficien\c{t}ii $\mu$ s\u{a} fie nuli, trebuie
+s\u{a} avem
+\[
+\int_{a}^{b}h_{\nu,1}\left(  t\right)  w(t)\mathrm{d}\,t=0,\quad\nu
+=1,2,\dots,n.
+\]
+sau, pe baza lui (a), observ\^{a}nd c\u{a} $\ell_{\nu}(t)=\frac{\omega_{n}%
+(t)}{(t-\tau_{\nu})\omega_{n}^{\prime}(\tau_{\nu})}$,%
+\[
+\frac{1}{\omega_{n}^{\prime}(\tau_{\nu})}\int_{a}^{b}\frac{\omega_{n}%
+(t)}{(t-\tau_{\nu})\omega_{n}^{\prime}(\tau_{\nu})}\omega_{n}(t)w(t)\mathrm{d}%
+\,t=0,\quad\nu=1,2,\dots,n.
+\]
+adic\u{a},%
+\[
+\int_{a}^{b}\ell_{\nu}(t)\omega_{n}(t)w(t)\mathrm{d}\,t=0,\quad\nu
+=1,2,\dots,n.
+\]
+Deoarece $\{\ell_{\nu}(t)\}_{\nu=1}^{n}$ formeaz\u{a} o baz\u{a} a lui
+$\mathbb{P}_{n-1}$ ($\ell_{\nu}$ sunt liniar independente \c{s}i genereaz\u{a}
+$\mathbb{P}_{n-1}$), $\omega_{n}$ trebuie s\u{a} fie ortogonal pe $[a,b]$
+\^{\i}n raport cu $w(t)=1$ pe toate polinoamele de grad mai mic, adic\u{a},
+$\omega_{n}(t)=\pi_{n}(t;w)$. Se ob\c{t}ine o formul\u{a} de cuadratur\u{a} gaussian\u{a}.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Implementa\c{t}i \^{\i}n MATLAB o metod\u{a} hibrid\u{a}
+Newton+\^{\i}njum\u{a}t\u{a}\c{t}ire pentru rezolvarea ecua\c{t}iei $f(x)=0$,
+$f\in C^{1}$. Testa\c{t}i pentru $f(x)=J_{0}(x)$, pe intervalul $[0,4]$ \c{s}i
+compara\c{t}i cu metoda lui Newton pentru $x_{0}=0.01$.
+\end{problem}
+
+\newpage
+
+\section*{Subiectul 4}
+
+\begin{problem}
+\label{Gautschip3.46}
+
+\begin{enumerate}
+\item[(a)] Utiliza\c{t}i metoda coeficien\c{t}ilor nedetermina\c{t}i pentru a
+ob\c{t}ine formula de cuadratur\u{a} (cu gradul de exactitate $d\geq2$) de
+forma
+\[
+\int_{0}^{1}y(s)\mathrm{d}\,s\approx ay(0)+by(1)-c\left[  y^{\prime
+}(1)-y^{\prime}(0)\right]  +R(f).
+\]
+
+
+\item[(b)] Transforma\c{t}i formula de la (a) \^{\i}ntr-o formul\u{a} pentru a
+aproxima $\int_{x}^{h+x}f(t)\mathrm{d}\,t$.
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} de integrare repetat\u{a} bazat\u{a}
+pe formula de la (b) pentru a aproxima $\int_{a}^{b}f(t)\mathrm{d}\,t$.
+Interpreta\c{t}i rezultatul.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Implementa\c{t}i \^{\i}n MATLAB o metod\u{a} hibrid\u{a}
+secant\u{a}+\^{\i}njum\u{a}t\u{a}\c{t}ire pentru rezolvarea ecua\c{t}iei
+$f(x)=0$. Testa\c{t}i pentru $f(x)=1-\frac{2}{x^{2}-2x+2}$. C\^{a}te
+itera\c{t}ii sunt necesare? Compara\c{t}i cu metoda secantei \c{s}i a \^{\i}njum\u{a}t\u{a}\c{t}irii.
+\end{problem}
+
+
+\end{document}

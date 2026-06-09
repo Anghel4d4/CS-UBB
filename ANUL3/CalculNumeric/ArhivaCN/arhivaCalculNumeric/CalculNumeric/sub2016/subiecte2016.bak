@@ -1,0 +1,129 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Thursday, May 19, 2016 00:31:09}
+%TCIDATA{LastRevised=Thursday, May 19, 2016 00:44:50}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Setul 1}
+
+\begin{problem}
+Pentru func\c{t}ia $f:\mathbb{R\rightarrow R}$, $f(x)=\cos\frac{\pi}{2}x$
+\c{s}i diviziunea $\Delta:x_{1}=-1<x_{2}=0<x_{3}=1$, determina\c{t}i spline-ul
+natural de interpolare.
+\end{problem}
+
+\begin{problem}
+Fie $a>0$. Pornind de la o ecua\c{t}ie convenabil\u{a} \c{s}i folosind metoda
+lui Newton, deduce\c{t}i o metod\u{a} pentru aproximarea lui $\frac{1}%
+{\sqrt{a}}$ f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri. Cum se alege valoarea de
+pornire? Care este criteriul de oprire? Deduce\c{t}i de aici o metod\u{a}
+pentru calculul lui $\sqrt{a}$ f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri.
+\end{problem}
+
+\section*{Setul 2}
+
+\begin{problem}
+Pentru func\c{t}ia $f:\mathbb{R\rightarrow R}$, $f(x)=\sin\frac{\pi}{2}x$
+\c{s}i diviziunea $\Delta:x_{1}=-1<x_{2}=0<x_{3}=1$, determina\c{t}i spline-ul
+complet de interpolare.
+\end{problem}
+
+\begin{problem}
+Fie $a>0$. Pornind de la o ecua\c{t}ie convenabil\u{a} \c{s}i folosind metoda
+lui Newton, deduce\c{t}i o metod\u{a} pentru aproximarea lui $\frac{1}{a}$
+f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri. Cum se alege valoarea de pornire? Care
+este criteriul de oprire? Cum ve\c{t}i proceda pentru o implementare
+eficient\u{a} \^{\i}n virgul\u{a} flotant\u{a}?
+\end{problem}
+
+\newpage
+
+\section*{Setul 3}
+
+\begin{problem}
+Se consider\u{a} ecua\c{t}ia $f(x)=xe^{x}-1=0$. Dorim s\u{a} o rezolv\u{a}m
+aplic\^{a}nd metoda aproxima\c{t}iilor succesive, rezolv\^{a}nd problema de
+punct fix $x=F(x)$ \^{\i}n dou\u{a} moduri
+
+\begin{enumerate}
+\item[(a)] $F(x)=e^{-x}$
+
+\item[(b)] $F(x)=\frac{1+x}{1+e^{x}}$.
+\end{enumerate}
+
+Ar\u{a}ta\c{t}i c\u{a} \^{\i}n ambele cazuri itera\c{t}iile $x_{k}=F(x_{k})$
+sunt convergente, determina\c{t}i ordinul de convergen\c{t}\u{a} \c{s}i
+num\u{a}rul de itera\c{t}ii necesare pentru a ob\c{t}ine precizia
+$\varepsilon=10^{-10}$.
+\end{problem}
+
+\begin{problem}
+Fie $f\in C^{4}[-1,1]$. Determina\c{t}i un polinom de interpolare $P$ de grad
+minim care verific\u{a} condi\c{t}iile
+\[
+P(-1)=f(-1),~P^{\prime}(-1)=f^{\prime}(-1),~P(0)=f(0),~P(1)=f(1)
+\]
+\c{s}i determina\c{t}i expresia restului.
+\end{problem}
+
+\section*{Setul 4}
+
+\begin{problem}
+Pentru a rezolva ecua\c{t}ia $f(x)=0$ se aplic\u{a} metoda lui Newton
+func\c{t}iei $g(x)=\frac{f(x)}{\sqrt{f^{\prime}(x)}}$.
+
+\begin{enumerate}
+\item[(a)] Scrie\c{t}i formula iterativ\u{a} care se ob\c{t}ine \c{s}i
+determina\c{t}i ordinul de convergen\c{t}\u{a}.
+
+\item[(b)] Aplica\c{t}i metoda de la punctul (a) pentru a aproxima $\sqrt{a}$,
+$a>0$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+Fie $f\in C^{4}[-1,1]$. Determina\c{t}i un polinom de interpolare $P$ de grad
+minim care verific\u{a} condi\c{t}iile
+\[
+P(-1)=f(-1),~~P(0)=f(0),~P(1)=f(1),P^{\prime}(1)=f^{\prime}(1).
+\]
+\c{s}i determina\c{t}i expresia restului.
+\end{problem}
+
+
+\end{document}

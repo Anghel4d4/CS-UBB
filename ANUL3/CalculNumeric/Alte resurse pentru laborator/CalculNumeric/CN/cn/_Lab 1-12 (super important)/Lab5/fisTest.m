@@ -1,0 +1,17 @@
+clc
+A = [  -2, 0, 0, 4, -1, 0;
+       0, -1, 4, 0,  0, -1;
+       0, -1, 0, -1, 4, -1;
+       4, -1, 0 , -1, 0, 0;
+       0, 0, -1, 0, -1, 4;
+       -1, 4, -1, 0, -1, 0]
+D = diag(diag(A))
+L = -tril(A,-1)
+U = -triu(A,1)
+Acompm = D+L+U
+b = [1; 2; 1; 2; 2; 1]
+
+rez = A\b
+rezJP = Jacobi(A, b)
+rezJ = rezolvaJacobi(A ,b, 1e-5)
+rezGS = rezolvaGaussSeidel(A, b, 1e-5)

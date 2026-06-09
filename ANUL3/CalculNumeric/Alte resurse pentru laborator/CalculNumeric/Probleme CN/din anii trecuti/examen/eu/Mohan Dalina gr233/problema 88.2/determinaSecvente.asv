@@ -1,0 +1,30 @@
+function fiMinime=determinaSecvente(m,L,E)
+
+    %calculam volumul
+    latimea=0.0025;
+    lungimea=0.9;
+    inaltimea=0.025;
+    volum=latimea*lungimea*inaltimea;
+    %folosim formula densitate = masa / volum
+    masa=7850/volum;
+    %din enunt avem valoarea modulului de elasticitate
+    E=200;
+    %momentul de inertie al sectiunii transversale se calculeaza cu formula masa*(lungime^2)
+    I=m*(L^2)/3;
+    
+    %calculam folosind metoda Newton-Raphson 2 cele mai mici secvente
+    f = @(x) cos(x)*cosh(x)+1; % ecuatia de secventa
+    fd = @(x) sinh(x)-cosh(x)*sin(x); % derivata ecuatiei de secventa
+    vectorDeSol=aplicaRN(f , fd, 1,300, 1E-30);
+    %obtinem rezultatele intr-un vector, dupa care luam cele mai mici 2
+    %valori
+    valMinime=sort(abs(vectorDeSol));
+    
+    
+   
+   fiMinime(1)=sqrt((E*I*valMinime(1)^4) / (masa*lungimea^3)  )/2/pi;
+   fiMinime(2)=sqrt((E*I*valMinime(2)^4) / (masa*lungimea^3)  )/2/pi;
+
+
+    
+    

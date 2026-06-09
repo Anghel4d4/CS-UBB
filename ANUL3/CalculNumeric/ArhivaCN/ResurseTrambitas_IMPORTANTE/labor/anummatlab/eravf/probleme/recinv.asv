@@ -1,0 +1,7 @@
+function E=recinv(n,k)
+%recurenta inversa
+
+E=0;
+for j=n+k-1:-1:n
+    E=(1-E)/j;
+end

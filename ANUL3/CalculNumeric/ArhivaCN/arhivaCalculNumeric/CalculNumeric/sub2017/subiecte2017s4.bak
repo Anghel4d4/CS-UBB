@@ -1,0 +1,124 @@
+\documentclass[a4paper]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Friday, June 09, 2017 22:43:27}
+%TCIDATA{LastRevised=Sunday, June 11, 2017 08:52:58}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Subiectul 9}
+
+\begin{problem}
+\label{pb4.35}
+
+\begin{enumerate}
+\item[(a)] Fie $\mathrm{d\,}\lambda$ o m\u{a}sur\u{a} simetric\u{a} pe
+$[-a,a]$, $0<a\leq\infty$ \c{s}i
+\[
+\pi_{2k}(t;\mathrm{d\,}\lambda)=\pi_{k}^{+}(t^{2}).
+\]
+Ar\u{a}ta\c{t}i c\u{a} $\{\pi_{k}^{+}\}$ sunt polinoame ortogonale monice pe
+$[0,a^{2}]$\ \^{\i}n raport cu m\u{a}sura $\mathrm{d\,}\lambda^{+}%
+(t)=t^{-1/2}w(t^{1/2})\mathrm{d\,}t$. (1p)
+
+\item[(b)] Aplica\c{t}i acest rezultat la calculul polinoamelor ortogonale pe
+$[0,1]$ \^{\i}n raport cu ponderea $w(t)=\frac{1}{\sqrt{t}}$. (1p)
+
+\item[(c)] Genera\c{t}i o formul\u{a} de cuadratur\u{a} de tip Gauss cu
+dou\u{a} noduri pentru aceast\u{a} pondere. (4p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+\label{Gautschip4.27}Consider\u{a}m ecua\c{t}iile echivalente%
+\[
+(A)~x\ln x-1=0;\quad(B)~\ln x-\frac{1}{x}=0.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i c\u{a} au exact o r\u{a}d\u{a}cin\u{a} pozitiv\u{a}
+\c{s}i determina\c{t}i un interval care o con\c{t}ine. (1p)
+
+\item[(b)] At\^{a}t pentru (A) c\^{a}t \c{s}i pentru (B), determina\c{t}i cel
+mai mare interval pe care metoda lui Newton converge. (Indica\c{t}ie:
+studia\c{t}i convexitatea celor dou\u{a} func\c{t}ii care apar \^{\i}n
+ecua\c{t}ii.) (1p)
+
+\item[(c)] Care din cele dou\u{a} itera\c{t}ii converge asimptotic mai repede? (1p)
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section*{Subiectul 10}
+
+\begin{problem}
+\label{pb4.35b}
+
+\begin{enumerate}
+\item[(a)] Fie $\mathrm{d\,}\lambda$ o m\u{a}sur\u{a} simetric\u{a} pe
+$[-a,a]$, $0<a\leq\infty$ \c{s}i
+\[
+\pi_{2k+1}(t;\mathrm{d\,}\lambda)=t\pi_{k}^{-}(t^{2}).
+\]
+Ar\u{a}ta\c{t}i c\u{a} $\{\pi_{k}^{-}\}$ sunt polinoame ortogonale monice pe
+$[0,a^{2}]$\ \^{\i}n raport cu m\u{a}sura $\mathrm{d\,}\lambda^{-}%
+(t)=t^{+1/2}w(t^{1/2})\mathrm{d\,}t$. (1p)
+
+\item[(b)] Aplica\c{t}i acest rezultat la calculul polinoamelor ortogonale pe
+$[0,1]$ \^{\i}n raport cu ponderea $w(t)=\sqrt{t}$. (1p)
+
+\item[(c)] Genera\c{t}i o formul\u{a} de cuadratur\u{a} de tip Gauss cu
+dou\u{a} noduri pentru aceast\u{a} pondere. (4p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+\label{Gautschip4.30}Ecua\c{t}ia
+\[
+\cos x\cosh x-1=0
+\]
+are exact dou\u{a} r\u{a}d\u{a}cini $\alpha_{n}$ $<\beta_{n}$ \^{\i}n fiecare
+interval $\left[  -\frac{\pi}{2}+2n\pi,\frac{\pi}{2}+2n\pi\right]  $,
+$n=1,2,3,\dots$ (1p) Ar\u{a}ta\c{t}i c\u{a} metoda lui Newton aplicat\u{a}
+aceste ecua\c{t}ii converge c\u{a}tre $\alpha_{n}$ c\^{a}nd se ia valoarea de
+pornire $x_{0}=-\frac{\pi}{2}+2n\pi$ (1p) \c{s}i c\u{a}tre $\beta_{n}$
+c\^{a}nd se ia valoarea de pornire $x_{0}=\frac{\pi}{2}+2n\pi$. (1p)
+\end{problem}
+
+
+\end{document}

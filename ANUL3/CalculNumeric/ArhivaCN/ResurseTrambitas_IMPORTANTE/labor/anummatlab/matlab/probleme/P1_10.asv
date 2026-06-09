@@ -1,0 +1,9 @@
+function [lx,ly]=P1_10(x,y)
+%P1_10 subdivizarea recursiva a unui triunghi
+%dupa mijloace
+%x,y - coordonatele varfurilor
+%lx,ly - coordonatele punctelor
+
+[lx,ly]=subdivizare(x,y);
+T=delaunay(lx,ly)
+triplot(T,lx,ly)

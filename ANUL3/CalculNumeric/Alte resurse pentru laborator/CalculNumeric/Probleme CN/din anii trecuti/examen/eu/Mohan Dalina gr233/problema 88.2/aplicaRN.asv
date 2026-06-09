@@ -1,0 +1,18 @@
+function V = aplicaRN(f,J,st,dr,eps)
+
+%N0 = 100000;
+k = 0;
+vect=[];
+for t=st:dr
+    i = 1;
+    p0  = t;
+    p=NewtonRaphson(f,J,p0,eps);
+    if ( any( abs(vect-0.0001)<=p))
+    else
+        k=k+1;
+        vect(k) = p;
+    end;
+	
+end;
+
+V=sol;

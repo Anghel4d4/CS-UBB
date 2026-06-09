@@ -1,0 +1,2 @@
+function I=aplicaCuadratura(A, x, f)
+% tb sa aplicam formula 

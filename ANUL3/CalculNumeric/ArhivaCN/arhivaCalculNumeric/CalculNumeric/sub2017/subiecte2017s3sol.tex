@@ -1,0 +1,540 @@
+\documentclass[12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Thursday, June 08, 2017 12:02:06}
+%TCIDATA{LastRevised=Friday, June 09, 2017 11:00:38}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Subiectul 5}
+
+\begin{problem}
+\label{Gautschip4.31}Ecua\c{t}ia urm\u{a}toare se folose\c{s}te \^{\i}n
+inginerie la determinarea vitezelor unghiulare critice pentru axe circulare:%
+\[
+f(x)=0,\quad f(x)=\tan x+\tanh x,~x>0.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i c\u{a} are o infinitate de r\u{a}d\u{a}cini
+pozitive, exact c\^{a}te una, $\alpha_{n}$, \^{\i}n fiecare interval de forma
+$\left[  \left(  n-\frac{1}{2}\right)  \pi,n\pi\right]  $, $n=1,2,3,\dots$ (1p)
+
+\item[(b)] Determina\c{t}i $\lim_{n\rightarrow\infty}\left(  n\pi-\alpha
+_{n}\right)  $. (1p)
+
+\item[(c)] Discuta\c{t}i convergen\c{t}a metodei lui Newton dac\u{a} se
+porne\c{s}te cu $x_{0}=n\pi$. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+\end{proof}
+
+\begin{problem}
+
+
+\begin{enumerate}
+\item[(a)] Stabili\c{t}i o formul\u{a} de cuadratur\u{a} cu dou\u{a} noduri
+\c{s}i cu grad maxim de exactitate
+\[
+\int_{0}^{1}\sqrt{x}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}f(x_{2})+R(f)
+\]
+reduc\^{a}nd cuadratura la o cuadratur\u{a} de tip Gauss-Jacobi. (3p)
+
+\item[(b)] Folosind ideea de la (a), calcula\c{t}i
+\[
+\int_{0}^{1}\sqrt{x}\cos x\mathrm{d}\,x
+\]
+cu 8 zecimale exacte (2p)
+\end{enumerate}
+\end{problem}
+
+\section{Subiectul 6}
+
+\begin{problem}
+\label{Gautschip4.41}Ecua\c{t}ia $f(x)=x^{2}-3x+2=0$ are r\u{a}d\u{a}cinile 1
+\c{s}i 2. Scris\u{a} sub forma de punct fix, $x=\frac{1}{\omega}\left[
+x^{2}-\left(  3-\omega\right)  x+2\right]  $, $\omega\neq0$, sugereaz\u{a}
+itera\c{t}ia%
+\[
+x_{n+1}=\frac{1}{\omega}\left[  x_{n}^{2}-\left(  3-\omega\right)
+x_{n}+2\right]  ,\quad n=1,2,\dots~(\omega\neq0)
+\]
+
+
+\begin{enumerate}
+\item[(a)] Determina\c{t}i un interval pentru $\omega$ astfel ca pentru orice
+$\omega$ din acest interval procesul iterativ s\u{a} convearg\u{a} c\u{a}tre 1
+(c\^{a}nd $x_{0}\neq1$ este ales adecvat). (1p)
+
+\item[(b)] Face\c{t}i acela\c{s}i lucru ca la (a), dar pentru r\u{a}d\u{a}cina
+2 (\c{s}i $x_{0}\neq2$). (1p)
+
+\item[(c)] Pentru ce valori ale lui $\omega$ itera\c{t}ia converge
+p\u{a}tratic c\u{a}tre 1? (1p)
+
+\item[(d)] Interpreta\c{t}i algoritmul de la (c) ca o aplicare a metodei lui
+Newton pentru o ecua\c{t}ie $F(x)=0$ \c{s}i determina\c{t}i $F$. Pentru ce
+valori in\c{t}iale $x_{0}$ metoda este convergent\u{a}? (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+
+
+\begin{enumerate}
+\item[(a)] Stabili\c{t}i o formul\u{a} de cuadratur\u{a} cu dou\u{a} noduri
+\c{s}i cu grad maxim de exactitate
+\[
+\int_{0}^{1}\frac{f(x)}{\sqrt{x}}\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}%
+f(x_{2})+R(f)
+\]
+reduc\^{a}nd cuadratura la o cuadratur\u{a} de tip Gauss-Legendre. (2p)
+
+\item[(b)] Folosind ideea de la (a), calcula\c{t}i
+\[
+\int_{0}^{1}\frac{\cos x}{\sqrt{x}}\mathrm{d}\,x
+\]
+cu 8 zecimale exacte (2p).
+\end{enumerate}
+\end{problem}
+
+
+
+\section*{Subiectul 7}
+
+\begin{problem}
+\label{Gautschip2.73}Fie $\Delta:$ $a=x_{1}<x_{2}<x_{3}<\dots<x_{n-1}<x_{n}=b$
+o diviziune a intervalului $[a,b]$ cu $n-1$ subintervale. Presupunem c\u{a} se
+dau valorile $f_{i}=f(x_{i})$ ale unei func\c{t}ii $f(x)$ \^{\i}n punctele
+$x=x_{i}$ , $i=1,2,\dots,n$. \^{I}n aceast\u{a} problem\u{a} $s$ $\in$
+$\mathbb{S}_{2}^{1}(\Delta)$ este un spline p\u{a}tratic din $C^{1}[a,b]$ care
+interpoleaz\u{a} $f$ pe $\Delta$, adic\u{a}, $s(x_{i})=f_{i}$, $i=1,2,\dots,n$.
+
+\begin{enumerate}
+\item[(a)] Explica\c{t}i de ce este necesar\u{a} o condi\c{t}ie
+suplimentar\u{a} pentru a determina pe $s$ unic. (1p)
+
+\item[(b)] Definim $m_{i}=s^{\prime}(x_{i})$, $i=1,2,\dots,n-1$.
+Determina\c{t}i $p_{i}$ $=\left.  s\right\vert _{[x_{i},x_{i+1}]}$,
+$i=1,2,\dots,n-1$, \^{\i}n func\c{t}ie de $f_{i}$, $f_{i+1}$ \c{s}i $m_{i}$. (1p)
+
+\item[(c)] Presupunem c\u{a} lu\u{a}m $m_{1}=f^{\prime}(a)$. (Conform lui (a),
+aceasta determin\u{a} $s$ \^{\i}n mod unic.) Ar\u{a}ta\c{t}i cum se poate
+calcula $m_{2}$, $m_{3}$, $\dots$, $m_{n-1}$. (1p)
+
+\item[(d)] Implementa\c{t}i metoda de calcul a spline-ului de la (a), (b), (c)
+\^{\i}n MATLAB. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Sunt $3(n-1)$ parametrii \c{s}i  $2(n-2)+2$ condi\c{t}ii de
+interpolare \c{s}i $n-2$ condi\c{t}ii de continuitate a primei derivate.
+R\u{a}m\^{a}n  $3(n-1)-2(n-2)-2-(n-2)=1$ grade de libertate. Avem nevoie de o
+condi\c{t}ie suplimentar\u{a} pentru a determina spline-ul unic.
+
+\item[(b)] Cu nota\c{t}ia $\Delta x_{i}=x_{i+1}-x_{i}$, ob\c{t}inem tabela de
+diferen\c{t}e divizate   \newline%
+\begin{tabular}
+[c]{cccc}%
+$x$ & $f$ & $\mathcal{D}^{1}$ & $\mathcal{D}^{2}$\\\hline
+\multicolumn{1}{l}{$x_{i}$} & \multicolumn{1}{l}{$f_{i}$} &
+\multicolumn{1}{l}{$m_{i}$} & \multicolumn{1}{l}{$\frac{m_{i}-f[x_{i}%
+,x_{i+1}]}{\Delta x_{i}}$}\\
+\multicolumn{1}{l}{$x_{i}$} & \multicolumn{1}{l}{$f_{i}$} &
+\multicolumn{1}{l}{$f[x_{i},x_{i+1}]$} & \multicolumn{1}{l}{}\\
+\multicolumn{1}{l}{$x_{i+1}$} & \multicolumn{1}{l}{$f_{i+1}$} &
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{}%
+\end{tabular}
+\\ Polinoamele $p_{i}$ sunt%
+\[
+p_{i}(x)=f_{i}+m_{i}(x-x_{i})+(x-x_{i})^{2}\frac{m_{i}-f[x_{i},x_{i+1}%
+]}{\Delta x_{i}},\quad1\leq i\leq n-1.
+\]
+
+
+\item[(c)] Impunem $p_{i}^{\prime}(x_{i+1})=m_{i+1}$, $i=1,2,\dots,n-2$.
+Astfel,
+\begin{align*}
+m_{i}+2\Delta x_{i}\frac{m_{i}-f[x_{i},x_{i+1}]}{\Delta x_{i}} &
+=m_{i+1}\Longleftrightarrow\\
+m_{i}+2f[x_{i},x_{i+1}]-2m_{i} &  =m_{i+1},
+\end{align*}
+sau%
+\[
+\left\{
+\begin{array}
+[c]{cc}%
+m_{1}=f^{\prime}(a) & \\
+m_{i+1}=2f[x_{i},x_{i+1}]-m_{i} & i=1,2,\dots,n-2
+\end{array}
+\right.
+\]
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+\label{pb4.37}
+
+\begin{enumerate}
+\item[(a)] Fie $w(t)$ o func\c{t}ie pondere par\u{a} pe $[a,b]$, $a<b$,
+$a+b=0$, adic\u{a} $w(-t)=w(t)$ pe $[a,b]$. Ar\u{a}ta\c{t}i c\u{a}
+$(-1)^{n}\pi_{n}(-t;w)=\pi_{n}(t,w)$, adic\u{a} polinomul ortogonal monic de
+grad $n$ \^{\i}n raport cu ponderea $w$ este par (impar) dac\u{a} $n$ este par (impar).
+
+\item[(b)] Ar\u{a}ta\c{t}i c\u{a} formula gaussian\u{a}
+\[
+\int_{a}^{b}f(t)w(t)dt=\sum_{\nu=1}^{n}A_{\nu}f(t_{\nu})+R_{n}(f),
+\]
+pentru o pondere $w$ par\u{a} este simetric\u{a}, i.e.
+\[
+t_{n+1-\nu}=-t_{\nu},\qquad A_{n+1-\nu}=A_{\nu},~\nu=1,\dots,n.
+\]
+
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} gaussian\u{a} de forma%
+\[
+\int_{-\infty}^{\infty}e^{-|x|}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}%
+f(x_{2})+A_{3}f(x_{3})+R(f).
+\]
+Folosi\c{t}i (a) \c{s}i (b) pentru a simplifica calculele.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Fie $\overline{\pi}_{n}(t)(t)=(-1)^{n}\pi_{n}(-t)$. Se observ\u{a}
+c\u{a}%
+\begin{align*}
+\left(  \overline{\pi}_{n},\overline{\pi}_{m}\right)    & =\int_{-a}%
+^{a}w(t)\overline{\pi}_{n}(t)\overline{\pi}_{m}(t)\mathrm{d}\,t=(-1)^{n+m}%
+\int_{-a}^{a}w(t)\pi_{n}(-t)\pi_{m}(-t)\mathrm{d}\,t\\
+& =(-1)^{n+m}\int_{-a}^{a}w(-u)\pi_{n}(u)\pi_{m}(u)\mathrm{d}\,t=(-1)^{n+m}%
+\int_{-a}^{a}w(u)\pi_{n}(u)\pi_{m}(u)\mathrm{d}\,t=0
+\end{align*}
+Deci polinoamele $\left(  \overline{\pi}_{n}\right)  $ sunt ortogonale pe
+$[-a,a]$ \^{\i}n raport cu ponderea $w$ \c{s}i sunt monice, deci $\pi
+_{n}=\overline{\pi}_{n}$.
+
+\item[(b)] Simetria nodurilor rezult\u{a} din paritatea/imparitatea
+polinoamelor ortogonale. Simetria coeficien\c{t}ilor: deoarece $(-1)^{n}%
+\pi_{n}^{\prime}(-t)=\pi_{n}^{\prime}(t)$, avem%
+\begin{align*}
+A_{n+1-\nu}  & =\int_{-a}^{a}\frac{\pi_{n}(t)w(t)}{\left(  t-t_{n+1-\nu
+}\right)  w^{\prime}(t_{n+1-\nu})}\mathrm{d}\,t=\int_{-a}^{a}\frac{\pi
+_{n}(-t)w(t)}{\left(  -t-t_{n+1-\nu}\right)  w^{\prime}(-t_{\nu})}%
+\mathrm{d}\,t\\
+& =\left(  -1\right)  ^{n+1}\int_{-a}^{a}\frac{\pi_{n}(-t)w(-t)}{\left(
+-t-t_{\nu}\right)  \left(  -1\right)  ^{n+1}w^{\prime}(-t_{\nu})}%
+\mathrm{d}\,t=\int_{-a}^{a}\frac{\pi_{n}(t)w(t)}{\left(  t-t_{\nu}\right)
+w^{\prime}(t_{\nu})}\mathrm{d}\,t\\
+& =A_{\nu}.
+\end{align*}
+
+
+\item[(c)] Din simetria nodurilor \c{s}i coeficien\c{t}ilor rezult\u{a} c\u{a}%
+\[
+\int_{-\infty}^{\infty}e^{-|x|}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}%
+f(0)+A_{1}f(-x_{1})+R(f).
+\]
+Polinomul ortogonal are forma
+\[
+\pi_{3}(x)=x^{3}-\alpha x.
+\]
+El trebuie s\u{a} fie ortogonal pe $\pi_{1}(x)=x$, adic\u{a}%
+\[
+\int_{-\infty}^{\infty}e^{-\left\vert x\right\vert }x\left(  x^{3}-\alpha
+x\right)  \mathrm{d}\,x=48-4\alpha=0,
+\]
+adic\u{a} $\alpha=12$. Nodurile sunt $x_{1}=-2\sqrt{3}$, $x_{2}=0$,
+$x_{3}=2\sqrt{3}$. Din condi\c{t}iile de exactitate avem%
+\begin{align*}
+A_{1}+A_{2}+A_{3}  & =2A_{1}+A_{2}=\int_{-\infty}^{\infty}e^{-\left\vert
+x\right\vert }\mathrm{d}\,x=2\\
+A_{1}(-2\sqrt{3})^{2}+A_{2}\cdot0^{2}+A_{1}(-2\sqrt{3})^{2}  & =24A_{1}%
+=\int_{-\infty}^{\infty}x^{2}e^{-\left\vert x\right\vert }\mathrm{d}\,x=4
+\end{align*}
+adic\u{a}%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+24A_{1}  & =4
+\end{align*}
+Solu\c{t}iile: $\left[  A_{1}=\frac{1}{6},A_{2}=\frac{5}{3}\right]  $ .
+Altfel: rezolv\u{a}m sistemul neliniar%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+-A_{1}x_{1}+A_{2}\cdot0+A_{1}x_{1}  & =0\\
+A_{1}x_{1}^{2}+A_{2}\cdot0+A_{1}x_{1}^{2}  & =4\\
+A_{1}x_{1}^{4}+A_{2}\cdot0+A_{1}x_{1}^{4}  & =\int_{-\infty}^{\infty}%
+x^{4}e^{-\left\vert x\right\vert }\mathrm{d}\,x=48
+\end{align*}
+Sistemul este echivalent cu%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+2A_{1}x_{1}^{2}  & =4\\
+2A_{1}x_{1}^{4}  & =48
+\end{align*}
+Solu\c{t}iile: $\left[  A_{1}=\frac{1}{6},A_{2}=\frac{5}{3},x_{1}=-2\sqrt
+{3}\right]  ,\left[  A_{1}=\frac{1}{6},A_{2}=\frac{5}{3},x_{1}=2\sqrt
+{3}\right]  \allowbreak$\\ Restul%
+\[
+R(f)=\frac{f^{(6)}(\xi)}{6!}\int_{-\infty}^{\infty}e^{-\left\vert x\right\vert
+}\left(  x^{3}-12x\right)  ^{2}\mathrm{d}\,x=\frac{6}{5}f^{(6)}(\xi).
+\]
+: $\frac{6}{5}f^{6}\xi$\newline\newline
+\end{enumerate}
+\end{proof}
+
+\section*{Subiectul 8}
+
+\begin{problem}
+\label{Subbotinspline}Presupunem c\u{a} se d\u{a} diviziunea $\Delta
+:a=t_{0}<t_{1}<\dots<t_{n}=b$; fie nodurile
+\begin{align*}
+\tau_{0} &  =t_{0},~\tau_{n+1}=t_{n}\\
+\tau_{i} &  =\frac{1}{2}\left(  t_{i}+t_{i-1}\right)  ,\quad i=1,\dots,n.
+\end{align*}
+Determina\c{t}i un spline p\u{a}tratic $Q\in S_{2}^{1}(\Delta)$ care \^{\i}n
+nodurile date ia ni\c{s}te valori prescrise:%
+\[
+Q(\tau_{i})=y_{i},\quad i=0,1,\dots,n.
+\]
+Implementa\c{t}i metoda de calcul a spline-ului \^{\i}n MATLAB.
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]Fie $Q_{i}=Q|_{[t_{i},t_{i+1}]}$ \c{s}i $m_{i}=Q^{\prime}(t_{i}%
+)$. C\u{a}ut\u{a}m $Q_{i}$ sub forma%
+\begin{equation}
+Q_{i}(x)=y_{i+1}+c_{i,1}(x-\tau_{i+1})+c_{i,2}(x-\tau_{i+1})^{2}.\label{KC6}%
+\end{equation}
+Ob\c{t}inem $c_{i,1}$ \c{s}i $c_{i,2}$ din condi\c{t}iile $Q_{i}(\tau
+_{i+1})=y_{i+1}$, $Q_{i}^{\prime}(t_{i})=m_{i}$ \c{s}i $Q_{i}^{\prime}%
+(t_{i+1})=m_{i+1}$. Aceste condi\c{t}ii ne conduc la %
+
+\begin{equation}
+Q_{i}(x)=y_{i+1}+\frac{1}{2}\left(  m_{i}+m_{i+1}\right)  (x-\tau_{i+1}%
+)+\frac{1}{2h_{i}}(m_{i+1}-m_{i})(x-\tau_{i+1})^{2},\label{KC7}%
+\end{equation}
+unde $h_{i}=x_{i+1}-x_{i}$. Impun\^{a}nd condi\c{t}ia de continuitate pe
+nodurile interioare
+\[
+\lim_{x\rightarrow t_{i}^{-}}Q_{i-1}(x)=\lim_{x\rightarrow t_{i}^{+}}Q_{i}(x)
+\]
+se ob\c{t}ine
+\begin{equation}
+h_{i-1}m_{i-1}+3(h_{i-1}+h_{i})m_{i}+h_{i}m_{i+1}=8(y_{i+1}-y_{i}),\quad
+i=1,\dots,n-1.\label{KC8}%
+\end{equation}
+Trebuie impuse condi\c{t}ii de interpolare pe capete
+\[
+Q(\tau_{0})=y_{0},\qquad Q(\tau_{n+1})=y_{n+1}.
+\]
+Aceste dou\u{a} condi\c{t}ii ne conduc la ecua\c{t}iile
+\begin{align*}
+3h_{0}m_{0}+h_{0}m_{1} &  =8(y_{1}-y_{0})\\
+h_{n-1}m_{n-1}+3h_{n-1}m_{n} &  =8(y_{n+1}-y_{n})
+\end{align*}
+Sistemul de ecua\c{t}ii pentru vectorul $\mathbf{m}=[m_{0},m_{1}%
+,...,m_{n}]^{T}$ se scrie sub forma%
+\begin{align*}
+&  \left[
+\begin{array}
+[c]{cccccc}%
+3h_{0} & h_{0} &  &  &  & \\
+h_{0} & 3\left(  h_{0}+h_{1}\right)   & h_{1} &  &  & \\
+& h_{1} & 3\left(  h_{1}+h_{2}\right)   & h_{2} &  & \\
+&  & \ddots & \ddots & \ddots & \\
+&  &  & h_{n-2} & 3\left(  h_{n-2}+h_{n-1}\right)   & h_{n-1}\\
+&  &  &  & h_{n-1} & 3h_{n-1}%
+\end{array}
+\right]  \left[
+\begin{array}
+[c]{c}%
+m_{0}\\
+m_{1}\\
+m_{2}\\
+\vdots\\
+m_{n-1}\\
+m_{n}%
+\end{array}
+\right]  \\
+&  =8\left[
+\begin{array}
+[c]{c}%
+y_{1}-y_{0}\\
+y_{2}-y_{1}\\
+y_{3}-y_{2}\\
+\vdots\\
+y_{n}-y_{n-1}\\
+y_{n+1}-y_{n}%
+\end{array}
+\right]  .
+\end{align*}
+Sistemul are $n+1$ ecua\c{t}ii, $n+1$ necunoscute, este tridiagonal, simetric
+\c{s}i diagonal dominant. Dup\u{a} ob\c{t}inerea vectorului $\mathbf{m}$,
+valorile lui $Q(x)$ se pot calcula folosind formula (\ref{KC7}).
+\end{proof}
+
+\begin{problem}
+\label{pb4.37b}
+
+\begin{enumerate}
+\item[(a)] Fie $w(t)$ o func\c{t}ie pondere par\u{a} pe $[a,b]$, $a<b$,
+$a+b=0$, adic\u{a} $w(-t)=w(t)$ pe $[a,b]$. Ar\u{a}ta\c{t}i c\u{a}
+$(-1)^{n}\pi_{n}(-t;w)=\pi_{n}(t,w)$, adic\u{a} polinomul ortogonal monic de
+grad $n$ \^{\i}n raport cu ponderea $w$ este par (impar) dac\u{a} $n$ este par (impar).
+
+\item[(b)] Ar\u{a}ta\c{t}i c\u{a} formula gaussian\u{a}
+\[
+\int_{a}^{b}f(t)w(t)dt=\sum_{\nu=1}^{n}A_{\nu}f(t_{\nu})+R_{n}(f),
+\]
+pentru o pondere $w$ par\u{a} este simetric\u{a}, i.e.
+\[
+t_{n+1-\nu}=-t_{\nu},\qquad A_{n+1-\nu}=A_{\nu},~\nu=1,\dots,n.
+\]
+
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} gaussian\u{a} de forma%
+\[
+\int_{-1}^{1}\left\vert x\right\vert f(x)\mathrm{d}\,x=A_{1}f(x_{1}%
+)+A_{2}f(x_{2})+A_{3}f(x_{3})+R(f).
+\]
+Folosi\c{t}i (a) \c{s}i (b) pentru a simplifica calculele.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Fie $\overline{\pi}_{n}(t)(t)=(-1)^{n}\pi_{n}(-t)$. Se observ\u{a}
+c\u{a}%
+\begin{align*}
+\left(  \overline{\pi}_{n},\overline{\pi}_{m}\right)    & =\int_{-a}%
+^{a}w(t)\overline{\pi}_{n}(t)\overline{\pi}_{m}(t)\mathrm{d}\,t=(-1)^{n+m}%
+\int_{-a}^{a}w(t)\pi_{n}(-t)\pi_{m}(-t)\mathrm{d}\,t\\
+& =(-1)^{n+m}\int_{-a}^{a}w(-u)\pi_{n}(u)\pi_{m}(u)\mathrm{d}\,t=(-1)^{n+m}%
+\int_{-a}^{a}w(u)\pi_{n}(u)\pi_{m}(u)\mathrm{d}\,t=0
+\end{align*}
+Deci polinoamele $\left(  \overline{\pi}_{n}\right)  $ sunt ortogonale pe
+$[-a,a]$ \^{\i}n raport cu ponderea $w$ \c{s}i sunt monice, deci $\pi
+_{n}=\overline{\pi}_{n}$.
+
+\item[(b)] Simetria nodurilor rezult\u{a} din paritatea/imparitatea
+polinoamelor ortogonale. Simetria coeficien\c{t}ilor: deoarece $(-1)^{n}%
+\pi_{n}^{\prime}(-t)=\pi_{n}^{\prime}(t)$, avem%
+\begin{align*}
+A_{n+1-\nu}  & =\int_{-a}^{a}\frac{\pi_{n}(t)w(t)}{\left(  t-t_{n+1-\nu
+}\right)  w^{\prime}(t_{n+1-\nu})}\mathrm{d}\,t=\int_{-a}^{a}\frac{\pi
+_{n}(-t)w(t)}{\left(  -t-t_{n+1-\nu}\right)  w^{\prime}(-t_{\nu})}%
+\mathrm{d}\,t\\
+& =\left(  -1\right)  ^{n+1}\int_{-a}^{a}\frac{\pi_{n}(-t)w(-t)}{\left(
+-t-t_{\nu}\right)  \left(  -1\right)  ^{n+1}w^{\prime}(-t_{\nu})}%
+\mathrm{d}\,t=\int_{-a}^{a}\frac{\pi_{n}(t)w(t)}{\left(  t-t_{\nu}\right)
+w^{\prime}(t_{\nu})}\mathrm{d}\,t\\
+& =A_{\nu}.
+\end{align*}
+
+
+\item[(c)] Din simetria nodurilor \c{s}i coeficien\c{t}ilor rezult\u{a} c\u{a}%
+\[
+\int_{-1}^{1}\left\vert x\right\vert f(x)\mathrm{d}\,x=A_{1}f(x_{1}%
+)+A_{2}f(0)+A_{1}f(-x_{1})+R(f).
+\]
+Polinomul ortogonal are forma
+\[
+\pi_{3}(x)=x^{3}-\alpha x.
+\]
+El trebuie s\u{a} fie ortogonal pe $\pi_{1}(x)=x$, adic\u{a}%
+\[
+\int_{-1}^{1}\left\vert x\right\vert x\left(  x^{3}-\alpha x\right)
+\mathrm{d}\,x=\frac{1}{3}-\frac{1}{2}\alpha=0,
+\]
+adic\u{a} $\alpha=\frac{2}{3}$. Nodurile sunt $x_{1}=-\sqrt{\frac{2}{3}}$,
+$x_{2}=0$, $x_{3}=\sqrt{\frac{2}{3}}$. Din condi\c{t}iile de exactitate avem%
+\begin{align*}
+A_{1}+A_{2}+A_{3}  & =2A_{1}+A_{2}=\int_{-1}^{1}\left\vert x\right\vert
+\mathrm{d}\,x=2\\
+A_{1}\left(  -\sqrt{\frac{2}{3}}\right)  ^{2}+A_{2}\cdot0^{2}+A_{1}\left(
+\sqrt{\frac{2}{3}}\right)  ^{2}  & =\frac{4}{3}A_{1}=\int_{-1}^{1}%
+x^{2}\left\vert x\right\vert \mathrm{d}\,x=\frac{1}{2}%
+\end{align*}
+adic\u{a}%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+\frac{4}{3}A_{1}  & =\frac{1}{2}%
+\end{align*}
+Solu\c{t}iile: $\left[  A_{1}=\frac{3}{8},A_{2}=\frac{5}{4}\right]  $ .
+Altfel: rezolv\u{a}m sistemul neliniar%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+-A_{1}x_{1}+A_{2}\cdot0+A_{1}x_{1}  & =0\\
+A_{1}x_{1}^{2}+A_{2}\cdot0+A_{1}x_{1}^{2}  & =\frac{1}{2}\\
+A_{1}x_{1}^{4}+A_{2}\cdot0+A_{1}x_{1}^{4}  & =\int_{-1}^{1}x^{4}\left\vert
+x\right\vert \mathrm{d}\,x=\frac{1}{3}%
+\end{align*}
+Sistemul este echivalent cu%
+\begin{align*}
+2A_{1}+A_{2}  & =2\\
+2A_{1}x_{1}^{2}  & =\frac{1}{2}\\
+2A_{1}x_{1}^{4}  & =\frac{1}{3}%
+\end{align*}
+Solu\c{t}iile: $\left[  A_{1}=\frac{3}{8},A_{2}=\frac{5}{4},x_{1}=-\frac{1}%
+{3}\sqrt{2}\sqrt{3}\right]  ,\left[  A_{1}=\frac{3}{8},A_{2}=\frac{5}{4}%
+,x_{1}=\frac{1}{3}\sqrt{2}\sqrt{3}\right]  \allowbreak$ \\ Restul%
+\[
+R(f)=\frac{f^{(6)}(\xi)}{6!}\int_{-1}^{1}\left\vert x\right\vert \left(
+x^{3}-\frac{2}{3}x\right)  ^{2}\mathrm{d}\,x=\frac{1}{25\,920}f^{(6)}(\xi).
+\]
+
+\end{enumerate}
+
+\newline
+\end{proof}
+
+
+\end{document}

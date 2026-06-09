@@ -1,0 +1,51 @@
+s3(fi x) pe intervalul [xi, xi+1] (spline)  =pi(x) maxim gard 3=> pi(x) = c0i + c1i(x-x1) + c2(x-xi)^2 + c3i(x-xi)^3
+
+
+notalii 
+
+DXi = xi+1- xi
+Dfi = fi+1 = fi+1-fi , fi=f(xi)  f[xi, xi+1] = Dfi / Dxi
+mi = f'(xi)
+
+c0i = fi
+c1i = mi 
+c2i = (Dfi/Dxi - mi) 1/Dxi - c3i * DXi
+c3i = (mi+1 + mi = 2Dfi/Dxi)* 1/Dxi ^2
+
+CUBIC SPLINE INTERPOLATION:
+ 
+p''i-1(xi) = p''i(xi), i= 2...n-1(Doar nodurile interioare)
+
+Se rezolva sistemul
+Dxi * mi-1 + 2(Dxi-1 + Dxi) * mi + Dxi-1 * mi+1 = bi, 
+unde bi = 3(Dxi* Dfi-1 / Dxi-1 + Dxi-1 * Dfi/ Dxi) , i=2..n-1;
+
+=> necunoscutele sunt mi, i=1...n;
+
+Conditii pentru natural cubic spline
+ se aleg m1 si mn a.i, s3''(f, a ) = s''(f, b) =0;
+ 
+se adauga ecuatiile
+1. 2m1 + m2 = b1 =  3f1/Dx1
+n. mn-1 + 2mn = bn = 3 Dfn-1 / Dxn-1
+
+Pentru matricea sistemului !!!coeficientii 0
+
+prima linie ecuatia 1. , ultima n.
+2            1     ...  0           0             0
+Dx2  2(Dxi-1 + Dxi).... 0           0             0
+.
+.
+.
+0 0 0 0 0 0 0 ....... Dxn-1    2(Dxn-2,Dxn-1)   Dxn-2
+0 0 0 0 0.............. 0            1            2
+
+
+diagonala principala, superioara si inferioara sunt singurele care vor avea valori diferite de 0
+
+se dau doar valorile lui fi si nordurile (xi)
+
+
+function(X,f,x) x- punctul in care se calculeaza spline
+
+

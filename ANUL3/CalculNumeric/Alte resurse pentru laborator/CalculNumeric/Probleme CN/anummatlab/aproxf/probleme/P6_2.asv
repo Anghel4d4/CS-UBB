@@ -1,0 +1,37 @@
+function P6_2
+%P6_2
+clf
+pc =[
+   -0.4   -0.6   -0.2    0.0    0.0    0.2    0.6  0.4
+    0.6   -0.4   -0.6    0.0    0.0   -0.6   -0.4  0.6
+    ];
+npd=200;
+q=gen_B_spline(pc,3,npd);
+plot(q(1,:),q(2,:),'r-');
+hold on
+q1=gen_B_spline(pc,2,npd);
+plot(q1(1,:),q1(2,:),'g-');
+legend('grad=3','grad=2',0)
+hold off
+clf
+pc=[
+   -0.6  -0.6  -0.6  0.0  -0.01  -0.2   -0.2  -0.01  -0.04  -0.42 -0.5
+   -0.9971    0.6813    0.6813    0.6754    0.2018   -0.0029   -0.0029
+  Columns 8 through 11 
+   -0.0115   -0.0484   -0.4263   -0.5046
+   -0.1491   -0.4591   -0.4883   -0.3129    
+q=gen_B_spline(pc,3,npd);
+plot(q(1,:),q(2,:),'r-');
+hold on
+q1=gen_B_spline(pc,2,npd);
+plot(q1(1,:),q1(2,:),'g-');
+legend('grad=3','grad=2',0)
+hold off
+function q=gen_B_spline(pc,g,npd)
+n=length(pc);
+kn=noduri(n-1,g);
+ln=length(kn); 
+pas=kn(ln)/npd;
+t=0:pas:kn(ln);
+q=Cox_deBoor(g,pc,kn,t);
+

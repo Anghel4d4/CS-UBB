@@ -1,0 +1,6 @@
+function[t1,t2,t3,t4,t5]=expAprox(x)
+t1=1+x
+t2=t1+x.^2/2
+t3=t2+
+t4=
+t5=

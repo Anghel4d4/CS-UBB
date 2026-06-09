@@ -1,0 +1,12 @@
+function I=intTrapeze(f, a, b, N)
+%restul il neglijam
+%    suma = 0;
+%    for k = 1:N+1
+%        h = (b-a)/N;
+%        suma = suma + f(a+k*h);
+%    end
+    
+    suma1 = sum(1:f(a+k*(b-a)/N):N+1);
+    I=(b-a)/2*N*(f(a)+f(b)+2*suma1);
+    
+    

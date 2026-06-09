@@ -1,0 +1,12 @@
+%testiter
+o1=ones(n-1,1);
+A=5*eye(n)-diag(o1,1)-diag(o1,-1);
+b=A*ones(n,1);
+err=eps;
+w=relopt(A);
+tic
+[x1,ni1]=Jacobi(A,b,b,err,1000); 
+[x2,ni2]=relaxt(A,b,1,b,err,1000); 
+[x3,ni3]=relaxt(A,b,w,b,err,1000); 
+toc
+ni1,ni2

@@ -1,0 +1,5 @@
+x=linspace(-pi,pi);
+y1=sin(x);
+y2=cos(x);
+[tsin, tcos]=aproxSinCos(x,1e-5);
+plot(x,y1,'.',)

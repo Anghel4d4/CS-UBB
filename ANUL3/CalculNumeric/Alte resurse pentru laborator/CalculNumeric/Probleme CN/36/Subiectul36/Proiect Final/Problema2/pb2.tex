@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+\usepackage[romanian]{babel}
+\usepackage{amsthm,amsmath,amstext}
+\usepackage{enumerate}
+%
+\theoremstyle{plain}
+\newtheorem{teor}{Teorema}[subsection]
+\theoremstyle{definition}
+\newtheorem{pb}{Problema}[subsection]
+\theoremstyle{definition}
+\newtheorem{ex}{Exemplul}[subsection]
+\theoremstyle{definition}
+\newtheorem{defi}{Defini\c{t}ia}[subsection]
+\theoremstyle{definition}
+\newtheorem{obs}{Observa\c{t}ia}[subsection]
+\theoremstyle{plain}
+\newtheorem{cor}{Consecin\c{t}a}[subsection]
+%
+\begin{document}
+\title{Subiectul 36 - problema 2}
+\author{Chiril\u{a} Paul Ionu\c{t}}
+\date{}
+\maketitle
+(a) Ar\u{a}ta\c{t}i c\u{a} itera\c{t}ia Newton
+$$x_{n+1} = \frac{1}{2}\left(x_n + \frac{a}{x_n}\right), \quad a>0$$
+pentru calculul r\u ad\u acinii p\u{a}trate $\alpha = \sqrt{a}$ satisface
+$$\frac{x_{n+1}-\alpha}{(x_n -\alpha)^2} = \frac{1}{2x_n}.$$
+Ob\c{t}ine\c{t}i de aici eroarea asimptotic\u{a}.
+
+(b) Care este formula analoag\u{a} pentru r\u{a}d\u{a}cina cubic\u{a}?
+
+
+\textbf{Rezolvare}
+
+Din $\alpha = \sqrt{a}$, ob\c{t}inem $\alpha^2 =a$. Rela\c{t}ia este echivalent\u{a} cu :
+$$x_{n+1} = \frac{1}{2}\left(x_n + \frac{\alpha^2}{x_n}\right).$$
+Sc\u{a}z\^{a}nd $\alpha$ \^{\i}n ambii membri ai ecua\c{t}iei, ob\c{t}inem:
+$$x_{n+1}-\alpha = \frac{1}{2}\left(x_n + \frac{\alpha^2}{x_n}\right)-\alpha.$$
+Aducem la acela\c{s}i numitor:
+$$x_{n+1}-\alpha = \frac{x_n^2+\alpha^2 -2\alpha x_n}{2x_n},$$
+ceea ce este echivalent cu:
+$$\frac{x_{n+1}-\alpha}{(x_n -\alpha)^2} = \frac{1}{2x_n},$$
+ceea ce trebuia demonstrat.
+
+Eroarea asimptotic\u{a}:
+$$c = \lim_{n \to \infty} \frac{1}{2x_n} = \frac{1}{2\alpha}.$$
+
+(b) Folosim 
+$$x_{n+1} = x_{n} - \frac{f(x_n) - f(\alpha)}{f'(x_n)},$$
+pentru $f(x) = x^3$.
+\^{I}nlocuind, ob\c{t}inem:
+$$x_{n+1} = x_n - \frac{x_n^3 - \alpha^3}{3x_n^2}.$$
+Sc\u{a}dem $\alpha$ \^{\i}n ambii membri:
+$$x_{n+1}- \alpha = x_n - \alpha - \frac{x_n^3 - \alpha^3}{3x_n^2}.$$
+D\u{a}m factor for\c{t}at $x_n -\alpha$ \^{\i}n membrul doi:
+$$x_{n+1}- \alpha = (x_n - \alpha)\left[1-\frac{x_n^3 - \alpha^3}{(x_n-\alpha)3x_n^2}\right].$$
+Rela\c{t}ia devine:
+$$x_{n+1}- \alpha = (x_n - \alpha)\frac{(x_n-\alpha)3x_n^2 - (x_n^3 - \alpha^3)}{(x_n-\alpha)3x_n^2},$$
+de unde ob\c{t}inem:
+$$x_{n+1}- \alpha = (x_n - \alpha)^2 \frac{3x_n^2 - x_n^2 - x_n \alpha - \alpha^2}{(x_n-\alpha)3x_n^2}.$$
+\^{I}n final ob\c{t}inem
+$$x_{n+1}- \alpha = (x_n - \alpha)^2 \frac{(x_n - \alpha)(2x_n+\alpha)}{(x_n - \alpha)3x_n^2},$$
+de unde deducem formula:
+$$\frac{x_{n+1}-\alpha}{(x_n - \alpha)^2} = \frac{2x_n+ \alpha}{3x_n^2}.$$
+Eroarea asimptotic\u{a}
+$$c = \lim_{n \to \infty} \frac{2x_n+ \alpha}{3x_n^2} = \frac{2\alpha +\alpha}{3\alpha^2} = \frac{1}{\alpha}.$$
+
+
+
+\end{document}

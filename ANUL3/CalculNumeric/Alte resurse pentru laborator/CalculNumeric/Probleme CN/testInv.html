@@ -1,0 +1,177 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>testInv</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-04-28"><meta name="DC.source" content="testInv.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%{
+</span><span class="comment">    2.49 Implementati o procedura pentru inversarea unei matrice triunghiulare inferior
+</span><span class="comment">    cu 1 pe diagonala principala. Testati-o pentru matricea:
+</span><span class="comment">        1  0  0  0
+</span><span class="comment">        3  1  0  0
+</span><span class="comment">        5  2  1  0
+</span><span class="comment">        7  4 -3  1
+</span><span class="comment">%}
+</span>clc;
+fprintf(<span class="string">'Problema 2.49\n'</span>);
+fprintf(<span class="string">'test 1: test cu matricea din enunt\n'</span>);
+A = [ [1 0 0 0];
+      [3 1 0 0];
+      [5 2 1 0];
+      [7 4 -3 1]
+    ]
+invSistem = inv(A)
+invProcedura = invGaussTriunghiulara(A)
+
+fprintf(<span class="string">'test 2: test cu o matrice generata de 5 x 5 triunghiulara inferior\n'</span>);
+n = 5;
+A = tril(round(normrnd(0, 5, n, n)), -1) + diag(ones(n, 1))
+invSistem = inv(A)
+invProcedura = invGaussTriunghiulara(A)
+</pre><pre class="codeoutput">Problema 2.49
+test 1: test cu matricea din enunt
+
+A =
+
+     1     0     0     0
+     3     1     0     0
+     5     2     1     0
+     7     4    -3     1
+
+
+invSistem =
+
+    1.0000         0         0         0
+   -3.0000    1.0000    0.0000   -0.0000
+    1.0000   -2.0000    1.0000         0
+    8.0000  -10.0000    3.0000    1.0000
+
+
+invProcedura =
+
+     1     0     0     0
+    -3     1     0     0
+     1    -2     1     0
+     8   -10     3     1
+
+test 2: test cu o matrice generata de 5 x 5 triunghiulara inferior
+
+A =
+
+     1     0     0     0     0
+    -2     1     0     0     0
+     5    -3     1     0     0
+    -1     1     5     1     0
+     6     5    -2    -8     1
+
+
+invSistem =
+
+    1.0000         0         0         0         0
+    2.0000    1.0000    0.0000   -0.0000         0
+    1.0000    3.0000    1.0000   -0.0000         0
+   -6.0000  -16.0000   -5.0000    1.0000         0
+  -62.0000 -127.0000  -38.0000    8.0000    1.0000
+
+
+invProcedura =
+
+     1     0     0     0     0
+     2     1     0     0     0
+     1     3     1     0     0
+    -6   -16    -5     1     0
+   -62  -127   -38     8     1
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%{
+    2.49 Implementati o procedura pentru inversarea unei matrice triunghiulare inferior
+    cu 1 pe diagonala principala. Testati-o pentru matricea:
+        1  0  0  0
+        3  1  0  0
+        5  2  1  0
+        7  4 -3  1
+%}
+clc;
+fprintf('Problema 2.49\n');
+fprintf('test 1: test cu matricea din enunt\n');
+A = [ [1 0 0 0];
+      [3 1 0 0];
+      [5 2 1 0];
+      [7 4 -3 1]
+    ]
+invSistem = inv(A)
+invProcedura = invGaussTriunghiulara(A)
+
+fprintf('test 2: test cu o matrice generata de 5 x 5 triunghiulara inferior\n');
+n = 5;
+A = tril(round(normrnd(0, 5, n, n)), -1) + diag(ones(n, 1))
+invSistem = inv(A)
+invProcedura = invGaussTriunghiulara(A)
+
+
+
+
+##### SOURCE END #####
+--></body></html>

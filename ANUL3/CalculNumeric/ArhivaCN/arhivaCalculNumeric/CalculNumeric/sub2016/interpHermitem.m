@@ -1,0 +1,11 @@
+M7R0
+I0HermiteBasicPolf*6''%"xG%%listG'%"rGF''%"kG%*nonnegintG'%"jGF,'%"tG%%nameG6(%
+"uG%"mG%"iG%"HG%#nuG%"sG6"F9C*>8%,&-%%nopsG6#9$"""!""FB>8)""!>8$FB?(8&FFFBF<%%t
+rueG@$09&FJ>FH*&FHFB),&9(FB&FA6#,&FJFBFBFBFC,&&9%FUFBFBFBFB>8'*(),&FSFB&FA6#,&F
+NFBFBFBFC9'FB-%*factorialG6#F\oFCFHFB>FE-%%evalG6$*$FHFC/FSFin?(8(FBFB,&&FYFjnF
+BF\oFCFK>FE,&FEFB*()FhnFgoFB-F^o6#FgoFC-Fbo6$-%%diffG6$Fdo-%"$G6$FSFgoFeoFBFBO*
+&FenFBFEFBF9F9F9F9,
+I+HermitePolf*6&F%F(F/'%"fG%*procedureG6&F+F.F8F4F9F9C'>FenF=>FJFF?(FHFFFBFenFK
+>FJ,&FJFB*&-F"6'FAFYFHFFFNFB-F\o6#&FA6#,&FHFBFBFBFBFB?(FHFFFBFenFK?(F<FBFB&FYF]
+rFK>FJ,&FJFB*&-F"6'FAFYFHF<FNFB---%#@@G6$%"DGF<F_oF[rFBFBO-%(collectG6$FJF\oF9F
+9F9F9

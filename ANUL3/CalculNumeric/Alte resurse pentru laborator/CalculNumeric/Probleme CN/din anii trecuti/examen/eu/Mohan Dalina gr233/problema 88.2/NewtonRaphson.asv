@@ -1,0 +1,16 @@
+function p = NewtonRaphson(f,J,p0,eps)
+
+while i < N0
+    p = p0 - f(p0)/J(p0); %f(p0) * J(p0);
+    if abs(p0 - p)<eps %if abs(p0 - p)<eps
+        succes = true;		
+        if ( any( abs(sol-0.0001)<=p))
+          else
+            poz=poz+1;
+            sol(poz) = p;
+          end;
+          break;
+    end;
+    p0 = p;
+    i = i + 1;
+	end;

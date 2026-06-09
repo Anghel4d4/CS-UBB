@@ -1,0 +1,556 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Wednesday, June 08, 2016 10:51:44}
+%TCIDATA{LastRevised=Thursday, June 09, 2016 17:06:00}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Setul 1}
+
+\begin{problem}
+\label{pb4.3}
+
+\begin{enumerate}
+\item[(a)] Determina\c{t}i forma Newton a polinomului de interpolare $p$ ce
+interpoleaz\u{a} $f$ \^{\i}n $x=0$ \c{s}i $x=1$ \c{s}i $f^{\prime}$ \^{\i}n
+$x=0$. Exprima\c{t}i eroarea cu ajutorul unei derivate de ordin
+corespunz\u{a}tor a lui $f$ (presupus\u{a} continu\u{a} pe $[0,1]$). (3p)
+
+\item[(b)] Folosind rezultatul de la (a), deduce\c{t}i o formul\u{a} de
+cuadratur\u{a} de tipul
+\[
+\int_{0}^{1}f(x)\mathrm{d}\,x=a_{0}f(0)+a_{1}f(1)+b_{0}f^{\prime}(0)+R(f)
+\]
+Determina\c{t}i $a_{0}$, $a_{1}$, $b_{0}$ \c{s}i $R(f)$. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] (1p) Tabela de diferen\c{t}e divizate este%
+
+\begin{tabular}
+[c]{llll}%
+$0$ & $f(0)$ & $f^{\prime}(0)$ & $f(1)-f(0)-f^{\prime}(0)$\\
+$0$ & $f(0)$ & $f(1)-f(0)$ & \\
+$1$ & $f(1)$ &  &
+\end{tabular}
+
+
+Gradul polinomului de interpolare este 2. (1p) Expresia polinomului de
+interpolare este%
+\[
+(H_{2}f)(t)=f(0)+tf^{\prime}(0)+t^{2}\left[  f(1)-f(0)-f^{\prime}(0)\right]
+,
+\]
+iar restul este (1p)%
+\[
+(R_{2}f)(t)=\frac{t^{2}(t-1)}{3!}f^{\prime\prime\prime}(\xi).
+\]
+
+
+\item[(b)] Integr\^{a}nd termen cu termen se ob\c{t}ine (1p)%
+\[
+\int_{0}^{1}f(x)dx=\frac{2}{3}f(0)+\frac{1}{3}f(1)+\frac{1}{6}f^{\prime
+}(0)+R(f)
+\]
+unde (1p)%
+\[
+R(f)=\int_{0}^{1}(R_{2}f)(t)\mathrm{d}\,t=\int_{0}^{1}\frac{t^{2}(t-1)}%
+{3!}f^{\prime\prime\prime}(\xi)\mathrm{d}\,t=-\frac{1}{72}f^{\prime
+\prime\prime}(\xi).
+\]
+
+\end{enumerate}
+
+Altfel: direct $\left(  H_{2}f\right)  (x)=ax^{2}+bx+c$, $(H_{2}f)(0)=c=f(0)$,
+$(H_{2}f)(1)=a+b+c=f(1)$, $(H_{2}f)^{\prime}(0)=b=f^{\prime}(1)$. (2p).
+\end{proof}
+
+\begin{problem}
+\label{pb5.18} Concepe\c{t}i o metod\u{a} pentru a calcula $\sqrt[20]{a}$,
+$a>0$, bazat\u{a} pe metoda lui Newton. (2p) De ce o astfel de metod\u{a} este
+lent convergent\u{a}? (A se vedea de exemplu $a=1$ \c{s}i $x_{0}=\frac{1}{2}%
+$). (1p) Ce se poate face? G\^{a}ndi\c{t}i-v\u{a} \c{s}i la o alt\u{a}
+metod\u{a}. (1p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]$f(x)=x^{20}-a$, $f^{\prime}(x)=20x^{19}$, $f^{\prime\prime
+}(x)=20\cdot19\cdot x^{18}$,
+\[
+x_{n+1}=\frac{19x_{n}^{20}+a}{20x_{n}^{19}}=\frac{19}{20}x_{n}+\frac
+{a}{20x_{n}^{19}}%
+\]
+Deoarece pe $(0,\infty)$ $f^{\prime}>0$, $f^{\prime\prime}>0$, orice $x_{0}>0$
+este bun ca valoare de pornire. (2p) \c{T}in\^{a}nd cont c\u{a} $x_{n+1}%
+\approx\frac{19}{20}x_{n}$ dac\u{a} $x_{n}$ este mare, pentru $a=1$ \c{s}i
+$x_{0}=1/2$, se ob\c{t}ine
+\[
+x_{1}=\frac{19\cdot(0.5)^{20}+1}{20\cdot(0.5)^{19}}=26215,
+\]
+si deoarece la fiecare pas aproximanta este redus\u{a} cu un factor $\frac
+{19}{20}=0.95$ avem nevoie cam de 200 de itera\c{t}ii. Odat\u{a} ce ne
+apropiem de r\u{a}d\u{a}cin\u{a}, viteza de convergen\c{t}\u{a} cre\c{s}te
+dramatic (1p).
+
+Folosind criteriul de alegere a valorii de pornire $f(x_{0})f^{\prime\prime
+}(x_{0})>0$ \c{s}i folosind inegalitatea mediilor%
+\[
+\sqrt[20]{a\cdot1\cdots1}\leq\frac{a+19}{20}=:x_{0}\text{.}%
+\]
+Alt\u{a} metod\u{a}: se poate folosi formula lui Taylor pentru seria
+binomial\u{a}%
+\[
+(1-x)^{1/20}=\allowbreak1-\frac{1}{20}x-\frac{19}{800}x^{2}-\frac
+{247}{16\,000}x^{3}-\frac{14\,573}{1280\,000}x^{4}-\allowbreak\frac
+{1151\,267}{128\,000\,000}x^{5}+O\left(  x^{6}\right)
+\]
+sau aproxim\^{a}nd $\sqrt[20]{a}=\exp\left(  \frac{1}{20}\ln a\right)  $.(1p)
+\end{proof}
+
+\section*{Setul 2}
+
+\begin{problem}
+\label{pb4.17}
+
+\begin{enumerate}
+\item[(a)] Determina\c{t}i forma Newton a polinomului de interpolare $p$ ce
+interpoleaz\u{a} $f$ \^{\i}n $x=0$ \c{s}i $x=1$ \c{s}i $f^{\prime}$ \^{\i}n
+$x=1$. Exprima\c{t}i eroarea cu ajutorul unei derivate de ordin
+corespunz\u{a}tor a lui $f$ (presupus\u{a} continu\u{a} pe $[0,1]$).
+
+\item[(b)] Folosind rezultatul de la (a), deduce\c{t}i o formul\u{a} de
+cuadratur\u{a} de tipul
+\[
+\int_{0}^{1}f(x)dx=a_{0}f(0)+a_{1}f(1)+b_{0}f^{\prime}(1)+R(f)
+\]
+Determina\c{t}i $a_{0}$, $a_{1}$, $b_{0}$ \c{s}i $R(f)$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] (1p) Tabela de diferen\c{t}e divizate este%
+
+\begin{tabular}
+[c]{llll}%
+$0$ & $f(0)$ & $f(1)-f(0)$ & $f^{\prime}(1)-f(1)+f(0)$\\
+$1$ & $f(1)$ & $f^{\prime}(1)$ & \\
+$1$ & $f(1)$ &  &
+\end{tabular}
+
+
+Gradul polinomului de interpolare este 2. (1p) Expresia polinomului de
+interpolare este%
+\[
+(H_{2}f)(t)=f(0)+t\left[  f(1)-f(0)\right]  +t(t-1)\left[  f^{\prime
+}(1)-f(1)+f(0)\right]  ,
+\]
+iar restul este (1p)%
+\[
+(R_{2}f)(t)=\frac{t(t-1)^{2}}{3!}f^{\prime\prime\prime}(\xi).
+\]
+
+
+\item[(b)] Integr\^{a}nd termen cu termen se ob\c{t}ine (1p)%
+\[
+\int_{0}^{1}f(x)dx=\frac{1}{3}f(0)+\frac{2}{3}f(1)-\frac{1}{6}f^{\prime
+}(0)+R(f)
+\]
+unde (1p)%
+\[
+R(f)=\int_{0}^{1}(R_{2}f)(t)\mathrm{d}\,t=\int_{0}^{1}\frac{t(t-1)^{2}}%
+{3!}f^{\prime\prime\prime}(\xi)\mathrm{d}\,t=\frac{1}{72}f^{\prime\prime
+\prime}(\xi).
+\]
+
+\end{enumerate}
+
+Altfel: direct $\left(  H_{2}f\right)  (x)=ax^{2}+bx+c$, $(H_{2}f)(0)=c=f(0)$,
+$(H_{2}f)(1)=a+b+c=f(1)$, $(H_{2}f)^{\prime}(1)=2a+b=f^{\prime}(1)$. (2p).
+\end{proof}
+
+\begin{problem}
+\label{pb5.21} Se consider\u{a} ecua\c{t}ia $x=\cos x$.
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i grafic c\u{a} are o r\u{a}d\u{a}cin\u{a}
+pozitiv\u{a} unic\u{a} $\alpha$. Indica\c{t}i, aproximativ, unde este situat\u{a}.
+
+\item[(b)] Demonstra\c{t}i convergen\c{t}a local\u{a} a itera\c{t}iei
+$x_{n+1}=\cos x_{n}$.
+
+\item[(c)] Pentru itera\c{t}ia de la (b) demonstra\c{t}i c\u{a} dac\u{a}
+$x_{n}\in\left[  0,\frac{\pi}{2}\right]  $, atunci%
+\[
+\left\vert x_{n+1}-\alpha\right\vert <\sin\frac{\alpha+\pi/2}{2}\left\vert
+x_{n}-\alpha\right\vert .
+\]
+\^{I}n particular, are loc convergen\c{t}a global\u{a} pe $\left[  0,\frac
+{\pi}{2}\right]  $ .
+
+\item[(d)] Ar\u{a}ta\c{t}i c\u{a} metoda lui Newton aplicat\u{a} ecua\c{t}iei
+$f\left(  x\right)  =0$, $f(x)=x-\cos x$, converge global pe $\left[
+0,\frac{\pi}{2}\right]  $.
+\end{enumerate}
+\end{problem}
+
+%
+
+%TCIMACRO{\FRAME{dtbpFUX}{10.2868cm}{7.6245cm}{0pt}{\Qcb{Punctul fix al lui
+%$\cos(x)$}}{\Qlb{fig1}}{Plot}{\special{ language "Scientific Word";
+%type "MAPLEPLOT";  width 10.2868cm;  height 7.6245cm;  depth 0pt;
+%display "USEDEF";  plot_snapshots TRUE;  mustRecompute FALSE;
+%lastEngine "MuPAD";  xmin "0";  xmax "1.57";  xviewmin "0";  xviewmax "1.57";
+%yviewmin "-0.1";  yviewmax "1";  viewset "XY";  rangeset "X";  plottype 4;
+%axesFont "Times New Roman,12,0000000000,useDefault,normal";  numpoints 100;
+%plotstyle "patch";  axesstyle "normal";  axestips FALSE;  xis \TEXUX{x};
+%var1name \TEXUX{$x$};  function \TEXUX{$\cos (x)$};  linecolor "black";
+%linestyle 1;  pointstyle "point";  linethickness 1;  lineAttributes "Solid";
+%var1range "0,1.57";  num-x-gridlines 100;
+%curveColor "[flat::RGB:0000000000]";  curveStyle "Line";
+%function \TEXUX{$x$};  linecolor "black";  linestyle 1;  pointstyle "point";
+%linethickness 1;  lineAttributes "Solid";  var1range "0,1.57";
+%num-x-gridlines 100;  curveColor "[flat::RGB:0000000000]";
+%curveStyle "Line";  VCamFile 'O8HVQL03.xvz';valid_file "T";
+%tempfilename 'O8HVQL00.wmf';tempfile-properties "XPR";}}}%
+%BeginExpansion
+\begin{center}
+\fbox{\includegraphics[
+natheight=7.624500cm,
+natwidth=10.286800cm,
+height=7.6245cm,
+width=10.2868cm
+]%
+{D:/Radu/subiecte/Numerica/sub2016/graphics/sub2016restsol__1.png}%
+}\\
+Punctul fix al lui $\cos(x)$%
+\label{fig1}%
+\end{center}
+%EndExpansion
+
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] $x=\cos(x)$, Solu\c{t}ia $\alpha\approx0.739\,09\allowbreak$
+
+\item[(b)]
+\[
+|\varphi^{\prime}(x)|=|\sin(x)|<1\text{ }%
+\]
+pentru $x\in(0,\pi/2)$. $\ I_{\varepsilon}=\{x:|x-\alpha|<\varepsilon\}$. Se
+poate alege $I_{\varepsilon}\subset\lbrack0.6,0.8];$
+
+\item[(c)]
+\[
+\left\vert x_{n+1}-\alpha\right\vert =\left\vert \cos x_{n}-\cos
+\alpha\right\vert =\left\vert 2\sin\frac{x_{n}+\alpha}{2}\sin\frac
+{x_{n}-\alpha}{2}\right\vert \leq\sin\frac{\alpha+\pi/2}{2}\left\vert
+x_{n}-\alpha\right\vert
+\]
+pentru $x_{n}\in\left[  0,\frac{\pi}{2}\right]  $, \c{s}i deoarece $\sin
+\frac{\alpha+\pi/2}{2}<1$ in acest interval, rezult\u{a} convergen\c{t}a global\u{a}.
+
+\item[(d)] $f(x)=x-\cos(x)$, $f^{\prime}(x)=1+\sin(x)>0$, $f^{\prime\prime
+}(x)=\cos(x)>0$ pentru $x_{n}\in\left(  0,\frac{\pi}{2}\right)  $. Se poate
+alege orice $x_{0}$ din $(0,\pi/2).$%
+\[
+x_{n+1}=x_{n}-\frac{x_{n}-\cos(x_{n})}{1+\sin(x_{n})}%
+\]
+Pentru $x_{0}=0$, $x_{1}=1$ \c{s}i pentru $x_{0}=\frac{\pi}{2}$, $x_{1}%
+=\frac{\pi}{4}$ avem $f(x_{1})f^{\prime\prime}(x_{1})>0.$
+\end{enumerate}
+\end{proof}
+
+\section*{Setul 3}
+
+\begin{problem}
+\label{pb4.21}
+
+\begin{enumerate}
+\item[(a)] Utiliza\c{t}i metoda coeficien\c{t}ilor nedetermina\c{t}i pentru a
+construi o formul\u{a} de cuadratur\u{a} de tipul
+\[
+\int_{0}^{1}f(x)dx=af(0)+bf(1)+cf^{\prime\prime}(\gamma)+R(f)
+\]
+cu gradul maxim de exactitate $d$, nedeterminatele fiind $a,b,c$ \c{s}i
+$\gamma$.(3p)
+
+\item[(b)] Ar\u{a}ta\c{t}i c\u{a} nucleul lui $K_{d}$ al restului formulei
+ob\c{t}inute la (a) are semn constant \c{s}i exprima\c{t}i restul sub forma
+(2p)
+\[
+R(f)=e_{d+1}f^{(d+1)}(\xi),\quad0<\xi<1.
+\]
+
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]Definind%
+\[
+R(f)=\int_{0}^{1}f(x)dx-af(0)-bf(1)-cf^{\prime\prime}(\gamma)
+\]
+\c{s}i scriind c\u{a} formula este exact\u{a} pentru $f(x)=1,x,x^{2},x^{3}$ se
+ob\c{t}ine sistemul%
+\begin{align*}
+1-a-b  &  =0\\
+\frac{1}{2}-b  &  =0\\
+\frac{1}{3}-b-2c  &  =0\\
+\frac{1}{4}-b-6c\gamma &  =0
+\end{align*}
+cu solu\c{t}iile%
+\[
+a=\frac{1}{2},b=\frac{1}{2},c=-\frac{1}{12},\gamma=\frac{1}{2}.
+\]
+Deoarece $R(e_{4})\neq0$, $dex=3$. Nucleul lui Peano este%
+\begin{align*}
+K  &  =\frac{1}{3!}R\left(  \left(  x-t\right)  _{+}^{3}\right)  =\left\{
+\begin{array}
+[c]{cc}%
+-\frac{1}{12}t^{3}+\frac{1}{24}t^{4} & t\in\lbrack0,\frac{1}{2})\\
+-\frac{1}{24}+\frac{1}{12}t-\frac{1}{12}t^{3}+\frac{1}{24}t^{4} & t\in\left[
+\frac{1}{2},1\right] \\
+0 & \text{\^{\i}n rest.}%
+\end{array}
+\right. \\
+&  =\left\{
+\begin{array}
+[c]{cc}%
+\frac{1}{24}t^{3}\left(  t-2\right)  & t\in\lbrack0,\frac{1}{2})\\
+\frac{1}{24}\left(  t+1\right)  \left(  t-1\right)  ^{3} & t\in\left[
+\frac{1}{2},1\right] \\
+0 & \text{\^{\i}n rest.}%
+\end{array}
+\right.  \leq0
+\end{align*}
+Aplic\^{a}nd corolarul la teorema lui Peano%
+\begin{align*}
+R(f)  &  =\frac{1}{4!}f^{(4)}(\xi)R(e_{4})\\
+&  =\frac{1}{4!}f^{(4)}(\xi)\left[  \int_{0}^{1}x^{4}dx-\frac{1}{2}%
+\cdot0-\frac{1}{2}f(1)+\frac{2}{12}\cdot12\frac{1}{2^{2}}\right] \\
+&  =-\frac{1}{480}f^{(4)}(\xi)
+\end{align*}
+
+\end{proof}
+
+\begin{problem}
+\label{p5.23}
+
+\begin{enumerate}
+\item[(a)] S\u{a} se arate c\u{a} \c{s}irul dat prin rela\c{t}ia de
+recuren\c{t}\u{a}
+\[
+x_{n+1}=x_{n}+(2-e^{x_{n}})\frac{x_{n}-x_{n-1}}{e^{x_{n}}-e^{x_{n-1}}}%
+,x_{0}=0,x_{1}=1
+\]
+este convergent \c{s}i s\u{a} se determine limita sa. (3p)
+
+\item[(b)] Itera\c{t}ia din metoda secantei se poate scrie \c{s}i sub forma
+(1p)%
+\[
+x_{n+1}=\frac{x_{n-1}f(x_{n})-x_{n}f(x_{n-1})}{f(x_{n})-f(x_{n-1})}.
+\]
+Din punct de vedere al erorii, care form\u{a} este mai bun\u{a} \^{\i}n
+programe, forma aceasta sau forma clasic\u{a}? Justifica\c{t}i riguros raspunsul.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] \c{S}irul se ob\c{t}ine aplic\^{a}nd metoda secantei func\c{t}iei
+$f(x)=e^{x}-2$ (1p)%
+%TCIMACRO{\FRAME{dtbpFX}{9.0325cm}{7.6245cm}{0pt}{}{}{Plot}%
+%{\special{ language "Scientific Word";  type "MAPLEPLOT";  width 9.0325cm;
+%height 7.6245cm;  depth 0pt;  display "USEDEF";  plot_snapshots TRUE;
+%mustRecompute FALSE;  lastEngine "MuPAD";  xmin "-0.1";  xmax "1";
+%xviewmin "-0.1";  xviewmax "1";  yviewmin "-2.008103";  yviewmax "1.5";
+%viewset "XY";  rangeset "X";  plottype 4;
+%axesFont "Times New Roman,12,0000000000,useDefault,normal";  numpoints 100;
+%plotstyle "patch";  axesstyle "normal";  axestips FALSE;  xis \TEXUX{x};
+%var1name \TEXUX{$x$};  function \TEXUX{$e^{x}-2$};  linecolor "black";
+%linestyle 1;  pointstyle "point";  linethickness 1;  lineAttributes "Solid";
+%var1range "-0.1,1";  num-x-gridlines 100;
+%curveColor "[flat::RGB:0000000000]";  curveStyle "Line";
+%VCamFile 'O8HVQL02.xvz';valid_file "T";
+%tempfilename 'O8HVQL01.wmf';tempfile-properties "XPR";}} }%
+%BeginExpansion
+\begin{center}
+\fbox{\includegraphics[
+natheight=7.624500cm,
+natwidth=9.032500cm,
+height=7.6245cm,
+width=9.0325cm
+]%
+{D:/Radu/subiecte/Numerica/sub2016/graphics/sub2016restsol__2.png}%
+}
+\end{center}
+%EndExpansion
+cu r\u{a}d\u{a}cina $\alpha=\ln2$ \c{s}i valorile de pornire men\c{t}ionate.
+Convergen\c{t}a: $f$ convex\u{a}, cresc\u{a}toare%
+\[
+M(\varepsilon)=\max_{s,t}\frac{f^{\prime\prime}(s)}{2f^{\prime}(t)}=\max
+_{s,t}\frac{e^{s}}{e^{t}}=\max_{s,t}e^{s-t}=e
+\]
+Lu\^{a}nd $\varepsilon<1/e=\allowbreak0.367\,88$, se ob\c{t}ine $\varepsilon
+M(\varepsilon)<1$, deci convergen\c{t}a. (2p)
+
+\item[(b)] \^{I}n forma din enun\c{t}, avem anul\u{a}ri flotante. Justificarea
+anul\u{a}rilor flotante-1p
+\end{enumerate}
+\end{proof}
+
+\section*{Setul 4}
+
+\begin{problem}
+\label{pb4.16} (a) Construi\c{t}i o formul\u{a} Newton-Cotes cu ponderi
+\[
+\int_{0}^{1} f(x)x^{\alpha}dx=a_{0}f(0)+a_{1}f(1)+R(f),\ \alpha>-1.
+\]
+
+
+Explica\c{t}i de ce formula are sens.(3p)
+
+(b) Deduce\c{t}i o expresie a erorii $R(f)$ \^{\i}n func\c{t}ie de o
+derivat\u{a} adecvat\u{a} a lui $f$. (2p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]Definind%
+\[
+R(f)=\int_{0}^{1}f(x)x^{\alpha}dx-a_{0}f(0)-a_{1}f(1)
+\]
+\c{s}i scriind c\u{a} formula este exact\u{a} pentru $1$ \c{s}i $x$
+ob\c{t}inem sistemul (2p)%
+\begin{align*}
+\frac{1}{\alpha+1}-a_{0}-a_{1} &  =0\\
+\frac{1}{\alpha+2}-a_{1} &  =0
+\end{align*}
+cu solu\c{t}iile (1p)%
+\begin{align*}
+a_{0} &  =\frac{1}{\alpha^{2}+3\alpha+2}\\
+a_{1} &  =\frac{1}{\alpha+2}%
+\end{align*}
+Deoarece $R(e_{2})\neq0$, $dex=1$. Pentru rest folosim teorema lui Peano (1p)%
+\begin{align*}
+K(t) &  =\frac{1}{1!}R\left[  \left(  x-t\right)  _{+}\right]  \\
+&  =\left\{
+\begin{array}
+[c]{cc}%
+\frac{t^{\alpha+2}}{\left(  \alpha+1\right)  \left(  \alpha+2\right)  } &
+x<t\\
+\frac{t^{\alpha+2}-t}{\left(  \alpha+1\right)  \left(  \alpha+2\right)  } &
+x\geq t
+\end{array}
+\right.  \geq0
+\end{align*}
+Folosind corolarul la TP (1p)%
+\[
+R(f)=\frac{1}{2!}f^{\prime\prime}(\xi)R(e_{2})=\frac{-1}{2\left(
+\alpha+2\right)  (\alpha+3)}f^{\prime\prime}(\xi).
+\]
+
+\end{proof}
+
+\begin{problem}
+\label{p5.70} Se consider\u{a} itera\c{t}ia%
+\[
+x_{k+1}=x_{k}-\frac{f(x_{k})^{2}}{f\left(  x_{k}+f(x_{k})\right)  -f(x_{k}%
+)},\qquad k=0,1,2,\dots
+\]
+pentru rezolvarea ecua\c{t}iei $f(x)=0$. Explica\c{t}i leg\u{a}tura cu
+itera\c{t}ia Newton \c{s}i ar\u{a}ta\c{t}i c\u{a} $(x_{k})$ converge
+p\u{a}tratic dac\u{a} $x_{0}$ este suficient de apropiat\u{a} de solu\c{t}ie.
+(2p - legatura cu Newton+ covergenta, 2p ordinul de convergenta).
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]Itera\c{t}ia se scrie sub forma%
+\[
+x_{k+1}=x_{k}-\frac{f(x_{k})}{f\left(  x_{k}+f(x_{k})\right)  -f(x_{k}%
+)}f(x_{k}),
+\]
+iar dac\u{a} este convergent\u{a} $x_{k}$ este apropiat de
+r\u{a}d\u{a}cin\u{a}, $f(x_{k})\approx0$,
+\[
+\frac{f(x_{k})}{f\left(  x_{k}+f(x_{k})\right)  -f(x_{k})}\approx\frac
+{1}{f^{\prime}(x_{k})}%
+\]
+iar limita va fi r\u{a}d\u{a}cina c\u{a}utat\u{a} $\alpha$. (2p) Scriem
+itera\c{t}ia sub forma%
+\[
+x_{n+1}=x_{n}-\frac{f(x_{n})}{g(x_{n})},\quad g(x_{n})=\frac{f\left(
+x_{n}+f(x_{n})\right)  -f(x_{n})}{f(x_{n})}%
+\]
+Pentru a ar\u{a}ta convergen\c{t}a p\u{a}tratic\u{a} punem $\beta_{n}%
+=f(x_{n})$ \c{s}i dezvolt\u{a}m $g(x_{n})$ cu Taylor%
+\[
+g(x_{n})=f^{\prime}(x_{n})\left[  1-\frac{1}{2}h_{n}f^{\prime\prime}%
+(x_{n})+O\left(  \beta_{n}^{2}\right)  \right]
+\]
+unde $h_{n}=-f(x_{n})/f^{\prime}(x_{n})$.Deci%
+\[
+x_{n+1}=x_{n}+h_{n}\left[  1+\frac{1}{2}h_{n}f^{\prime\prime}(x_{n})+O\left(
+\beta_{n}^{2}\right)  \right]
+\]
+Utiliz\^{a}nd expresia erorii pentru Newton ob\c{t}inem%
+\[
+\frac{e_{n+1}}{e_{n}^{2}}\rightarrow\frac{1}{2}\frac{f^{\prime\prime}(\alpha
+)}{f^{\prime}(\alpha)}\left[  1+f^{\prime}(\alpha)\right]  .
+\]
+(2p)
+
+\textbf{Altfel}. Punem%
+\[
+\varphi(x)=x-\frac{f^{2}(x)}{f(x+f(x))-f(x)}%
+\]
+\c{s}i ar\u{a}t\u{a}m c\u{a} $\varphi(\alpha)=\alpha$, $\varphi^{\prime
+}(\alpha)=0$, $\varphi^{\prime\prime}(\alpha)=\frac{f^{\prime\prime}(\alpha
+)}{f^{\prime}(\alpha)}\left[  1+f^{\prime}(\alpha)\right]  \neq0$.
+\end{proof}
+
+
+\end{document}

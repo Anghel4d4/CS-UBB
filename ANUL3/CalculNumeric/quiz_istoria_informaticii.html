@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz — Istoria Informaticii</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0f; min-height: 100vh; display: flex; flex-direction: column; color: #e2e8f0; }
+
+/* NAV */
+nav { background: #111118; border-bottom: 1px solid #1e1e2e; padding: 0 1.5rem; display: flex; align-items: center; gap: 4px; height: 54px; flex-shrink: 0; flex-wrap: wrap; }
+nav .brand { color: #e2e8f0; font-size: 15px; font-weight: 600; margin-right: 12px; letter-spacing: -0.2px; white-space: nowrap; }
+.nav-sep { width: 1px; height: 22px; background: #2a2a3a; margin: 0 6px; }
+.nav-btn { padding: 7px 14px; font-size: 13px; font-weight: 500; border: none; cursor: pointer; border-radius: 8px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+.nav-btn.active { background: #3b82f6; color: #fff; }
+.nav-btn:not(.active) { background: transparent; color: #6b7280; }
+.nav-btn:not(.active):hover { background: #1e1e2e; color: #c4c9d4; }
+
+/* QUIZ VIEWS */
+.quiz-view { flex: 1; display: none; align-items: center; justify-content: center; padding: 2rem; background: #0a0a0f; }
+.quiz-view.visible { display: flex; }
+.quiz-card { background: #111118; border: 1px solid #1e1e2e; border-radius: 16px; padding: 2.5rem; max-width: 680px; width: 100%; box-shadow: 0 4px 32px rgba(0,0,0,0.5); }
+
+#progress-bar-bg, #progress-bar-bg2, #progress-bar-bg3 { height: 4px; background: #1e1e2e; border-radius: 3px; margin-bottom: 1.5rem; }
+#progress-bar, #progress-bar2, #progress-bar3 { height: 4px; background: #3b82f6; border-radius: 3px; transition: width 0.4s ease; }
+.q-counter { font-size: 13px; color: #4b5563; margin-bottom: 0.4rem; }
+.course-badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: #1a2540; color: #60a5fa; border: 1px solid #1e3a6e; margin-bottom: 0.85rem; letter-spacing: 0.2px; }
+.q-text { font-size: 20px; font-weight: 600; color: #f1f5f9; margin-bottom: 1.75rem; line-height: 1.5; }
+
+/* Open text */
+.input-row { display: flex; gap: 10px; margin-bottom: 1rem; }
+.answer-input { flex: 1; padding: 11px 14px; font-size: 15px; border: 1.5px solid #2a2a3a; border-radius: 10px; outline: none; color: #e2e8f0; background: #0d0d15; transition: border-color 0.2s, box-shadow 0.2s; }
+.answer-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+.answer-input:disabled { background: #0d0d15; color: #4b5563; }
+.answer-input::placeholder { color: #374151; }
+.submit-btn { padding: 11px 22px; font-size: 14px; font-weight: 600; border-radius: 10px; border: none; background: #3b82f6; color: #fff; cursor: pointer; transition: background 0.15s, transform 0.1s; }
+.submit-btn:hover:not(:disabled) { background: #2563eb; }
+.submit-btn:active:not(:disabled) { transform: scale(0.97); }
+.submit-btn:disabled { background: #1e3a6e; color: #4b5563; cursor: default; }
+
+/* MC choices */
+.choice-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
+.choice-btn { padding: 12px 16px; font-size: 15px; text-align: left; border: 1.5px solid #2a2a3a; border-radius: 10px; background: #0d0d15; color: #c4c9d4; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.choice-btn:hover:not(:disabled) { background: #1a2540; border-color: #3b82f6; color: #f1f5f9; }
+.choice-btn.selected-correct { background: #0d2818; border-color: #16a34a; color: #4ade80; font-weight: 600; }
+.choice-btn.selected-wrong   { background: #2a0d0d; border-color: #dc2626; color: #f87171; font-weight: 600; }
+.choice-btn.reveal-correct   { background: #0d2818; border-color: #16a34a; color: #4ade80; font-weight: 600; }
+
+.feedback { display: none; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: 14px; line-height: 1.6; }
+.feedback.correct { background: #0d2818; color: #4ade80; border: 1.5px solid #166534; }
+.feedback.wrong   { background: #2a0d0d; color: #f87171; border: 1.5px solid #7f1d1d; }
+.feedback .explanation { margin-top: 6px; font-size: 13px; opacity: 0.8; }
+
+.next-btn { display: none; padding: 11px 26px; font-size: 14px; font-weight: 600; border-radius: 10px; border: none; background: #3b82f6; color: #fff; cursor: pointer; transition: background 0.15s; margin-top: 0.25rem; }
+.next-btn:hover { background: #2563eb; }
+
+/* Score */
+.score-wrap { display: none; text-align: center; padding: 1rem 0; }
+.score-wrap h2 { font-size: 26px; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+.score-wrap p  { font-size: 15px; color: #6b7280; margin-bottom: 1.75rem; }
+.score-ring { width: 120px; height: 120px; margin: 0 auto 1.5rem; }
+.restart-btn { padding: 12px 30px; font-size: 15px; font-weight: 600; border-radius: 10px; border: none; background: #3b82f6; color: #fff; cursor: pointer; }
+.restart-btn:hover { background: #2563eb; }
+
+/* STUDY VIEWS */
+.study-view { display: none; flex: 1; flex-direction: row; }
+.study-view.visible { display: flex; }
+.study-sidebar { width: 230px; flex-shrink: 0; background: #0d0d15; border-right: 1px solid #1e1e2e; padding: 1.25rem 0; overflow-y: auto; }
+.sidebar-title { font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.8px; padding: 0 1.25rem 0.75rem; }
+.sidebar-item { display: block; width: 100%; text-align: left; padding: 9px 1.25rem; font-size: 13px; font-weight: 500; border: none; background: transparent; color: #6b7280; cursor: pointer; transition: background 0.12s, color 0.12s; line-height: 1.4; }
+.sidebar-item:hover { background: #1e1e2e; color: #c4c9d4; }
+.sidebar-item.active { background: #1a2540; color: #60a5fa; border-right: 2px solid #3b82f6; }
+.sidebar-item .badge { display: inline-block; margin-left: 6px; font-size: 11px; background: rgba(255,255,255,0.07); border-radius: 10px; padding: 1px 7px; }
+.study-main { flex: 1; overflow-y: auto; padding: 2rem 2.5rem; background: #0a0a0f; }
+.study-course-title { font-size: 20px; font-weight: 700; color: #f1f5f9; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #1e1e2e; }
+.study-section { display: none; }
+.study-section.active { display: block; }
+
+/* QA cards — study 1 */
+.qa-card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border-left: 3px solid #3b82f6; }
+.qa-num { font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.qa-q { font-size: 14px; color: #9ca3af; margin-bottom: 6px; line-height: 1.5; }
+.qa-a { font-size: 16px; font-weight: 600; color: #60a5fa; }
+
+/* MC cards — study 2 */
+.mc-card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border-left: 3px solid #a78bfa; }
+.mc-num { font-size: 11px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.mc-q { font-size: 15px; font-weight: 600; color: #f1f5f9; margin-bottom: 10px; line-height: 1.5; }
+.mc-choices { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+.mc-choice { font-size: 13px; color: #6b7280; padding: 5px 8px; border-radius: 6px; }
+.mc-choice.correct-answer { background: #0d2818; color: #4ade80; font-weight: 600; border: 1px solid #166534; }
+.mc-explanation { font-size: 13px; color: #4b5563; margin-top: 6px; padding-top: 8px; border-top: 1px solid #1e1e2e; font-style: italic; }
+
+/* ===================== RESPONSIVE MOBILE ===================== */
+@media (max-width: 768px) {
+  nav {
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  nav .brand {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.3rem 0;
+    margin-right: 0;
+  }
+  .nav-sep { display: none; }
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .quiz-view {
+    padding: 1rem 0.75rem;
+    align-items: flex-start;
+  }
+  .quiz-card {
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
+  }
+  .q-text {
+    font-size: 16px;
+    margin-bottom: 1.25rem;
+  }
+  .input-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .answer-input {
+    width: 100%;
+    font-size: 16px; /* prevent iOS zoom */
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+  }
+  .choice-btn {
+    font-size: 14px;
+    padding: 11px 12px;
+  }
+  .next-btn {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+  }
+  .restart-btn {
+    width: 100%;
+    padding: 13px;
+  }
+  .score-wrap h2 { font-size: 20px; }
+
+  /* Study views */
+  .study-view {
+    flex-direction: column;
+  }
+  .study-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #1e1e2e;
+    padding: 0.5rem 0;
+    /* horizontal scroll on mobile */
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sidebar-title { display: none; }
+  .sidebar-item {
+    display: inline-block;
+    width: auto;
+    padding: 8px 14px;
+    font-size: 12px;
+    border-right: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sidebar-item.active {
+    border-right: none;
+    border-bottom: 2px solid #3b82f6;
+    background: #1a2540;
+  }
+  .study-main {
+    padding: 1rem 0.85rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .study-course-title {
+    font-size: 16px;
+  }
+  .qa-card, .mc-card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  .qa-a { font-size: 14px; }
+  .mc-q { font-size: 14px; }
+  .mc-choice { font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+  .nav-btn { font-size: 11px; padding: 5px 7px; }
+  .q-text { font-size: 15px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">🖥️ Istoria Informaticii</span>
+  <div class="nav-sep"></div>
+  <button class="nav-btn active" onclick="show('q1')">Quiz 1 — Raspunsuri deschise</button>
+  <button class="nav-btn" onclick="show('q2')">Quiz 2 — Grila</button>
+  <button class="nav-btn" onclick="show('q3')">Quiz 3 — Grila</button>
+  <div class="nav-sep"></div>
+  <button class="nav-btn" onclick="show('s1')">Materie Quiz 1</button>
+  <button class="nav-btn" onclick="show('s2')">Materie Quiz 2</button>
+  <button class="nav-btn" onclick="show('s3')">Materie Quiz 3</button>
+</nav>
+
+<!-- QUIZ 1 -->
+<div class="quiz-view visible" id="view-q1">
+  <div class="quiz-card">
+    <div id="progress-bar-bg"><div id="progress-bar" style="width:0%"></div></div>
+    <div id="q1-counter" class="q-counter"></div>
+    <div id="q1-badge" class="course-badge"></div>
+    <div id="q1-question" class="q-text"></div>
+    <div id="q1-input-row" class="input-row">
+      <input id="q1-input" class="answer-input" type="text" placeholder="Răspunsul tău..." autocomplete="off" />
+      <button id="q1-submit" class="submit-btn">Verifică</button>
+    </div>
+    <div class="choice-list" id="q1-choices"></div>
+    <div id="q1-feedback" class="feedback"></div>
+    <button id="q1-next" class="next-btn">Următoarea →</button>
+    <div id="q1-score" class="score-wrap">
+      <svg class="score-ring" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#1e1e2e" stroke-width="10"/>
+        <circle id="q1-score-circle" cx="60" cy="60" r="52" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 0.9s ease"/>
+        <text x="60" y="65" text-anchor="middle" font-size="22" font-weight="700" fill="#f1f5f9" id="q1-score-pct">0%</text>
+      </svg>
+      <h2 id="q1-score-title"></h2><p id="q1-score-sub"></p>
+      <button class="restart-btn" onclick="startQ1()">🔄 Încearcă din nou</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ 2 -->
+<div class="quiz-view" id="view-q2">
+  <div class="quiz-card">
+    <div id="progress-bar-bg2"><div id="progress-bar2" style="width:0%"></div></div>
+    <div id="q2-counter" class="q-counter"></div>
+    <div id="q2-badge" class="course-badge" style="background:#1a1030;color:#a78bfa;border-color:#3b1fa8;">📝 Quiz Grilă</div>
+    <div id="q2-question" class="q-text"></div>
+    <div class="choice-list" id="q2-choices"></div>
+    <div id="q2-feedback" class="feedback"></div>
+    <button id="q2-next" class="next-btn">Următoarea →</button>
+    <div id="q2-score" class="score-wrap">
+      <svg class="score-ring" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#1e1e2e" stroke-width="10"/>
+        <circle id="q2-score-circle" cx="60" cy="60" r="52" fill="none" stroke="#7c3aed" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 0.9s ease"/>
+        <text x="60" y="65" text-anchor="middle" font-size="22" font-weight="700" fill="#f1f5f9" id="q2-score-pct">0%</text>
+      </svg>
+      <h2 id="q2-score-title"></h2><p id="q2-score-sub"></p>
+      <button class="restart-btn" style="background:#7c3aed;" onclick="startQ2()">🔄 Încearcă din nou</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- QUIZ 3 -->
+<div class="quiz-view" id="view-q3">
+  <div class="quiz-card">
+    <div id="progress-bar-bg3"><div id="progress-bar3" style="width:0%"></div></div>
+    <div id="q3-counter" class="q-counter"></div>
+    <div id="q3-badge" class="course-badge" style="background:#1a1030;color:#a78bfa;border-color:#3b1fa8;">📝 Quiz Grila</div>
+    <div id="q3-question" class="q-text"></div>
+    <div class="choice-list" id="q3-choices"></div>
+    <div id="q3-feedback" class="feedback"></div>
+    <button id="q3-next" class="next-btn">Urmatoarea &rarr;</button>
+    <div id="q3-score" class="score-wrap">
+      <svg class="score-ring" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#1e1e2e" stroke-width="10"/>
+        <circle id="q3-score-circle" cx="60" cy="60" r="52" fill="none" stroke="#a78bfa" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 0.9s ease"/>
+        <text x="60" y="65" text-anchor="middle" font-size="22" font-weight="700" fill="#f1f5f9" id="q3-score-pct">0%</text>
+      </svg>
+      <h2 id="q3-score-title"></h2><p id="q3-score-sub"></p>
+      <button class="restart-btn" style="background:#7c3aed;" onclick="startQ3()">🔄 Incearca din nou</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDY 3 -->
+<div class="study-view" id="view-s3">
+  <div class="study-sidebar" id="sidebar-s3"><div class="sidebar-title">Teme</div></div>
+  <div class="study-main" id="main-s3"></div>
+</div>
+
+<!-- STUDY 1 -->
+<div class="study-view" id="view-s1">
+  <div class="study-sidebar" id="sidebar-s1"><div class="sidebar-title">Cursuri</div></div>
+  <div class="study-main" id="main-s1"></div>
+</div>
+
+<!-- STUDY 2 -->
+<div class="study-view" id="view-s2">
+  <div class="study-sidebar" id="sidebar-s2"><div class="sidebar-title">Teme</div></div>
+  <div class="study-main" id="main-s2"></div>
+</div>
+
+<script>
+// ===================== DATA Q1 =====================
+const COURSES = {
+  "Examen": [
+    {q:"Cine a inventat termenul de algoritm?", a:"Abu Abdullah Muhammad ibn Musa al-Khwarizmi"},
+    {q:"Cine a creat primul calculator mecanic de interes general?", a:"Charles Babbage"},
+    {q:"Cine a rezolvat 'halting problem'?", a:"Alan Turing"},
+    {q:"Care a fost primul calculator analogic din istorie?", a:"Antikythera"},
+    {q:"Care a aparut primul — lampile (vacuum tubes) sau tranzistoarele?", a:"Lampile (vacuum tubes)", type:"choice", choices:["Lampile (vacuum tubes)","Tranzistoarele"]},
+    {q:"Ce firma a creat primul microprocesor din istorie?", a:"Intel (microprocesorul Intel 4004)"},
+    {q:"Ce sistem de operare a fost creat in 1970?", a:"UNIX"},
+    {q:"Cine a creat GNU si Free Software Foundation?", a:"Richard Matthew Stallman"},
+    {q:"Care a fost primul limbaj de programare de nivel inalt din istorie?", a:"Plankalkul (1945)"},
+    {q:"Cine a fost parintele internetului?", a:"Vinton Cerf"},
+    {q:"Cine a formulat teorema incompletitudinii in matematica?", a:"Kurt Godel"},
+    {q:"Ce aveau in comun masina analitica si cea diferentiala ale lui Babbage?", a:"Constructia lor nu a fost dusa la bun sfarsit de Babbage"},
+    {q:"Cine a fost Jonathan Postel si ce legatura are cu Internetul?", a:"A editat o perioada lunga de timp documentele RFC"},
+    {q:"Ce calcula primul program din istorie (scris de Ada Byron-Lovelace)?", a:"Numerele lui Bernoulli"},
+    {q:"Care masina a lui Babbage era de interes general?", a:"Analytical Engine"},
+    {q:"Care microcalculator a aparut primul?", a:"Altair 8800", type:"choice", choices:["Altair 8800","Apple I","IBM-PC 5150"]},
+    {q:"Ce firma americana a inventat microprocesorul?", a:"Intel"},
+    {q:"Cine a inventat masina 'The Bomb'?", a:"Alan Turing"},
+    {q:"Cine a fost Richard Matthew Stallman si ce miscare a creat?", a:"Miscarea Free Software"},
+    {q:"Cine a inventat cartelele perforate in 1804?", a:"Joseph Marie Jacquard"},
+  ],
+  "Curs 2": [
+    {q:"Cine a inventat algoritmul Merge Sort?", a:"John von Neumann"},
+    {q:"In ce revista a aparut prima data termenul 'computer science'?", a:"Communications of the ACM (1959)"},
+    {q:"Cum i se mai spunea Teoremei lui Pitagora?", a:"Regula 'Gougu'"},
+    {q:"Cine a scris prima carte de matematica riguroasa?", a:"Euclid (Axiomele lui Euclid)"},
+    {q:"Cine a masurat diametrul Pamantului?", a:"Eratostene"},
+    {q:"Cine a formulat, pentru prima data, modelul Geocentric?", a:"Ptolemeu"},
+    {q:"Cine a scris o colectie de 13 carti numita 'Aritmetica'?", a:"Diofant"},
+    {q:"Cine a inventat numarul 0?", a:"Indienii"},
+    {q:"Cine a inventat baza 10?", a:"Arabii"},
+  ],
+  "Curs 3": [
+    {q:"Prin ce se diferentia masina analitica de cea diferentiala ale lui Babbage?", a:"Masina analitica reprezenta numerele in baza 10, cea diferentiala in baza 2"},
+    {q:"Care a fost prima masina de calcul de interes general?", a:"Masina analitica a lui Charles Babbage"},
+    {q:"Cine a optimizat recensamantul din SUA construind masini care perforeaza cartele?", a:"Herman Hollerith"},
+  ],
+  "Curs 4": [
+    {q:"Care este cel mai cunoscut algoritm de criptare?", a:"RSA (Rivest-Shamir-Adleman)"},
+    {q:"Numiti un sistem de criptare cu cheie simetrica.", a:"Enigma"},
+    {q:"Cum se numeste cel mai celebru premiu in Informatica?", a:"Premiul Turing"},
+    {q:"Cine a publicat definitia moderna a numerelor ordinale?", a:"John von Neumann"},
+    {q:"Cine a inventat ENIAC si EDVAC?", a:"John von Neumann"},
+  ],
+  "Curs 5": [
+    {q:"Ce calculator calcula pozitia Soarelui si a Lunii in functie de timp?", a:"Antikythera"},
+    {q:"Care a fost primul calculator programabil?", a:"Ceasul de castel al lui Al-Jazari (1206)"},
+    {q:"Cine a inventat primul calculator digital mecanic?", a:"Wilhelm Schickard"},
+    {q:"Cine a construit Pascaline in 1642?", a:"Blaise Pascal"},
+    {q:"Cine a inventat aritmometrul in 1800?", a:"Thomas de Colmar"},
+    {q:"Care este primul calculator electronic?", a:"ANITAM Mk. VIII (UK, 1962)"},
+  ],
+  "Curs 6": [
+    {q:"Cine a inventat calculatoarele electromecanice Z1, Z2, Z3 si Z4?", a:"Konrad Zuse"},
+    {q:"Ce este un ciclu de calcul?", a:"Un ceas"},
+    {q:"Care a fost primul calculator programabil care folosea cifre pentru stocarea digitala?", a:"Z3 (Konrad Zuse)"},
+    {q:"Care calculator folosea tuburi cu vid (vacuum tubes)?", a:"Colossus (UK, 1943)"},
+    {q:"Ce calculatoare au fost folosite pentru a simula traiectoria unei bombe?", a:"ENIAC si EDVAC"},
+  ],
+  "Curs 7": [
+    {q:"Care este primul calculator care stoca programul in memorie?", a:"IBM 7007 (1958)"},
+    {q:"Care sunt cele mai vechi limbaje de programare de nivel inalt folosite pana in prezent?", a:"COBOL si Fortran"},
+    {q:"Cine a inventat microcipul / circuitul integrat?", a:"Jack Clair Kilby si Robert Noyce"},
+    {q:"Care calculator a inceput revolutia calculatoarelor personale?", a:"IBM-PC 5150 (1981)"},
+  ],
+  "Curs 8": [
+    {q:"Cine a creat primul OS pentru calculatoare?", a:"General Motors (GM-NAA I/O, 1956)"},
+  ],
+  "Curs 9": [
+    {q:"Care este cea mai importanta standardizare a OS-urilor?", a:"POSIX"},
+    {q:"Care a fost primul sistem grafic?", a:"Macintosh System 1 (1984)"},
+  ],
+};
+
+const Q1_ALL = [];
+for (const [course, qs] of Object.entries(COURSES))
+  qs.forEach(q => Q1_ALL.push({...q, course, type: q.type||"text"}));
+
+// ===================== DATA Q2 =====================
+const Q2_TOPICS = {
+  "Babbage & Ada Lovelace": [
+    {q:"Cine a creat motorul diferential si motorul analitic?", choices:["A) Blaise Pascal","B) Gottfried Leibniz","C) Charles Babbage","D) Ada Lovelace"], correct:"C", explanation:"Charles Babbage a creat motorul diferential si motorul analitic, considerate primele masini de calcul universale."},
+    {q:"Cine a fost primul programator din istorie?", choices:["A) Alan Turing","B) Ada Lovelace","C) Charles Babbage","D) John von Neumann"], correct:"B", explanation:"Ada Lovelace a scris primul program din istorie pentru motorul analitic al lui Babbage."},
+    {q:"De ce programul Adei Lovelace nu a functionat?", choices:["A) Avea erori de compilare.","B) Limbajul de programare era incorect.","C) Motorul analitic nu a fost niciodata construit in timpul vietii ei.","D) Avea erori de runtime."], correct:"C", explanation:"Programul nu a functionat deoarece motorul analitic nu a fost construit in timpul vietii Adei Lovelace."},
+    {q:"Inainte de anii 1800, ce utilizau oamenii pentru a calcula formule matematice?", choices:["A) Tabele tiparite in carti","B) Calculatoare mecanice","C) Calculatorul lui Pascal","D) Abacul"], correct:"A", explanation:"Inainte de 1800, oamenii utilizau tabele tiparite in carti complicate."},
+    {q:"De ce a creat Charles Babbage motorul diferential?", choices:["A) Pentru a inlocui abacul.","B) Pentru a juca jocuri video.","C) Pentru a calcula si tipari tabele precise cu valori matematice.","D) Pentru a construi un calculator de buzunar."], correct:"C", explanation:"Babbage a vrut sa elimine discrepantele din tabelele matematice existente."},
+    {q:"Cati bani a primit Charles Babbage de la guvernul britanic pentru motorul diferential?", choices:["A) 1000 de lire sterline","B) 1700 de lire sterline","C) 17000 de lire sterline","D) Nu a primit finantare."], correct:"C", explanation:"Babbage a primit in total 17000 de lire sterline de la guvernul britanic."},
+    {q:"De ce nu a fost finalizat motorul diferential in timpul vietii lui Babbage?", choices:["A) Nu avea o echipa de tehnicieni.","B) Echipamentele industriale nu erau suficient de precise si Babbage era dificil.","C) Finantarea a fost insuficienta.","D) Guvernul britanic a anulat finantarea."], correct:"B", explanation:"Lipsa de precizie a echipamentelor industriale si personalitatea dificila a lui Babbage au impiedicat finalizarea."},
+    {q:"Care dintre urmatoarele operatii nu putea fi realizata de motorul analitic?", choices:["A) Navigare pe internet","B) Impartire","C) Scadere","D) Adunare"], correct:"A", explanation:"Motorul analitic putea face operatii aritmetice de baza, dar nu naviga pe internet."},
+    {q:"Ce fel de date putea stoca memoria motorului analitic?", choices:["A) Imagini","B) Text","C) 1000 de numere de 40 de cifre zecimale fiecare","D) Muzica"], correct:"C", explanation:"Memoria motorului analitic putea stoca 1000 de numere, fiecare de 40 de cifre zecimale."},
+    {q:"Ce a folosit Ada Lovelace pentru a scrie programe pentru motorul analitic?", choices:["A) Carduri perforate","B) Ecran","C) Hartie si creion","D) Tastatura"], correct:"A", explanation:"Ada Lovelace a scris programe folosind carduri perforate."},
+  ],
+  "Computer Science & Algoritmi": [
+    {q:"Cand a aparut termenul 'computer science'?", choices:["A) In 1990","B) In anii 1800","C) In anii 1600","D) In 1959"], correct:"D", explanation:"Termenul 'computer science' a aparut prima data in Communications of the ACM in 1959."},
+    {q:"Care matematician arab este considerat inventatorul conceptului de algoritm?", choices:["A) Pitagora","B) Euclid","C) Muhammad ibn Musa al-Khwarizmi","D) Arhimede"], correct:"C", explanation:"Al-Khwarizmi, numit si parintele algebrei, a inventat conceptul de algoritm."},
+    {q:"De unde provine cuvantul 'algoritm'?", choices:["A) Din numele matematicianului Al-Khwarizmi","B) Din greaca antica","C) Din latina","D) Din babiloniana"], correct:"A", explanation:"Cuvantul 'algoritm' este derivat din numele matematicianului arab Al-Khwarizmi."},
+    {q:"Care este definitia moderna a unui algoritm?", choices:["A) O formula matematica.","B) Un limbaj de programare.","C) O secventa de pasi necesari pentru a rezolva o problema.","D) Un tip de computer."], correct:"C", explanation:"Un algoritm este o secventa de pasi necesari pentru a rezolva o problema specifica."},
+  ],
+  "Babilonieni & Egipteni": [
+    {q:"Ce scriau babilonienii pe tablite de lut?", choices:["A) Tabele matematice si texte","B) Retete de gatit","C) Poezii","D) Legi"], correct:"A", explanation:"Babilonienii scriau texte si rezultate matematice, inclusiv tabele."},
+    {q:"Ce sistem de numeratie foloseau babilonienii?", choices:["A) Baza 16","B) Baza 10","C) Baza 2","D) Baza 60"], correct:"D", explanation:"Babilonienii foloseau un sistem sexagesimal (baza 60)."},
+    {q:"Care civilizatie antica nu folosea cifra zero?", choices:["A) Babilonienii","B) Indienii","C) Toate cele de mai sus","D) Mayasii"], correct:"A", explanation:"Babilonienii, ca si multe alte civilizatii antice, nu foloseau cifra zero."},
+    {q:"Ce metoda foloseau babilonienii pentru a efectua diviziuni?", choices:["A) Foloseau tabele de reciproce","B) Foloseau scrierea cuneiformi","C) Foloseau abacul","D) Foloseau masini de calcul"], correct:"A", explanation:"Babilonienii foloseau tabele de reciproce si algoritmi bazati pe inmultire."},
+    {q:"Ce cunostinte matematice aveau babilonienii?", choices:["A) Cunostinte despre pi","B) Extragerea radacinii patrate si cubice","C) Toate cele de mai sus","D) Lucrul cu triplete pitagoreice"], correct:"C", explanation:"Babilonienii aveau cunostinte avansate: radacina patrata si cubica, triplete pitagoreice si pi."},
+    {q:"Care civilizatie antica avea mai multe cunostinte geometrice decat aritmetice?", choices:["A) Grecii","B) Egiptenii","C) Chinezii","D) Babilonienii"], correct:"B", explanation:"Egiptenii aveau mai multe cunostinte geometrice, necesare pentru remisurarea terenurilor dupa inundatiile Nilului."},
+    {q:"Ce sistem de numeratie foloseau egiptenii?", choices:["A) Baza 10","B) Baza 60","C) Baza 20","D) Baza 2"], correct:"A", explanation:"Egiptenii foloseau un sistem de numeratie in baza 10."},
+    {q:"Cum era scris sistemul de numeratie egiptean?", choices:["A) Cu cifre arabe","B) Cu simboluri asemanatoare unghiilor","C) Cu puncte si linii","D) Cu betisoare simple"], correct:"D", explanation:"Sistemul de numeratie egiptean era scris cu betisoare simple."},
+  ],
+  "China & Maya": [
+    {q:"Cum se numea teorema Pitagora in China antica?", choices:["A) Teorema lui Thales","B) Sieve of Eratosthenes","C) Legea lui Arhimede","D) Regula Gougu"], correct:"D", explanation:"In China antica, teorema lui Pitagora era cunoscuta sub numele de regula Gougu."},
+    {q:"Cum se numea cea mai faimoasa carte din istoria matematicii chinezesti?", choices:["A) Al-jabr w'al-muqabala","B) Noua capitole ale artei matematice","C) Arithmetica","D) Elementele"], correct:"B", explanation:"Cea mai faimoasa carte chinezeasca de matematica era 'Noua capitole ale artei matematice'."},
+    {q:"Cand a trait civilizatia Maya?", choices:["A) Intre 600 i.Hr. si 500 d.Hr.","B) Intre 100 d.Hr. si 800 d.Hr.","C) Intre 2000 i.Hr. si 600 i.Hr.","D) Intre 250 d.Hr. si 900 d.Hr."], correct:"D", explanation:"Civilizatia Maya a trait intre 250 d.Hr. si 900 d.Hr."},
+    {q:"Ce sistem de numeratie foloseau mayasii?", choices:["A) Baza 10","B) Baza 60","C) Baza 20","D) Baza 2"], correct:"C", explanation:"Mayasii foloseau un sistem de numeratie in baza 20."},
+    {q:"Ce simbol foloseau mayasii in sistemul lor de numeratie?", choices:["A) Toate cele de mai sus","B) Numere arabe","C) Zero","D) Litere"], correct:"C", explanation:"Mayasii aveau un simbol pentru zero in sistemul lor de numeratie."},
+    {q:"Ce operatii matematice nu foloseau mayasii?", choices:["A) Scaderea","B) Toate cele de mai sus","C) Adunarea","D) Inmultirea"], correct:"D", explanation:"Mayasii foloseau adunarea si scaderea, dar nu inmultirea si diviziunea."},
+    {q:"Cum se numea codexul cel mai bine conservat al civilizatiei Maya?", choices:["A) Codexul Dresda","B) Codexul Borgia","C) Codexul Florentin","D) Codexul Madrid"], correct:"A", explanation:"Codexul Dresda este codexul cel mai bine conservat al civilizatiei Maya."},
+  ],
+  "Grecia — Tales & Pitagora": [
+    {q:"Cine a enuntat teorema despre triunghiurile similare?", choices:["A) Euclid","B) Pitagora din Samos","C) Tales din Milet","D) Eratostene"], correct:"C", explanation:"Tales din Milet a enuntat teorema despre triunghiurile similare."},
+    {q:"In ce credea Tales din Milet in astronomie?", choices:["A) Pamantul era centrul universului","B) Pamantul se rotea in jurul Soarelui","C) Universul era infinit","D) Pamantul era plat si plutea pe un ocean infinit"], correct:"D", explanation:"Tales credea ca Pamantul este un disc plat care plutea pe un ocean infinit."},
+    {q:"Ce simbol avea cultul pitagoreic?", choices:["A) Pentagrama","B) Cercul","C) Triunghiul echilateral","D) Patratul"], correct:"A", explanation:"Cultul pitagoreic avea pentagrama ca simbol."},
+    {q:"Ce credeau membrii cultului pitagoreic?", choices:["A) Reincarnarea","B) Toate cele de mai sus","C) Nu mancau fasole","D) Numerele sunt zei si guverneaza totul"], correct:"B", explanation:"Membrii cultului credeau ca numerele sunt zei, credeau in reincarnare si nu mancau fasole."},
+    {q:"Ce au inventat pitagoreicii, care este inca folosit astazi?", choices:["A) Algebra","B) Geometria analitica","C) Calculul integral","D) Fundamentele teoriei muzicii"], correct:"D", explanation:"Pitagoreicii au inventat fundamentele teoriei muzicii, inca folosite astazi."},
+  ],
+  "Grecia — Euclid, Eratostene, Arhimede, Ptolemeu": [
+    {q:"Cine este considerat parintele geometriei axiomatice?", choices:["A) Eratostene","B) Arhimede","C) Euclid","D) Pitagora"], correct:"C", explanation:"Euclid este considerat parintele geometriei axiomatice."},
+    {q:"Cum se numea cartea lui Euclid care a pus bazele geometriei axiomatice?", choices:["A) Al-jabr w'al-muqabala","B) Noua capitole ale artei matematice","C) Elementele","D) Arithmetica"], correct:"C", explanation:"Cartea lui Euclid se numea 'Elementele'."},
+    {q:"Ce algoritm este asociat cu numele lui Eratostene?", choices:["A) Teorema lui Pitagora","B) Algoritmul lui Euclid","C) Ciurul lui Eratostene","D) Legea lui Arhimede"], correct:"C", explanation:"Eratostene este faimos pentru 'Ciurul lui Eratostene', care calculeaza numerele prime naturale mai mici decat un numar dat."},
+    {q:"Ce formula este asociata cu numele lui Heron din Alexandria?", choices:["A) Formula pentru aria unui triunghi folosind semiperimetrul","B) Legea lui Arhimede","C) Formula lui Euler","D) Teorema lui Pitagora"], correct:"A", explanation:"Heron este faimos pentru formula de calcul a ariei unui triunghi folosind semiperimetrul."},
+    {q:"Ce lege este asociata cu numele lui Arhimede din Siracuza?", choices:["A) Teorema lui Pitagora","B) Ciurul lui Eratostene","C) Legea lui Arhimede","D) Formula lui Heron"], correct:"C", explanation:"Legea lui Arhimede: un corp scufundat este impins de o forta egala cu greutatea lichidului dislocuit."},
+    {q:"Ce model al universului a formulat Klaudios Ptolemaios?", choices:["A) Modelul Big Bang","B) Modelul geocentric","C) Modelul universului in expansiune","D) Modelul heliocentric"], correct:"B", explanation:"Ptolemaios a formulat modelul geocentric: Pamantul este centrul universului."},
+  ],
+  "Diophantos, Fermat & India": [
+    {q:"Cine este cunoscut drept parintele algebrei?", choices:["A) Euclid","B) Diophantos din Alexandria","C) Eratostene","D) Arhimede"], correct:"B", explanation:"Diophantos din Alexandria este cunoscut drept parintele algebrei."},
+    {q:"Cum se numea colectia de carti scrise de Diophantos?", choices:["A) Elementele","B) Noua capitole ale artei matematice","C) Arithmetica","D) Al-jabr w'al-muqabala"], correct:"C", explanation:"Colectia de carti a lui Diophantos se numea 'Arithmetica'."},
+    {q:"Ce a scris Pierre de Fermat pe marginea unei pagini din Arithmetica?", choices:["A) O demonstratie a teoremei lui Pitagora","B) Teorema lui Fermat (ultima teorema)","C) O solutie pentru ecuatiile diofantiene","D) O metoda de calcul a numerelor prime"], correct:"B", explanation:"Fermat a scris ca nu exista triplete pitagoreice pentru n > 2 — ultima teorema a lui Fermat."},
+    {q:"Cine a rezolvat ultima teorema a lui Fermat in 1995?", choices:["A) Gottfried Leibniz","B) Pierre de Fermat","C) Isaac Newton","D) Andrew Wiles"], correct:"D", explanation:"Andrew Wiles a rezolvat ultima teorema a lui Fermat in 1995."},
+    {q:"Cine a adus cunostintele europene in India?", choices:["A) Chinezi","B) Mongolii","C) Arabii","D) Alexandru cel Mare"], correct:"D", explanation:"Alexandru cel Mare a adus cunostintele europene in India prin cuceririle sale."},
+    {q:"Cine a inventat cifra zero?", choices:["A) Indienii","B) Romanii","C) Grecii","D) Babilonienii"], correct:"A", explanation:"Indienii au inventat cifra zero."},
+    {q:"Cine a scris prima carte care trateaza zero ca pe un numar?", choices:["A) Aryabhata","B) Pitagora","C) Brahmagupta","D) Al-Khwarizmi"], correct:"C", explanation:"Brahmagupta a scris prima carte care trateaza zero ca pe un numar."},
+  ],
+  "Arabi & Al-Khwarizmi": [
+    {q:"Ce civilizatie a adoptat sistemul de numeratie in baza 10 de la indieni si l-a adus in Europa?", choices:["A) Arabii","B) Romanii","C) Grecii","D) Egiptenii"], correct:"A", explanation:"Arabii au adoptat sistemul de numeratie in baza 10 de la indieni si l-au adus in Europa."},
+    {q:"Cine este considerat 'parintele algebrei' in cultura araba?", choices:["A) Aryabhata","B) Brahmagupta","C) Al-Khwarizmi","D) Euclid"], correct:"C", explanation:"Al-Khwarizmi este considerat 'parintele algebrei' in cultura araba."},
+    {q:"Cum se numea cartea lui Al-Khwarizmi care a introdus conceptul de 'algebra'?", choices:["A) Arithmetica","B) Al-jabr w'al-muqabala","C) Elementele","D) Algoritmi de numero Indorum"], correct:"B", explanation:"Cartea se numea 'Al-jabr w'al-muqabala'."},
+    {q:"Cum a fost tradus numele lui Al-Khwarizmi in latina?", choices:["A) Euclid","B) Brahmagupta","C) Algoritmi","D) Diophantos"], correct:"C", explanation:"Numele lui Al-Khwarizmi a fost tradus in latina ca 'Algoritmi'."},
+  ],
+  "Babbage — Detalii & Carduri Perforate": [
+    {q:"In ce an a primit Charles Babbage finantare de la guvernul britanic pentru motorul diferential?", choices:["A) 1822","B) 1800","C) 1823","D) 1842"], correct:"C", explanation:"Babbage a primit finantare in 1823 pentru a construi motorul diferential."},
+    {q:"Ce problema a incercat sa rezolve Babbage prin construirea motorului diferential?", choices:["A) Necesarul de a naviga mai rapid","B) Inconsistentele in tabelele matematice","C) Lipsa de fonduri pentru cercetare","D) Lipsa calculatoarelor de buzunar"], correct:"B", explanation:"Babbage a vrut sa rezolve inconsistentele in tabelele matematice."},
+    {q:"Ce metoda matematica sta la baza conceptului motorului diferential?", choices:["A) Algebra liniara","B) Calculul diferential","C) Calculul integral","D) Metoda diferentelor finite"], correct:"D", explanation:"Metoda diferentelor finite sta la baza motorului diferential."},
+    {q:"Care era principalul avantaj al metodei diferentelor finite?", choices:["A) Nu necesita operatii de inmultire si impartire.","B) Era mai rapida decat alte metode.","C) Era mai precisa decat alte metode.","D) Necesita operatii de inmultire si impartire."], correct:"A", explanation:"Metoda diferentelor finite nu necesita inmultire si impartire, folosind doar adunari si scaderi."},
+    {q:"In ce an a fost construit motorul diferential la Muzeul Stiintei din Londra?", choices:["A) 1950","B) 1842","C) 1990","D) 1995"], correct:"D", explanation:"Motorul diferential a fost construit la Muzeul Stiintei din Londra in 1995."},
+    {q:"Ce tip de memorie avea motorul analitic?", choices:["A) Memorie pe carduri perforate","B) Memorie interna capabila sa stocheze 1000 de numere de 40 de cifre zecimale","C) Nu avea memorie","D) Memorie pe banda magnetica"], correct:"B", explanation:"Motorul analitic putea stoca 1000 de numere de 40 de cifre zecimale fiecare."},
+    {q:"Cine a inventat cardurile perforate utilizate in razboiul de tesut?", choices:["A) Ada Lovelace","B) Hermann Hollerith","C) Joseph Marie Jacquard","D) Charles Babbage"], correct:"C", explanation:"Joseph Marie Jacquard a inventat cardurile perforate pentru razboaiele de tesut automat."},
+    {q:"Cand a folosit Charles Babbage ideea de carduri perforate pentru motorul analitic?", choices:["A) 1970","B) 1837","C) 1804","D) 1822"], correct:"B", explanation:"Babbage a folosit ideea de carduri perforate in 1837 pentru motorul analitic."},
+    {q:"Pana in ce an au fost folosite cardurile perforate in Romania?", choices:["A) 1992","B) 1989","C) 2000","D) 1970"], correct:"A", explanation:"Cardurile perforate au fost folosite in Romania pana in 1992."},
+    {q:"Ce cod era folosit de obicei pentru a codifica simbolurile pe cardurile perforate?", choices:["A) UNICODE","B) Baza 60","C) 6-bit BCDIC","D) ASCII"], correct:"C", explanation:"Cele mai multe formate de carduri perforate foloseau codul 6-bit BCDIC."},
+  ],
+  "Herman Hollerith & IBM": [
+    {q:"In ce an a lucrat Hermann Hollerith pentru US Census Bureau?", choices:["A) 1819","B) 1804","C) 1880","D) 1890"], correct:"A", explanation:"Hermann Hollerith a lucrat pentru US Census Bureau in 1819."},
+    {q:"Ce masini a construit Hermann Hollerith pentru a procesa datele de recensamant?", choices:["A) Razboaie de tesut","B) Motoare diferentiale","C) Masini de tabulat","D) Calculatoare de buzunar"], correct:"C", explanation:"Hollerith a construit masini de tabulat pentru a procesa datele de recensamant."},
+    {q:"Ce companie a fost formata din fuziunea companiei lui Hermann Hollerith?", choices:["A) IBM","B) Apple","C) Microsoft","D) Intel"], correct:"A", explanation:"Compania lui Hollerith a fuzionat cu altele si a format IBM."},
+  ],
+  "David Hilbert & Kurt Godel": [
+    {q:"Cine a propus o lista de probleme matematice nerezolvate in 1900?", choices:["A) John von Neumann","B) Kurt Godel","C) David Hilbert","D) Alan Turing"], correct:"C", explanation:"David Hilbert a propus o lista de probleme matematice nerezolvate in 1900."},
+    {q:"Care dintre urmatoarele este una dintre problemele lui Hilbert?", choices:["A) Demonstrarea teoremei lui Pitagora","B) Gasirea unui algoritm pentru ecuatii diofantice polinomiale","C) Inventarea cardurilor perforate","D) Construirea unui motor diferential"], correct:"B", explanation:"Una din problemele lui Hilbert: gasirea unui algoritm pentru ecuatii diofantice polinomiale."},
+    {q:"Ce spune conjectura lui Goldbach?", choices:["A) Toate numerele prime sunt impare.","B) Toate numerele pare mai mari decat doi pot fi descrise ca suma a doua numere prime.","C) Toate numerele impare sunt prime.","D) Exista o infinitate de numere prime."], correct:"B", explanation:"Conjectura lui Goldbach: fiecare numar par mai mare decat doi este suma a doua numere prime."},
+    {q:"Ce problema de pe lista lui Hilbert a studiat Kurt Godel?", choices:["A) Rezolvarea ecuatiilor diofantiene","B) Demonstrarea ca axiomele aritmeticii sunt consistente","C) Gasirea numerelor prime","D) Demonstrarea teoremei lui Pitagora"], correct:"B", explanation:"Godel a studiat problema demonstratiei consistentei axiomelor aritmeticii."},
+    {q:"Ce a demonstrat Kurt Godel in 1931?", choices:["A) Axiomele aritmeticii nu sunt complete.","B) Axiomele aritmeticii sunt inconsistente.","C) Axiomele aritmeticii sunt complete.","D) Teorema lui Pitagora este gresita."], correct:"A", explanation:"Godel a demonstrat ca axiomele aritmeticii nu sunt complete (teorema incompletenei)."},
+    {q:"Ce spunea Kurt Godel despre alimentele consumate?", choices:["A) Ca trebuie consumate doar alimente gatite de sotia lui, din cauza fricii de otravire.","B) Ca trebuie consumate doar alimente proaspete.","C) Ca trebuie mancat multa fasole.","D) Ca trebuie mancata doar mancare organica."], correct:"A", explanation:"Godel consuma doar alimente gatite de sotia sa, de frica otravirii de catre comunistii rusi."},
+  ],
+  "Alan Turing": [
+    {q:"Care a fost particularitatea lui Alan Turing?", choices:["A) Era casatorit cu Albert Einstein.","B) Era homosexual, lucru ilegal in Anglia.","C) Avea 10 copii.","D) Era foarte inalt."], correct:"B", explanation:"Particularitatea lui Turing era ca era homosexual, lucru ilegal in Anglia la acea vreme."},
+    {q:"Cum se numeste filmul despre viata lui Alan Turing?", choices:["A) Codul Enigma","B) O minte sclipitoare","C) Imitation Game","D) Jocul Mintii"], correct:"C", explanation:"Filmul despre viata lui Alan Turing se numeste 'The Imitation Game'."},
+    {q:"In ce lucrare a demonstrat Alan Turing teorema lui Godel folosind Masinile Turing?", choices:["A) Elementele","B) Despre numerele computabile, cu o aplicatie la Entscheidungsproblem","C) Arithmetica","D) Al-jabr w'al-muqabala"], correct:"B", explanation:"Lucrarea se numeste 'Despre numerele computabile, cu o aplicatie la Entscheidungsproblem'."},
+    {q:"In ce problema a transformat Alan Turing problema decidabilitatii lui Godel?", choices:["A) Problema lui Pitagora","B) Problema diofantica","C) Problema opririi","D) Problema numerelor prime"], correct:"C", explanation:"Turing a transformat problema decidabilitatii in problema opririi (halting problem)."},
+    {q:"Ce este o Masina Turing Universala?", choices:["A) Un calculator electronic","B) Un model matematic al unui calculator abstract","C) Un calculator mecanic","D) Un limbaj de programare"], correct:"B", explanation:"Masina Turing Universala este un model matematic al unui calculator abstract."},
+    {q:"Cu ce a contribuit Alan Turing la Al Doilea Razboi Mondial?", choices:["A) A fost medic pe front.","B) A antrenat soldati.","C) A inventat bomba atomica","D) A creat computere electromecanice numite Bombe pentru a decripta Enigma."], correct:"D", explanation:"Turing a inventat calculatorul electromecanic Bomba, folosit pentru a decripta mesajele Enigma."},
+    {q:"Cum se numea testul de inteligenta artificiala inventat de Alan Turing?", choices:["A) Testul Von Neumann","B) Testul Turing","C) Testul Godel","D) Testul Bomba"], correct:"B", explanation:"Alan Turing a inventat testul Turing pentru a evalua inteligenta artificiala."},
+    {q:"Din ce cauza a fost judecat Alan Turing?", choices:["A) Pentru homosexualitate","B) Pentru furt","C) Pentru tradare","D) Pentru spionaj"], correct:"A", explanation:"Alan Turing a fost judecat pentru homosexualitate, ilegala in Marea Britanie."},
+    {q:"Ce s-a intamplat cu Alan Turing in 1954?", choices:["A) Devine prim ministru.","B) Se muta in Statele Unite.","C) Moare din cauza otravirii cu cianura, probabil sinucidere.","D) Devine miliardar."], correct:"C", explanation:"Alan Turing a murit in 1954 din cauza otravirii cu cianura, probabil sinucidere."},
+    {q:"Cum se numeste cel mai faimos premiu in informatica, denumit in onoarea lui Turing?", choices:["A) Premiul Turing","B) Medalia Fields","C) Premiul Nobel pentru Informatica","D) Premiul von Neumann"], correct:"A", explanation:"Cel mai faimos premiu in informatica se numeste Premiul Turing."},
+  ],
+  "John von Neumann": [
+    {q:"Cine era Kurt Godel pentru John von Neumann?", choices:["A) Frate","B) Prieten","C) Nu aveau nicio legatura","D) Sot"], correct:"B", explanation:"Kurt Godel si John von Neumann erau prieteni."},
+    {q:"Care a fost numele original al lui John von Neumann?", choices:["A) Kurt Godel","B) Janos Lajos","C) Alan Turing","D) Albert Einstein"], correct:"B", explanation:"Numele original al lui John von Neumann a fost Janos Lajos."},
+    {q:"Din ce cauza s-a mutat John von Neumann in Statele Unite?", choices:["A) Pentru a scapa de Holocaust si nazisti","B) Pentru ca i s-a oferit un post la Princeton","C) Pentru a obtine un doctorat","D) Pentru a lucra cu Alan Turing"], correct:"A", explanation:"Von Neumann s-a mutat in SUA pentru a scapa de Holocaust si actiunile nazistilor impotriva evreilor."},
+    {q:"Ce proiect important a implicat John von Neumann in timpul celui de-al doilea razboi mondial?", choices:["A) Proiectul ARPANET","B) Proiectul Enigma","C) Proiectul Manhattan","D) Proiectul Colossus"], correct:"C", explanation:"John von Neumann a participat la Proiectul Manhattan."},
+    {q:"De ce a murit John von Neumann?", choices:["A) Din cauza unui accident de masina","B) Din cauza unei boli de inima","C) Din cauza efectelor radiatiilor nucleare","D) Din cauza unei supradoze de medicamente"], correct:"C", explanation:"Von Neumann a murit din cauza efectelor radiatiilor nucleare."},
+  ],
+};
+
+const Q2_ALL = [];
+for (const [topic, qs] of Object.entries(Q2_TOPICS))
+  qs.forEach(q => Q2_ALL.push({...q, topic}));
+
+// ===================== UTILS =====================
+function shuffle(arr) {
+  const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
+}
+function normalize(s){return s.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim();}
+function levenshtein(a,b){const m=a.length,n=b.length,dp=Array.from({length:m+1},(_,i)=>Array.from({length:n+1},(_,j)=>i===0?j:j===0?i:0));for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return dp[m][n];}
+function similar(u,c){u=normalize(u);c=normalize(c);if(u===c)return true;if(c.includes(u)||u.includes(c))return true;return levenshtein(u,c)<=Math.max(1,Math.floor(Math.max(u.length,c.length)*0.25));}
+
+// ===================== NAV =====================
+const VIEWS = ['q1','q2','q3','s1','s2','s3'];
+function show(id) {
+  VIEWS.forEach(v => {
+    const el = document.getElementById('view-'+v);
+    el.classList.toggle('visible', v===id);
+  });
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i===VIEWS.indexOf(id)));
+  if (id==='s1' && !s1Built) buildStudy1();
+  if (id==='s2' && !s2Built) buildStudy2();
+  if (id==='s3' && !s3Built) buildStudy3();
+}
+
+// ===================== QUIZ 1 =====================
+let q1Order=[], q1Idx=0, q1Score=0, q1Answered=false;
+function startQ1(){
+  q1Order=shuffle([...Array(Q1_ALL.length).keys()]); q1Idx=0; q1Score=0;
+  document.getElementById('q1-score').style.display='none';
+  ['q1-counter','q1-badge','q1-question','q1-input-row','q1-feedback','q1-next'].forEach(id=>document.getElementById(id).style.display='');
+  showQ1();
+}
+function showQ1(){
+  q1Answered=false;
+  const q=Q1_ALL[q1Order[q1Idx]];
+  document.getElementById('q1-counter').textContent=`Intrebarea ${q1Idx+1} din ${Q1_ALL.length}`;
+  document.getElementById('progress-bar').style.width=`${(q1Idx/Q1_ALL.length)*100}%`;
+  document.getElementById('q1-badge').textContent=`📚 ${q.course}`;
+  document.getElementById('q1-question').textContent=q.q;
+  document.getElementById('q1-feedback').style.display='none';
+  document.getElementById('q1-next').style.display='none';
+  const ir=document.getElementById('q1-input-row'), cl=document.getElementById('q1-choices');
+  cl.innerHTML='';
+  if(q.type==='choice'){
+    ir.style.display='none';
+    shuffle(q.choices).forEach(c=>{const btn=document.createElement('button');btn.className='choice-btn';btn.textContent=c;btn.onclick=()=>handleQ1Choice(c,q.a);cl.appendChild(btn);});
+  } else {
+    ir.style.display='flex';
+    const inp=document.getElementById('q1-input');inp.value='';inp.disabled=false;
+    document.getElementById('q1-submit').disabled=false;
+    setTimeout(()=>inp.focus(),50);
+  }
+}
+function handleQ1Choice(chosen,correct){
+  if(q1Answered)return; q1Answered=true;
+  const ok=similar(chosen,correct); if(ok)q1Score++;
+  document.querySelectorAll('#q1-choices .choice-btn').forEach(btn=>{btn.disabled=true;if(btn.textContent===chosen)btn.classList.add(ok?'selected-correct':'selected-wrong');if(!ok&&similar(btn.textContent,correct))btn.classList.add('reveal-correct');});
+  showQ1Feedback(ok,correct,'');
+}
+function handleQ1Text(){
+  if(q1Answered)return; const val=document.getElementById('q1-input').value.trim(); if(!val)return;
+  q1Answered=true; const q=Q1_ALL[q1Order[q1Idx]]; const ok=similar(val,q.a); if(ok)q1Score++;
+  document.getElementById('q1-input').disabled=true; document.getElementById('q1-submit').disabled=true;
+  showQ1Feedback(ok,q.a,'');
+}
+function showQ1Feedback(ok,correct,expl){
+  const fb=document.getElementById('q1-feedback'); fb.style.display='block'; fb.className='feedback '+(ok?'correct':'wrong');
+  fb.innerHTML=ok?'&#x2705; <strong>Corect!</strong> Bine facut.':`&#x274C; <strong>Gresit.</strong> Raspunsul corect este: <strong>${correct}</strong>`;
+  document.getElementById('q1-next').style.display='inline-block';
+}
+function nextQ1(){q1Idx++;if(q1Idx>=Q1_ALL.length)scoreQ1();else showQ1();}
+function scoreQ1(){
+  ['q1-counter','q1-badge','q1-question','q1-input-row','q1-feedback','q1-next'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('q1-choices').innerHTML=''; document.getElementById('progress-bar').style.width='100%';
+  const pct=Math.round((q1Score/Q1_ALL.length)*100), C=326.7;
+  document.getElementById('q1-score-circle').style.strokeDashoffset=C-(pct/100)*C;
+  document.getElementById('q1-score-pct').textContent=pct+'%';
+  document.getElementById('q1-score').style.display='block';
+  document.getElementById('q1-score-title').textContent=`${q1Score} / ${Q1_ALL.length} corecte`;
+  document.getElementById('q1-score-sub').textContent=pct===100?'🏆 Perfect!':pct>=80?'🌟 Foarte bine!':pct>=60?'👍 Bine! Mai ai de studiat.':pct>=40?'📚 Continua sa inveti!':'💪 Nu te descuraja!';
+}
+document.getElementById('q1-submit').addEventListener('click',handleQ1Text);
+document.getElementById('q1-input').addEventListener('keydown',e=>{if(e.key==='Enter')handleQ1Text();});
+document.getElementById('q1-next').addEventListener('click',nextQ1);
+
+// ===================== QUIZ 2 =====================
+let q2Order=[], q2Idx=0, q2Score=0, q2Answered=false;
+function startQ2(){
+  q2Order=shuffle([...Array(Q2_ALL.length).keys()]); q2Idx=0; q2Score=0;
+  document.getElementById('q2-score').style.display='none';
+  ['q2-counter','q2-badge','q2-question','q2-feedback','q2-next'].forEach(id=>document.getElementById(id).style.display='');
+  showQ2();
+}
+function showQ2(){
+  q2Answered=false;
+  const q=Q2_ALL[q2Order[q2Idx]];
+  document.getElementById('q2-counter').textContent=`Intrebarea ${q2Idx+1} din ${Q2_ALL.length}`;
+  document.getElementById('progress-bar2').style.width=`${(q2Idx/Q2_ALL.length)*100}%`;
+  document.getElementById('q2-badge').textContent=`📝 ${q.topic}`;
+  document.getElementById('q2-question').textContent=q.q;
+  document.getElementById('q2-feedback').style.display='none';
+  document.getElementById('q2-next').style.display='none';
+  const cl=document.getElementById('q2-choices'); cl.innerHTML='';
+  // keep original order A-D
+  q.choices.forEach(c=>{
+    const btn=document.createElement('button'); btn.className='choice-btn';
+    btn.textContent=c; btn.dataset.letter=c[0];
+    btn.onclick=()=>handleQ2Choice(btn,q); cl.appendChild(btn);
+  });
+}
+function handleQ2Choice(btn,q){
+  if(q2Answered)return; q2Answered=true;
+  const chosen=btn.dataset.letter; const ok=chosen===q.correct; if(ok)q2Score++;
+  document.querySelectorAll('#q2-choices .choice-btn').forEach(b=>{
+    b.disabled=true;
+    if(b===btn) b.classList.add(ok?'selected-correct':'selected-wrong');
+    if(!ok && b.dataset.letter===q.correct) b.classList.add('reveal-correct');
+  });
+  const fb=document.getElementById('q2-feedback'); fb.style.display='block'; fb.className='feedback '+(ok?'correct':'wrong');
+  fb.innerHTML=(ok?'&#x2705; <strong>Corect!</strong>':'&#x274C; <strong>Gresit.</strong>')+`<div class="explanation">💡 ${q.explanation}</div>`;
+  document.getElementById('q2-next').style.display='inline-block';
+}
+function nextQ2(){q2Idx++;if(q2Idx>=Q2_ALL.length)scoreQ2();else showQ2();}
+function scoreQ2(){
+  ['q2-counter','q2-badge','q2-question','q2-feedback','q2-next'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('q2-choices').innerHTML=''; document.getElementById('progress-bar2').style.width='100%';
+  const pct=Math.round((q2Score/Q2_ALL.length)*100), C=326.7;
+  document.getElementById('q2-score-circle').style.strokeDashoffset=C-(pct/100)*C;
+  document.getElementById('q2-score-pct').textContent=pct+'%';
+  document.getElementById('q2-score').style.display='block';
+  document.getElementById('q2-score-title').textContent=`${q2Score} / ${Q2_ALL.length} corecte`;
+  document.getElementById('q2-score-sub').textContent=pct===100?'🏆 Perfect!':pct>=80?'🌟 Foarte bine!':pct>=60?'👍 Bine! Mai ai de studiat.':pct>=40?'📚 Continua sa inveti!':'💪 Nu te descuraja!';
+}
+document.getElementById('q2-next').addEventListener('click',nextQ2);
+
+// ===================== STUDY 1 =====================
+let s1Built=false;
+function buildStudy1(){
+  s1Built=true;
+  const sidebar=document.getElementById('sidebar-s1'), main=document.getElementById('main-s1');
+  Object.entries(COURSES).forEach(([name,qs],i)=>{
+    const btn=document.createElement('button'); btn.className='sidebar-item'+(i===0?' active':'');
+    btn.dataset.s='s1-'+name; btn.innerHTML=name+`<span class="badge">${qs.length}</span>`;
+    btn.onclick=()=>selectSection('s1',btn,'s1-'+name); sidebar.appendChild(btn);
+    const sec=document.createElement('div'); sec.className='study-section'+(i===0?' active':''); sec.id='s1-'+name;
+    sec.innerHTML=`<div class="study-course-title">📖 ${name}</div>`;
+    qs.forEach((q,qi)=>{sec.innerHTML+=`<div class="qa-card"><div class="qa-num">Intrebarea ${qi+1}</div><div class="qa-q"><strong>I:</strong> ${q.q}</div><div class="qa-a">→ ${q.a}</div></div>`;});
+    main.appendChild(sec);
+  });
+}
+
+// ===================== STUDY 2 =====================
+let s2Built=false;
+function buildStudy2(){
+  s2Built=true;
+  const sidebar=document.getElementById('sidebar-s2'), main=document.getElementById('main-s2');
+  let globalNum=1;
+  Object.entries(Q2_TOPICS).forEach(([topic,qs],i)=>{
+    const btn=document.createElement('button'); btn.className='sidebar-item'+(i===0?' active':'');
+    btn.dataset.s='s2-'+i; btn.innerHTML=topic+`<span class="badge">${qs.length}</span>`;
+    btn.onclick=()=>selectSection('s2',btn,'s2-'+i); sidebar.appendChild(btn);
+    const sec=document.createElement('div'); sec.className='study-section'+(i===0?' active':''); sec.id='s2-'+i;
+    sec.innerHTML=`<div class="study-course-title">📝 ${topic}</div>`;
+    qs.forEach(q=>{
+      const correctText=q.choices.find(c=>c[0]===q.correct)||'';
+      let choicesHtml=q.choices.map(c=>`<div class="mc-choice${c[0]===q.correct?' correct-answer':''}">${c}</div>`).join('');
+      sec.innerHTML+=`<div class="mc-card"><div class="mc-num">Intrebarea ${globalNum++}</div><div class="mc-q">${q.q}</div><div class="mc-choices">${choicesHtml}</div><div class="mc-explanation">💡 ${q.explanation}</div></div>`;
+    });
+    main.appendChild(sec);
+  });
+}
+
+function selectSection(prefix, btn, id){
+  document.querySelectorAll('#sidebar-'+prefix+' .sidebar-item').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#main-'+prefix+' .study-section').forEach(s=>s.classList.toggle('active',s.id===id));
+}
+
+
+// ===================== DATA Q3 =====================
+const Q3_TOPICS = {
+  "Babbage, Ada Lovelace & Algoritmi": [
+    {q:"Cine a creat motorul diferential si motorul analitic?", choices:["Ada Lovelace","Steve Jobs","Charles Babbage","Bill Gates"], correct:2, explanation:"Charles Babbage a creat motorul diferential si motorul analitic in anii 1800, considerate primele masini de calcul cu scop general."},
+    {q:"Cine a fost primul programator din istorie?", choices:["John von Neumann","Charles Babbage","Alan Turing","Ada Lovelace"], correct:3, explanation:"Ada Lovelace este considerata primul programator din istorie, scriind un program pentru motorul analitic al lui Charles Babbage."},
+    {q:"De ce nu a functionat programul lui Ada Lovelace?", choices:["Nu era scris intr-un limbaj adecvat.","Motorul analitic nu a fost niciodata construit.","Avea o eroare de runtime.","Avea o eroare de compilare."], correct:1, explanation:"Programul nu a functionat deoarece motorul analitic pentru care a fost scris nu a fost construit in timpul vietii ei."},
+    {q:"Care era problema cu tabelele matematice inainte de 1800?", choices:["Erau scrise doar in latina.","Erau greu de gasit.","Valorile functiilor difera intre carti.","Erau foarte scumpe."], correct:2, explanation:"Inainte de 1800, valorile functiilor din tabele variau intre carti, motivand crearea unui calculator mecanic."},
+    {q:"Pentru ce a cerut Charles Babbage finantare de la guvernul britanic?", choices:["Pentru a scrie carti de matematica.","Pentru a inventa un nou limbaj de programare.","Pentru a construi un motor diferential.","Pentru a preda matematica."], correct:2, explanation:"Babbage a solicitat finantare pentru a construi un motor diferential, o masina de calcul mecanica."},
+    {q:"De ce nu a fost construit motorul diferential in timpul vietii lui Babbage?", choices:["Nu avea cunostinte matematice suficiente.","Nu a gasit pe nimeni care sa-l ajute.","Echipamentele industriale nu erau suficient de precise.","Nu a primit suficienta finantare."], correct:2, explanation:"Lipsa de precizie a echipamentelor industriale si dificultatile de colaborare au impiedicat constructia."},
+    {q:"Ce operatii puteau efectua motorul diferential si motorul analitic?", choices:["Numai operatii logice.","Adunare si scadere.","Numai cele 4 operatii de baza.","Operatii complexe: exponentiale, logaritmi, trigonometrie si polinoame."], correct:3, explanation:"Puteau efectua operatii complexe: exponentiale, logaritmi, trigonometrie si polinoame."},
+    {q:"Ce capacitate de stocare avea memoria motorului analitic?", choices:["4000 numere de 10 cifre.","100 numere de 10 cifre.","1000 numere de 40 cifre.","10000 numere de 4 cifre."], correct:2, explanation:"Memoria motorului analitic putea stoca 1000 de numere de 40 de cifre fiecare."},
+    {q:"Cine a inventat termenul 'algoritm'?", choices:["Pitagora","Muhammad ibn Musa al-Khwarizmi","Ada Lovelace","Euclid"], correct:1, explanation:"Termenul 'algoritm' a fost inventat de matematicianul arab Muhammad ibn Musa al-Khwarizmi."},
+    {q:"In ce an a fost scrisa cartea in care al-Khwarizmi a inventat termenul 'algoritm'?", choices:["1600","820","1200","1000"], correct:1, explanation:"Cartea a fost scrisa in anul 820."},
+    {q:"Ce inseamna definitia moderna a unui algoritm?", choices:["O descriere a unui computer.","O formula matematica.","O teorie stiintifica.","O secventa de pasi pentru a rezolva o problema specifica."], correct:3, explanation:"Un algoritm este o secventa de pasi necesari pentru a rezolva o problema specifica."},
+    {q:"Cine a creat algoritmul pentru cel mai mare divizor comun?", choices:["Eratostene","Al-Khwarizmi","Pitagora","Euclid"], correct:3, explanation:"Euclid a dezvoltat algoritmul pentru calcularea celui mai mare divizor comun."},
+  ],
+  "Civilizatii antice — Babilonieni, Egipteni, Chinezi, Maya": [
+    {q:"Ce popor antic a trait in Mesopotamia?", choices:["Egiptenii","Grecii","Mayasii","Babilonienii"], correct:3, explanation:"Babilonienii au trait in Mesopotamia, corespunzand in mare parte Turciei si Siriei de azi."},
+    {q:"Cum se numea scrierea babilonienilor?", choices:["Morse","Alfabet","Hieroglife","Cuneiformi"], correct:3, explanation:"Scrierea babilonienilor se numea cuneiformi, literele si cifrele aratand ca niste cuie."},
+    {q:"Ce sistem numeric foloseau babilonienii?", choices:["Baza 20","Baza 60","Baza 10","Baza 100"], correct:1, explanation:"Babilonienii foloseau un sistem numeric in baza 60, numit sexagesimal."},
+    {q:"Ce cunostinte matematice aveau babilonienii?", choices:["Numai adunare si scadere.","Numai geometrie.","Radacina patrata si cubica, triplete pitagoreice, cunostinte despre pi.","Numai algebra."], correct:2, explanation:"Babilonienii aveau cunostinte avansate: radacina patrata/cubica, triplete pitagoreice si pi."},
+    {q:"Ce fel de cunostinte matematice aveau egiptenii?", choices:["Mai mult geometrice","Mai mult aritmetice","Numai statistica","Numai algebra"], correct:0, explanation:"Egiptenii aveau cunostinte mai mult geometrice, necesare pentru masurarea terenurilor dupa inundatiile Nilului."},
+    {q:"Ce sistem numeric foloseau egiptenii?", choices:["Baza 60","Baza 10","Baza 20","Baza 2"], correct:1, explanation:"Egiptenii foloseau un sistem numeric in baza 10, cu cifre desenate cu betisoare simple."},
+    {q:"Cum se numea teorema lui Pitagora in China antica?", choices:["Teorema Cercului","Legea lui Thales","Algoritmul lui Eratostene","Regula Gougu"], correct:3, explanation:"Chinezii numeau teorema lui Pitagora 'Regula Gougu'."},
+    {q:"Cum se numea cea mai faimoasa carte de matematica din istoria Chinei antice?", choices:["Arithmetica","De libero abaci","Elementele","Noua capitole despre arta matematica"], correct:3, explanation:"Cea mai faimoasa carte chinezeasca de matematica era 'Noua capitole despre arta matematica'."},
+    {q:"In ce baza numerica numarau Mayasii?", choices:["Baza 2","Baza 20","Baza 60","Baza 10"], correct:1, explanation:"Mayasii foloseau un sistem numeric in baza 20."},
+    {q:"Ce civilizatie antica avea un simbol pentru zero?", choices:["Grecii","Babilonienii","Egiptenii","Mayasii"], correct:3, explanation:"Civilizatia Maya avea un simbol pentru zero."},
+    {q:"Cate calendare aveau Mayasii?", choices:["Unul","Patru","Doua","Trei"], correct:2, explanation:"Mayasii aveau doua calendare: unul ritual de 260 de zile si unul civil de 365 de zile."},
+    {q:"Cine a popularizat cifra zero in Europa?", choices:["Al-Khwarizmi","Fibonacci","Euclid","Pitagora"], correct:1, explanation:"Fibonacci a popularizat cifra zero in Europa prin publicarea cartii 'De libero abaci'."},
+  ],
+  "Grecia antica & matematicieni": [
+    {q:"Cum se numea algoritmul lui Euclid pentru cel mai mare divizor comun?", choices:["Criba lui Eratostene","Algoritmul lui Euclid","Teorema lui Pitagora","Legea lui Arhimede"], correct:1, explanation:"Algoritmul lui Euclid calculeaza cel mai mare divizor comun a doua numere."},
+    {q:"Cine a construit o harta a stelelor cu 675 de stele?", choices:["Ptolemeu","Eratostene","Euclid","Arhimede"], correct:1, explanation:"Eratostene a construit o harta cu 675 de stele si a masurat diametrul Pamantului."},
+    {q:"Cine a formulat formula de calcul a ariei unui triunghi folosind semiperimetrul?", choices:["Arhimede","Heron din Alexandria","Euclid","Eratostene"], correct:1, explanation:"Heron din Alexandria este renumit pentru formula ariei unui triunghi cu semiperimetrul."},
+    {q:"Cine este faimos pentru Legea lui Arhimede?", choices:["Arhimede","Heron din Alexandria","Eratostene","Euclid"], correct:0, explanation:"Legea lui Arhimede descrie forta de flotabilitate asupra unui corp scufundat intr-un fluid."},
+    {q:"Ce model al spatiului a formulat Klaudios Ptolemaios?", choices:["Geocentric","Niciunul","Heliocentric","Ambele"], correct:0, explanation:"Ptolemaios a formulat modelul geocentric: Pamantul era centrul universului cunoscut."},
+    {q:"Cine este cunoscut ca 'parintele algebrei'?", choices:["Arhimede","Ptolemeu","Euclid","Diophantos din Alexandria"], correct:3, explanation:"Diophantos din Alexandria este cunoscut ca 'parintele algebrei' pentru colectia 'Arithmetica'."},
+  ],
+  "India & Lumea Araba": [
+    {q:"Cum au fost aduse cunostintele europene in India?", choices:["Prin intermediul babilonienilor.","Prin intermediul mayasilor.","Prin intermediul egiptenilor.","Prin intermediul lui Alexandru cel Mare."], correct:3, explanation:"Cunostintele europene au fost aduse in India de Alexandru cel Mare."},
+    {q:"Ce a inventat Aryabhata?", choices:["Numarul zero","Nu a inventat nimic.","Geometria axiomatica","Algebra"], correct:0, explanation:"Aryabhata a inventat cifra zero si a aprobat teoria heliocentrca."},
+    {q:"Cine a scris prima carte care a tratat zero ca pe un numar?", choices:["Euclid","Ptolemeu","Brahmagupta","Aryabhata"], correct:2, explanation:"Brahmagupta a scris prima carte care a tratat zero ca pe un numar."},
+    {q:"Cine este considerat 'parintele algebrei' in lumea araba?", choices:["Euclid","Ptolemeu","Aryabhata","Muhammad bin Musa al-Khwarizmi"], correct:3, explanation:"Al-Khwarizmi este considerat 'parintele algebrei' pentru scrierea cartii 'Al-jabr w'al-muqabala'."},
+    {q:"Din ce limba provine cuvantul 'algoritm'?", choices:["Latina","Araba","Greaca","Engleza"], correct:1, explanation:"Cuvantul 'algoritm' provine din numele latin al lui al-Khwarizmi, 'Algoritmi'."},
+  ],
+  "Calculatoare mecanice — Schickard, Pascal, Leibniz, Thomas": [
+    {q:"Ce fel de calculatoare erau motorul diferential si motorul analitic?", choices:["Electromecanice","Mecanice","Optice","Electronice"], correct:1, explanation:"Motorul diferential si cel analitic erau calculatoare mecanice."},
+    {q:"Ce metoda matematica sta la baza motorului diferential?", choices:["Metoda elementelor finite","Calculul infinitezimal","Calculul integral","Metoda diferentelor finite"], correct:3, explanation:"Metoda diferentelor finite este ideea matematica principala din spatele motorului diferential."},
+    {q:"Ce tip de calculator a construit Wilhelm Schickard in 1623?", choices:["Analogic","Digital","Electronic","Hidraulic"], correct:1, explanation:"In 1623, Wilhelm Schickard a construit primul calculator mecanic digital."},
+    {q:"Cum se numea masina de calcul construita de Blaise Pascal?", choices:["Addiator","Thomas Arithmometer","Stepped Reckoner","Pascaline"], correct:3, explanation:"Masina lui Pascal se numea Pascaline."},
+    {q:"Cate cifre putea aduna sau scadea Stepped Reckoner al lui Leibniz?", choices:["Douazeci","Doisprezece","Opt","Saisprezece"], correct:2, explanation:"Stepped Reckoner putea aduna sau scadea numere de opt cifre de la/la un numar de 16 cifre."},
+    {q:"Ce tip de calculator a fost Arithmometerul lui Thomas?", choices:["Primul dispozitiv mecanic de calcul electric.","Primul dispozitiv mecanic de calcul comercial.","Primul dispozitiv mecanic de calcul optic.","Primul dispozitiv mecanic de calcul hidraulic."], correct:1, explanation:"Thomas Arithmometer a fost primul dispozitiv mecanic de calcul comercial."},
+    {q:"Ce dispozitiv folosit in Berlin intre 1920-1982 putea efectua in mod natural adunari si scaderi?", choices:["Comptometer","Monroe machine.","Arithmometerul lui Thomas.","Addiator"], correct:3, explanation:"Addiator putea efectua in mod natural adunari si scaderi."},
+    {q:"Unde a fost folosit Comptometer?", choices:["Berlin.","Regatul Unit","Austria","Statele Unite"], correct:3, explanation:"Comptometer a fost folosit in Statele Unite."},
+    {q:"Unde a fost folosita masina Monroe?", choices:["Statele Unite","Austria","Berlin.","Regatul Unit"], correct:0, explanation:"Masina Monroe a fost folosita in Statele Unite."},
+    {q:"Unde a fost folosit Curta?", choices:["Regatul Unit","Statele Unite","Austria","Berlin."], correct:2, explanation:"Curta a fost folosit in Austria."},
+    {q:"Unde a fost folosit ANITA MarkVIII?", choices:["Berlin.","Statele Unite","Austria","Regatul Unit"], correct:3, explanation:"ANITA MarkVIII a fost folosit in Regatul Unit."},
+  ],
+  "Cartele perforate & Hollerith": [
+    {q:"Ce tip de memorie avea motorul analitic?", choices:["Pe relee","Pe cartele perforate","Pe tranzistori","Magnetica"], correct:1, explanation:"Inputul motorului analitic se facea pe cartele perforate; memoria stoca 1000 numere de 40 de cifre."},
+    {q:"Cine a venit cu ideea cartelelor perforate pentru programarea razboaielor de tesut?", choices:["Hermann Hollerith","Ada Lovelace","Charles Babbage","Joseph Marie Jacquard"], correct:3, explanation:"Joseph Marie Jacquard a inventat cartelele perforate pentru razboaiele de tesut automat."},
+    {q:"Pana in ce an au fost folosite cartelele perforate in Romania?", choices:["2000","1992","1970","1989"], correct:1, explanation:"In Romania, cartelele perforate au fost folosite pana in 1992."},
+    {q:"Ce folosea Hermann Hollerith pentru a stoca date statistice in Statele Unite?", choices:["Discuri optice","Cartele perforate","Carti","Benzi magnetice"], correct:1, explanation:"Hollerith a folosit cartele perforate pentru date statistice in biroul de recensamant."},
+    {q:"Cum se numea compania lui Hermann Hollerith?", choices:["Intel","Tabulating Machine Company","Apple","IBM"], correct:1, explanation:"Compania lui Hollerith se numea Tabulating Machine Company."},
+    {q:"Ce companie a rezultat din fuziunea companiei lui Hollerith cu altele?", choices:["Intel","Apple","Microsoft","IBM"], correct:3, explanation:"Compania lui Hollerith a fuzionat cu alte trei companii si a format IBM."},
+  ],
+  "Hilbert, Godel, Turing & Von Neumann": [
+    {q:"Cine a propus o lista de probleme matematice nerezolvate in 1900?", choices:["John von Neumann","David Hilbert","Alan Turing","Kurt Goedel"], correct:1, explanation:"David Hilbert a propus lista de probleme matematice nerezolvate in 1900."},
+    {q:"Care problema din lista lui Hilbert se refera la axiomele aritmeticii?", choices:["A doua","Prima","A treia","A patra"], correct:0, explanation:"A doua problema din lista lui Hilbert priveste consistenta axiomelor aritmeticii."},
+    {q:"Ce a demonstrat Kurt Goedel in 1931?", choices:["Axiomele aritmeticii sunt incomplete.","Teorema lui Fermat.","Axiomele aritmeticii sunt complete.","Teorema lui Pitagora."], correct:0, explanation:"Goedel a demonstrat teorema incompletitudinii: axiomele aritmeticii sunt incomplete."},
+    {q:"Ce particularitate avea Kurt Goedel?", choices:["Era homosexual.","Se temea ca va fi otravit.","Avea probleme cu alcoolul.","Nu stia sa conduca."], correct:1, explanation:"Goedel se temea ca va fi otravit si manca doar mancare preparata de sotia sa."},
+    {q:"Ce particularitate avea Alan Turing?", choices:["Nu stia sa conduca.","Era homosexual.","Avea probleme cu alcoolul.","Se temea ca va fi otravit."], correct:1, explanation:"Alan Turing era homosexual, iar homosexualitatea era ilegala in Anglia la acea vreme."},
+    {q:"Ce a inventat Alan Turing?", choices:["Legea lui Arhimede","Motorul analitic","Algoritmul lui Euclid","Testul Turing"], correct:3, explanation:"Alan Turing a inventat Testul Turing, un test pentru inteligenta artificiala."},
+    {q:"Ce masina a creat Alan Turing in timpul celui de-al doilea razboi mondial?", choices:["Bomba","EDVAC","Colossus","ENIAC"], correct:0, explanation:"Turing a creat 'Bomba' pentru a descifra mesajele criptate de masina germana Enigma."},
+    {q:"Ce a facut Alan Turing in Bletchley Park?", choices:["A construit bombe","A scris carti","A spart coduri","A programat computere"], correct:2, explanation:"Turing a lucrat in Bletchley Park, unde a spart codurile generate de masina Enigma."},
+    {q:"Cu cat se presupune ca a scurtat Turing al doilea razboi mondial prin munca de descifrare?", choices:["Zece ani","Cinci ani","Un an","Doi ani"], correct:3, explanation:"Se presupune ca munca lui Turing a scurtat al doilea razboi mondial cu doi ani."},
+    {q:"Ce tip de criptare a fost Enigma?", choices:["Criptare cuantica","Criptare simetrica","Nu era criptare","Criptare asimetrica"], correct:1, explanation:"Enigma a fost un sistem de criptare simetrica."},
+    {q:"Cum a murit Alan Turing?", choices:["De batranete.","Intr-un accident de masina.","De cancer.","De otravire cu cianura."], correct:3, explanation:"Alan Turing a murit de otravire cu cianura, probabil sinucidere."},
+    {q:"Ce premiu faimos in informatica poarta numele lui Alan Turing?", choices:["Medalia Fields","Premiul Nobel","Premiul Pulitzer","Premiul Turing"], correct:3, explanation:"Premiul Turing este cel mai faimos premiu in informatica, acordat de ACM."},
+    {q:"Ce particularitate avea John von Neumann?", choices:["Avea probleme cu alcoolul.","Se temea ca va fi otravit.","Nu stia sa conduca, dar isi lua masina noua in fiecare an.","Era homosexual."], correct:2, explanation:"Von Neumann era un sofer slab, dar bogat, si isi permitea o masina noua in fiecare an."},
+    {q:"Ce proiect a reunit oameni de stiinta pentru a dezvolta bomba atomica?", choices:["Proiectul ARPANET","Proiectul Apollo","Proiectul Manhattan","Proiectul ENIAC"], correct:2, explanation:"Proiectul Manhattan a reunit oameni de stiinta pentru a dezvolta bomba atomica."},
+    {q:"Ce algoritm a inventat John von Neumann in 1945?", choices:["Algoritmul lui Eratostene","Algoritmul lui Dijkstra","Algoritmul Merge Sort","Algoritmul lui Euclid"], correct:2, explanation:"John von Neumann a inventat algoritmul Merge Sort in 1945."},
+    {q:"Ce arhitectura de calculator a descris John von Neumann?", choices:["Arhitectura Turing","Arhitectura Harvard","Arhitectura Von Neumann","Arhitectura Babbage"], correct:2, explanation:"Von Neumann a descris arhitectura in care programul si datele sunt stocate in aceeasi memorie."},
+    {q:"Ce putere speciala avea John von Neumann?", choices:["Isi putea memora rapid pagini intregi din cartea de telefoane.","Era foarte bun la sport.","Era homosexual.","Era foarte bun la matematica."], correct:0, explanation:"Von Neumann putea memora rapid pagini intregi din cartea de telefoane."},
+    {q:"Ce a inventat Robert Kahn?", choices:["Bomba","Colossus","ARPANET","Computerul lui Charles Babbage"], correct:2, explanation:"Robert Kahn a creat arhitectura ARPANET."},
+    {q:"Ce a inventat Robert Metcalfe in 1973 la Xerox PARC?", choices:["Ecranele tactile","Mouse-ul","Computerul","Tehnologia Ethernet"], correct:3, explanation:"Tecnologia Ethernet a fost dezvoltata de Bob Metcalfe in 1973 la Xerox PARC."},
+  ],
+  "Calculatoare electromecanice & Tuburi vidate": [
+    {q:"Ce tipuri de parti contineau primele computere mecanice-electrice?", choices:["Doar relee electrice","Doar parti mecanice","Ambele parti mecanice si relee electrice","Numai tuburi vidate"], correct:2, explanation:"Primele computere mecanice-electrice contineau atat parti mecanice cat si relee electrice."},
+    {q:"Care era functia releelor electrice?", choices:["Efectuarea de calcule","Generarea de energie","Stocarea de date","Actionarea ca un comutator electric"], correct:3, explanation:"Releele electrice functioneaza ca un comutator electric, permitand curentului sa treaca sau sa se opreasca."},
+    {q:"Cine a inventat seria de computere Z1, Z2, Z3 si Z4?", choices:["Konrad Zuse","Alan Turing","John von Neumann","Charles Babbage"], correct:0, explanation:"Konrad Zuse a inventat seria de computere Z1, Z2, Z3 si Z4."},
+    {q:"Ce computer inventat de Zuse a fost primul computer digital programabil functional din lume?", choices:["Z1","Z4","Z2","Z3"], correct:3, explanation:"Z3 a fost primul computer digital programabil functional din lume."},
+    {q:"Ce inseamna termenul 'frecventa de ceas'?", choices:["Numarul de tranzistori dintr-un CPU","Numarul de batai sau semnale de ceas pe secunda","Cantitatea de memorie pe un computer","Cantitatea de caldura generata de un computer"], correct:1, explanation:"Frecventa de ceas este numarul de batai sau semnale de ceas pe secunda, masurata in hertzi (Hz)."},
+    {q:"Ce componente electronice au fost folosite pentru calculatoarele din prima generatie?", choices:["Tranzistori","Microprocesoare","Circuite integrate","Tuburi vidate"], correct:3, explanation:"Tuburile vidate au fost folosite pentru a construi calculatoarele din prima generatie."},
+    {q:"Unde se afla fabricile care produc tuburi vidate pentru instrumente muzicale?", choices:["China, Rusia si Republica Ceha","Rusia, Germania si Statele Unite","Statele Unite, Romania si China","Anglia, Statele Unite si China"], correct:0, explanation:"Unele fabrici care produc tuburi vidate se afla in China, Rusia si Republica Ceha."},
+    {q:"Ce dispozitiv antic a fost folosit pentru calcule aritmetice?", choices:["Mecanismul Antikythera","Motorul analitic","Abacul","Ceasul castelului lui Al-Jazari"], correct:2, explanation:"Abacul a fost un dispozitiv antic folosit pentru calcule aritmetice."},
+    {q:"Ce prezice Mecanismul Antikythera?", choices:["Ceasul.","Anul","Ora.","Pozitiile astronomice."], correct:3, explanation:"Mecanismul Antikythera prezicea pozitiile astronomice si urmarea miscarea lunii."},
+    {q:"Ce dispozitiv a fost creat de Al-Jazari?", choices:["Ceasul castelului","Abacul","Motorul analitic","Mecanismul Antikythera"], correct:0, explanation:"Al-Jazari a creat un ceas de castel care functiona cu apa si afisa zodia, pozitia solara si orbitele lunare."},
+    {q:"Ce puteau face oasele lui John Napier?", choices:["Efectuau operatii aritmetice.","Preziceau pozitii astronomice.","Afisau ora.","Generau muzica."], correct:0, explanation:"Oasele lui John Napier puteau fi folosite pentru adunari, scaderi, inmultiri si impartiri."},
+  ],
+};
+
+const Q3_ALL = [];
+for (const [topic, qs] of Object.entries(Q3_TOPICS))
+  qs.forEach(q => Q3_ALL.push({...q, topic}));
+
+// ===================== QUIZ 3 =====================
+let q3Order=[], q3Idx=0, q3Score=0, q3Answered=false;
+function startQ3(){
+  q3Order=shuffle([...Array(Q3_ALL.length).keys()]); q3Idx=0; q3Score=0;
+  document.getElementById('q3-score').style.display='none';
+  ['q3-counter','q3-badge','q3-question','q3-feedback','q3-next'].forEach(id=>document.getElementById(id).style.display='');
+  showQ3();
+}
+function showQ3(){
+  q3Answered=false;
+  const q=Q3_ALL[q3Order[q3Idx]];
+  document.getElementById('q3-counter').textContent=`Intrebarea ${q3Idx+1} din ${Q3_ALL.length}`;
+  document.getElementById('progress-bar3').style.width=`${(q3Idx/Q3_ALL.length)*100}%`;
+  document.getElementById('q3-badge').textContent=`📝 ${q.topic}`;
+  document.getElementById('q3-question').textContent=q.q;
+  document.getElementById('q3-feedback').style.display='none';
+  document.getElementById('q3-next').style.display='none';
+  const cl=document.getElementById('q3-choices'); cl.innerHTML='';
+  q.choices.forEach((c,i)=>{
+    const btn=document.createElement('button'); btn.className='choice-btn';
+    btn.textContent=c; btn.dataset.idx=i;
+    btn.onclick=()=>handleQ3Choice(btn,q); cl.appendChild(btn);
+  });
+}
+function handleQ3Choice(btn,q){
+  if(q3Answered)return; q3Answered=true;
+  const chosen=parseInt(btn.dataset.idx); const ok=chosen===q.correct; if(ok)q3Score++;
+  document.querySelectorAll('#q3-choices .choice-btn').forEach((b,i)=>{
+    b.disabled=true;
+    if(parseInt(b.dataset.idx)===chosen) b.classList.add(ok?'selected-correct':'selected-wrong');
+    if(!ok && parseInt(b.dataset.idx)===q.correct) b.classList.add('reveal-correct');
+  });
+  const fb=document.getElementById('q3-feedback'); fb.style.display='block'; fb.className='feedback '+(ok?'correct':'wrong');
+  fb.innerHTML=(ok?'&#x2705; <strong>Corect!</strong>':'&#x274C; <strong>Gresit.</strong>')+`<div class="explanation">💡 ${q.explanation}</div>`;
+  document.getElementById('q3-next').style.display='inline-block';
+}
+function nextQ3(){q3Idx++;if(q3Idx>=Q3_ALL.length)scoreQ3();else showQ3();}
+function scoreQ3(){
+  ['q3-counter','q3-badge','q3-question','q3-feedback','q3-next'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('q3-choices').innerHTML=''; document.getElementById('progress-bar3').style.width='100%';
+  const pct=Math.round((q3Score/Q3_ALL.length)*100), C=326.7;
+  document.getElementById('q3-score-circle').style.strokeDashoffset=C-(pct/100)*C;
+  document.getElementById('q3-score-pct').textContent=pct+'%';
+  document.getElementById('q3-score').style.display='block';
+  document.getElementById('q3-score-title').textContent=`${q3Score} / ${Q3_ALL.length} corecte`;
+  document.getElementById('q3-score-sub').textContent=pct===100?'🏆 Perfect!':pct>=80?'🌟 Foarte bine!':pct>=60?'👍 Bine! Mai ai de studiat.':pct>=40?'📚 Continua sa inveti!':'💪 Nu te descuraja!';
+}
+document.getElementById('q3-next').addEventListener('click',nextQ3);
+
+// ===================== STUDY 3 =====================
+let s3Built=false;
+function buildStudy3(){
+  s3Built=true;
+  const sidebar=document.getElementById('sidebar-s3'), main=document.getElementById('main-s3');
+  let globalNum=1;
+  Object.entries(Q3_TOPICS).forEach(([topic,qs],i)=>{
+    const btn=document.createElement('button'); btn.className='sidebar-item'+(i===0?' active':'');
+    btn.dataset.s='s3-'+i; btn.innerHTML=topic+`<span class="badge">${qs.length}</span>`;
+    btn.onclick=()=>selectSection('s3',btn,'s3-'+i); sidebar.appendChild(btn);
+    const sec=document.createElement('div'); sec.className='study-section'+(i===0?' active':''); sec.id='s3-'+i;
+    sec.innerHTML=`<div class="study-course-title">📝 ${topic}</div>`;
+    qs.forEach(q=>{
+      const correctText=q.choices[q.correct];
+      let choicesHtml=q.choices.map((c,ci)=>`<div class="mc-choice${ci===q.correct?' correct-answer':''}">${String.fromCharCode(65+ci)}) ${c}</div>`).join('');
+      sec.innerHTML+=`<div class="mc-card"><div class="mc-num">Intrebarea ${globalNum++}</div><div class="mc-q">${q.q}</div><div class="mc-choices">${choicesHtml}</div><div class="mc-explanation">💡 ${q.explanation}</div></div>`;
+    });
+    main.appendChild(sec);
+  });
+}
+
+// ===================== INIT =====================
+startQ1();
+startQ2();
+startQ3();
+</script>
+</body>
+</html>

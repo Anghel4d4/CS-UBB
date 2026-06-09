@@ -1,0 +1,10 @@
+clc
+n=10;
+functia = @(x) log(sin(x))/log(exp(1));
+functia2= @(x) (log(x))/log(exp(1));
+
+cuadraturi_Gauss(0.01,0.2,n,functia)
+cuadraturi_Gauss(0.02,pi/2,n,functia)
+adquad(@primaParte,0, 0.01 ,1e-6)
+%fprintf('Rezultatul este %g\n',rez1);
+%fprintf('Rezultatul este %g\n',rez2);

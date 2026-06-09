@@ -1,0 +1,51 @@
+> f := cos(x)^2;
+print(`output redirected...`); # input placeholder
+                                         2
+                                   cos(x) 
+> int(f, x);
+print(`output redirected...`); # input placeholder
+                            1                 1  
+                            - cos(x) sin(x) + - x
+                            2                 2  
+> int(f, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                    1   
+                                    - Pi
+                                    2   
+> f1 := cos(x)^4*cos(3*x);
+print(`output redirected...`); # input placeholder
+                                    4         
+                              cos(x)  cos(3 x)
+> int(f1, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                      0
+> f2 := cos(x)^7;
+print(`output redirected...`); # input placeholder
+                                         7
+                                   cos(x) 
+> int(f2, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                      0
+> f3 := cos(x)^5;
+print(`output redirected...`); # input placeholder
+                                         5
+                                   cos(x) 
+> int(f3, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                      0
+> f4 := cos(x)^5*cos(3*x);
+print(`output redirected...`); # input placeholder
+                                    5         
+                              cos(x)  cos(3 x)
+> int(f4, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                    5    
+                                    -- Pi
+                                    32   
+> f5 := cos(x)^5*cos(4*x);
+print(`output redirected...`); # input placeholder
+                                    5         
+                              cos(x)  cos(4 x)
+> int(f5, [x = 0 .. Pi]);
+print(`output redirected...`); # input placeholder
+                                      0

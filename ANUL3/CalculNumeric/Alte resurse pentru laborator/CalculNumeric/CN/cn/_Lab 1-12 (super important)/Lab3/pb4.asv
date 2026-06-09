@@ -1,0 +1,4 @@
+r = 1:20;
+% construieste radacinile polinomului cu n = 20
+c = poly(r); % polinomul cu radacinile r
+r1 = roots(c) %radacinile polinomului c

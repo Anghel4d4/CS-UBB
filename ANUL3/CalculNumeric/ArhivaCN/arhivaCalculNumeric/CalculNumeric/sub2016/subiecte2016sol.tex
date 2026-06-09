@@ -1,0 +1,493 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Thursday, May 19, 2016 00:31:09}
+%TCIDATA{LastRevised=Sunday, May 22, 2016 21:06:52}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Setul 1}
+
+\begin{problem}
+Pentru func\c{t}ia $f:\mathbb{R\rightarrow R}$, $f(x)=\cos\frac{\pi}{2}x$
+\c{s}i diviziunea $\Delta:x_{1}=-1<x_{2}=0<x_{3}=1$, determina\c{t}i spline-ul
+natural de interpolare. (5p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](3p) Pe por\c{t}iuni:
+\begin{align*}
+p_{1}(x) &  =f(-1)+b_{1}(x+1)+c_{1}(x+1)^{2}+d_{1}(x+1)^{3}~\\
+p_{2}(x) &  =f(0)+b_{2}x+c_{2}x^{2}+d_{2}x^{3}%
+\end{align*}
+Condi\c{t}ii: Condi\c{t}ii de netezime%
+\begin{align*}
+p_{1}(0) &  =p_{2}(0)\\
+p_{1}^{\prime}(0) &  =p_{2}^{\prime}(0)\\
+p_{1}^{\prime\prime}(0) &  =p_{2}^{\prime\prime}(0)
+\end{align*}
+
+
+Condi\c{t}ii de spline natural%
+\begin{align*}
+p_{1}^{\prime\prime}(-1)  &  =0\\
+p_{2}^{\prime\prime}(1)  &  =0
+\end{align*}
+Interpolare \^{\i}n 1: $p_{2}(1)=f(1)=0$. 
+
+(1p) Se ob\c{t}ine sistemul%
+\begin{align*}
+b_{1}+c_{1}+d_{1}  &  =1\\
+b_{1}+2c_{1}+3d_{1}  &  =b_{2}\\
+2c_{1}+6d_{1}  &  =2c_{2}\\
+2c_{1}  &  =0\\
+6d_{2}+2c_{2}]  &  =0\\
+1+b_{2}+c_{2}+d_{2}  &  =0
+\end{align*}
+(1p) Solu\c{t}iile: $\left[  b_{1}=\frac{3}{2},b_{2}=0,c_{1}=0,c_{2}=-\frac
+{3}{2},d_{1}=-\frac{1}{2},d_{2}=\frac{1}{2}\right]$. 
+
+Expresia spline-ului:%
+\[
+s(x)=\left\{
+\begin{array}
+[c]{cc}%
+\frac{3}{2}\left(  1+t\right)  -\frac{1}{2}(t+1)^{3}, & t\in\lbrack-1,0]\\
+1-\frac{3}{2}t^{2}+\frac{1}{2}t^{3}, & t\in(0,1].
+\end{array}
+\right.
+\]
+
+\end{proof}
+
+\begin{proof}
+[Solu\c{t}ie 2](1p) Pe intervalul $[x_{i},x_{i+1}],$ $s(x)=p_{i}%
+(x)=c_{i,0}+c_{i,1}(x-x_{i})+c_{i,2}(x-x_{i})^{2}+c_{i,3}(x-x_{i})^{3}$. Ca la
+curs not\u{a}m $s^{\prime}(x_{i})$ cu $m_{i}$. Avem $\Delta x_{1}=1$, $\Delta
+x_{2}=1$; $f[x_{1},x_{2}]=1$, $f[x_{2},x_{3}]=-1$. 
+
+(2p) Se ob\c{t}ine sistemul%
+\begin{align*}
+2m_{1}+m_{2}  &  =3\\
+m_{1}+4m_{2}+m_{3}  &  =0\\
+m_{2}+2m_{3}  &  =-3
+\end{align*}
+(1p) Solu\c{t}iile: $\left[  m_{1}=\frac{3}{2},m_{2}=0,m_{3}=-\frac{3}%
+{2}\right]  $. 
+
+(1p) Aplic\^{a}nd formulele pentru coeficien\c{t}i ob\c{t}inem%
+\[%
+\begin{array}
+[c]{cc}%
+c_{1,0}=0, & c_{2,0}=1\\
+c_{1,1}=\frac{3}{2}, & c_{2,1}=0\\
+c_{1,2}=0, & c_{2,2}=-\frac{3}{2}\\
+c_{1,3}=-\frac{1}{2}, & c_{2,3}=\frac{1}{2}%
+\end{array}
+\]
+
+\end{proof}
+
+\begin{problem}
+Fie $a>0$. Pornind de la o ecua\c{t}ie convenabil\u{a} \c{s}i folosind metoda
+lui Newton, deduce\c{t}i o metod\u{a} pentru aproximarea lui $\frac{1}%
+{\sqrt{a}}$ f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri. Cum se alege valoarea de
+pornire? Care este criteriul de oprire? Deduce\c{t}i de aici o metod\u{a}
+pentru calculul lui $\sqrt{a}$ f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri. (4p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](1p) Pornim de la ecua\c{t}ia $f(x)=\frac{1}{x^{2}}-a=0$. 
+
+(1p) Se ob\c{t}ine itera\c{t}ia
+\[
+\varphi(x)=x-\frac{\frac{1}{x^{2}}-a}{\frac{d}{dx}\left(  \frac{1}{x^{2}%
+}-a\right)  }=\allowbreak x-\frac{1}{2}x^{3}\left(  a-\frac{1}{x^{2}}\right)
+=\frac{1}{2}x\left(  3-ax^{2}\right)
+\]
+sau%
+\[
+x_{n+1}=\frac{1}{2}x_{n}\left(  3-ax_{n}^{2}\right)  .
+\]
+(0.5p) Criteriul de oprire: $|x_{n+1}-x_{n}|<\varepsilon$. 
+
+(1p) Alegerea
+valorii de pornire: $\frac{d}{dx}\left(  \frac{1}{x^{2}}-a\right)
+=\allowbreak-\frac{2}{x^{3}}<0$, pentru $x>0$; $\frac{d^{2}}{dx^{2}}\left(
+\frac{1}{x^{2}}-a\right)  =\allowbreak\frac{6}{x^{4}}>0$, pentru $x>0$. Deci
+orice valoare $x_{0}>0$ se poate lua ca valoare de pornire. 
+
+(0.5p) Pentru
+calculul lui $\sqrt{a}$ f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri: $\sqrt{a}%
+=a\frac{1}{\sqrt{a}}$.
+\end{proof}
+
+\section*{Setul 2}
+
+\begin{problem}
+Pentru func\c{t}ia $f:\mathbb{R\rightarrow R}$, $f(x)=\sin\frac{\pi}{2}x$
+\c{s}i diviziunea $\Delta:x_{1}=-1<x_{2}=0<x_{3}=1$, determina\c{t}i spline-ul
+complet de interpolare. (5p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](3p) Pe por\c{t}iuni:
+\begin{align*}
+p_{1}(x)  &  =f(-1)+b_{1}(x+1)+c_{1}(x+1)^{2}+d_{1}(x+1)^{3}~\\
+p_{2}(x)  &  =f(0)+b_{2}x+c_{2}x^{2}+d_{2}x^{3}%
+\end{align*}
+Conditii :Condi\c{t}ii de netezime%
+\begin{align*}
+p_{1}(0)  &  =p_{2}(0)\\
+p_{1}^{\prime}(0)  &  =p_{2}^{\prime}(0)\\
+p_{1}^{\prime\prime}(0)  &  =p_{2}^{\prime\prime}(0)
+\end{align*}
+
+
+Condi\c{t}ii de spline complet%
+\begin{align*}
+p_{1}^{\prime}(-1)  &  =f^{\prime}(-1)\\
+p_{2}^{\prime}(1)  &  =f^{\prime}(1)
+\end{align*}
+Interpolare \^{\i}n 1: $p_{2}(1)=f(1)=1$. 
+
+(1p) Se ob\c{t}ine sistemul%
+\begin{align*}
+-1+b_{1}+c_{1}+d_{1}  &  =0\\
+b_{1}+2c_{1}+3d_{1}  &  =b_{2}\\
+2c_{1}+6d_{1}  &  =2c_{2}\\
+b_{1}  &  =0\\
+3d_{2}+2c_{2}+b_{2}  &  =0\\
+b_{2}+c_{2}+d_{2}  &  =1
+\end{align*}
+(1p) Solu\c{t}iile: $\left[  b_{1}=0,b_{2}=\frac{3}{2}%
+,c_{1}=\frac{3}{2},c_{2}=0,d_{1}=-\frac{1}{2},d_{2}=-\frac{1}{2}\right]
+\allowbreak$ . Expresia spline-ului:%
+\[
+s(x)=\left\{
+\begin{array}
+[c]{cc}%
+-1+\frac{3}{2}(t+1)^{2}-\frac{1}{2}(t+1)^{3}, & t\in\lbrack-1,0]\\
+\frac{3}{2}t-\frac{1}{2}t^{3}, & t\in(0,1].
+\end{array}
+\right.
+\]
+
+\end{proof}
+
+\begin{proof}
+[Solu\c{t}ie 2](1p) Pe intervalul $[x_{i},x_{i+1}],$ $s(x)=p_{i}%
+(x)=c_{i,0}+c_{i,1}(x-x_{i})+c_{i,2}(x-x_{i})^{2}+c_{i,3}(x-x_{i})^{3}$. Ca la
+curs not\u{a}m $s^{\prime}(x_{i})$ cu $m_{i}$. Avem $\Delta x_{1}=1$, $\Delta
+x_{2}=1$; $f[x_{1},x_{2}]=1$, $f[x_{2},x_{3}]=1$. 
+
+(2p) Se ob\c{t}ine sistemul%
+\begin{align*}
+m_{1}  &  =0\\
+m_{1}+4m_{2}+m_{3}  &  =6\\
+m_{3}  &  =0
+\end{align*}
+(1p) Solu\c{t}iile: $\left[  m_{1}=0,m_{2}=\frac{3}{2},m_{3}=0\right]  $. (1p)
+Aplic\^{a}nd formulele pentru coeficien\c{t}i ob\c{t}inem%
+\[%
+\begin{array}
+[c]{cc}%
+c_{1,0}=-1, & c_{2,0}=0\\
+c_{1,1}=0, & c_{2,1}=\frac{3}{2}\\
+c_{1,2}=\frac{3}{2}, & c_{2,2}=0\\
+c_{1,3}=-\frac{1}{2}, & c_{2,3}=-\frac{1}{2}%
+\end{array}
+\]
+
+\end{proof}
+
+\begin{problem}
+Fie $a>0$. Pornind de la o ecua\c{t}ie convenabil\u{a} \c{s}i folosind metoda
+lui Newton, deduce\c{t}i o metod\u{a} pentru aproximarea lui $\frac{1}{a}$
+f\u{a}r\u{a} \^{\i}mp\u{a}r\c{t}iri. Cum se alege valoarea de pornire? Care
+este criteriul de oprire? Cum ve\c{t}i proceda pentru o implementare
+eficient\u{a} \^{\i}n virgul\u{a} flotant\u{a}? (4p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](1p) Pornim de la ecua\c{t}ia $f(x)=\frac{1}{x}-a=0$. 
+
+(1p) Itera\c{t}ia
+\[
+\varphi(x):=x-\frac{\frac{1}{x}-a}{\frac{d}{dx}\left(  \frac{1}{x}-a\right)
+}=x-x^{2}\left(  a-\frac{1}{x}\right)  =x\left(  2-ax\right)
+\]
+sau $x_{n+1}=x_{n}\left(  2-ax_{n}\right)  $.
+
+(0.5p) Criteriul de oprire: $|x_{n+1}-x_{n}|<\varepsilon$. (1p) Alegerea
+valorii de pornire:
+\[
+|x_{n}-1/a|<a\left(  \frac{1}{a}-x_{n-1}\right)  ^{2}<\cdots<\frac{1}%
+{a^{2^{n}-1}}\left(  \frac{1}{a}-x_{0}\right)  ^{2^{n}}%
+\]
+$(x_{n})$ covergent $\Longleftrightarrow0<ax_{0}<2$. 
+
+(0.5p) $x_{0}=\frac{3}{2}%
+$, maxim 5 itera\c{t}ii, $(2^{e}f)^{-1}=2^{-e}(1/f)$
+\end{proof}
+
+\section*{Setul 3}
+
+\begin{problem}
+Se consider\u{a} ecua\c{t}ia $f(x)=xe^{x}-1=0$. Dorim s\u{a} o rezolv\u{a}m
+aplic\^{a}nd metoda aproxima\c{t}iilor succesive, rezolv\^{a}nd problema de
+punct fix $x=F(x)$ \^{\i}n dou\u{a} moduri
+
+\begin{enumerate}
+\item[(a)] $F(x)=e^{-x}$
+
+\item[(b)] $F(x)=\frac{1+x}{1+e^{x}}$.
+\end{enumerate}
+
+Ar\u{a}ta\c{t}i c\u{a} \^{\i}n ambele cazuri itera\c{t}iile $x_{k}=F(x_{k})$
+sunt convergente, determina\c{t}i ordinul de convergen\c{t}\u{a} \c{s}i
+num\u{a}rul de itera\c{t}ii necesare pentru a ob\c{t}ine precizia
+$\varepsilon=10^{-10}$. (6p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] (2p) $x=e^{-x}$, Solutia: $\left\{  \left[  \alpha
+=0.567\,14\right]  \right\}  $. $F^{\prime}(x)=\left\vert \exp(-x)\right\vert
+<1$, pentru $x>0$. Deoarece $F^{\prime}(\alpha)\neq0$, $ordF=1$. 
+
+(0.5 p)
+Num\u{a}rul de itera\c{t}ii: din teorema de punct fix a lui Banach%
+\[
+\left\vert x_{n+1}-\alpha\right\vert <\frac{c^{n}}{1-c}|x_{1}-x_{0}%
+|<\varepsilon
+\]
+unde $c=\max\{|F^{\prime}(x)|,x\in I_{\varepsilon}\}$. Se ob\c{t}ine
+\[
+n=\left[  \frac{\ln(\varepsilon)+\ln(1-c)-\ln|x_{1}-x_{0}|}{\ln c}\right]
++1.
+\]
+De exemplu, pentru $x_{0}=0.2$ \c{s}i $\varepsilon=10^{-10}$ sunt necesare 122
+de itera\c{t}ii.
+
+\item[(b)] (3p) $F^{\prime}(x)=\frac{d}{dx}\left(  \frac{1+x}{1+e^{x}}\right)
+=\allowbreak-\frac{xe^{x}-1}{\left(  e^{x}+1\right)  ^{2}}$; $F^{\prime
+}(\alpha)=0$ c\u{a}ci $f(\alpha)=0$. $F^{\prime\prime}(x)=\frac{d^{2}}{dx^{2}%
+}\left(  \frac{1+x}{1+e^{x}}\right)  =\allowbreak-\frac{e^{x}}{\left(
+e^{x}+1\right)  ^{3}}\left(  x+e^{x}-xe^{x}+3\right)  =\allowbreak-\frac
+{e^{x}}{\left(  e^{x}+1\right)  ^{3}}\left(  x+e^{x}-xe^{x}+3\right)  $. Dar,
+$F^{\prime\prime}(\alpha)=-\frac{e^{\alpha}}{\left(  e^{\alpha}+1\right)
+^{3}}(\alpha+e^{\alpha}+2)\neq0$, deoarece $\alpha\exp(\alpha)=1$. $ordF=2$.
+\textbf{Altfel}: Newton aplicat\u{a} ecua\c{t}iei $f(x)=x-e^{-x}=0$. 
+
+(0.5p)
+Num\u{a}rul de itera\c{t}ii: Deoarece ordinul de convergen\c{t}\u{a} este 2
+pornim de la rela\c{t}ia de recuren\c{t}\u{a}%
+\[
+e_{n+1}\approx ce_{n}^{2}.
+\]
+Se ob\c{t}ine
+\begin{align*}
+e_{n+1}  &  \approx ce_{n}^{2}=c^{1+2}e_{n-1}^{2^{2}}=c^{1+2+\cdots+2^{n-1}%
+}e_{0}^{2^{n}}=c^{2^{n}-1}e_{0}^{2^{n}}\\
+&  =\frac{1}{c}\left(  ce_{0}\right)  ^{2^{n}}<\varepsilon\Longrightarrow
+\left(  ce_{0}\right)  ^{2^{n}}<c\varepsilon
+\end{align*}
+$n$ se ob\c{t}ine prin logaritmare%
+\[
+n=\frac{1}{\ln2}\ln\frac{\ln c+\ln\varepsilon}{\ln c+\ln\left\vert
+e_{0}\right\vert }.
+\]
+De exemplu, pentru $x_{0}=0.4$, avem $e_{0}\approx0.18$ \c{s}i avem nevoie cam
+de 3 itera\c{t}ii.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Fie $f\in C^{4}[-1,1]$. Determina\c{t}i un polinom de interpolare $P$ de grad
+minim care verific\u{a} condi\c{t}iile
+\[
+P(-1)=f(-1),~P^{\prime}(-1)=f^{\prime}(-1),~P(0)=f(0),~P(1)=f(1)
+\]
+\c{s}i determina\c{t}i expresia restului.(3p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](1.5p) Folosim metoda diferen\c{t}elor divizate: $x_{0}:=-1$,
+$r_{0}=1$, $x_{1}=0$, $r_{0}=0$, $x_{2}=1$, $r_{2}=0$. Gradul polinomului este
+$n=\sum(r_{i}+1)-1=3$. Tabela diferen\c{t}elor divizate%
+
+\begin{tabular}
+[c]{r|cccc}
+& $D^{0}$ & $D^{1}$ & $D^{2}$ & $D^{3}$\\\hline
+$-1$ & \multicolumn{1}{|l}{$f(-1)$} & \multicolumn{1}{l}{$f^{\prime}(-1)$} &
+\multicolumn{1}{l}{$f(0)-f(-1)-f^{\prime}(-1)$} & \multicolumn{1}{l}{$\frac
+{f(1)-4f(0)+3f(-1)+2f^{\prime}(-1)}{4}$}\\
+$-1$ & \multicolumn{1}{|l}{$f(-1)$} & \multicolumn{1}{l}{$f(0)-f(-1)$} &
+\multicolumn{1}{l}{$\frac{f(1)-2f(0)+f(-1)}{2}$} & \multicolumn{1}{l}{}\\
+$0$ & \multicolumn{1}{|l}{$f(0)$} & \multicolumn{1}{l}{$f(1)-f(0)$} &
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{}\\
+$1$ & \multicolumn{1}{|l}{$f(1)$} & \multicolumn{1}{l}{} &
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{}%
+\end{tabular}
+
+
+(0.5p) Polinomul de interpolare%
+\begin{align*}
+\left(  H_{3}f\right)  (x)  &  =f(-1)+(t+1)f^{\prime}(-1)+(t+1)^{2}\left[
+f(0)-f(-1)-f^{\prime}(-1)\right] \\
+&  +(t+1)^{2}t\left[  \frac{f(1)-4f(0)+3f(-1)+2f^{\prime}(-1)}{4}\right]
+\end{align*}
+(1p) Restul%
+\[
+\left(  R_{3}f\right)  (x)=\frac{(t+1)^{2}t(t-1)}{4!}f^{(4)}(\xi).
+\]
+
+\end{proof}
+
+\section*{Setul 4}
+
+\begin{problem}
+(6p) Pentru a rezolva ecua\c{t}ia $f(x)=0$ se aplic\u{a} metoda lui Newton
+func\c{t}iei $g(x)=\frac{f(x)}{\sqrt{f^{\prime}(x)}}$.
+
+\begin{enumerate}
+\item[(a)] Scrie\c{t}i formula iterativ\u{a} care se ob\c{t}ine \c{s}i
+determina\c{t}i ordinul de convergen\c{t}\u{a}.
+
+\item[(b)] Aplica\c{t}i metoda de la punctul (a) pentru a aproxima $\sqrt{a}$,
+$a>0$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] (2p)%
+\begin{align*}
+\varphi(x) &  =x-\frac{g(x)}{g^{\prime}(x)}=x-\frac{\frac{f(x)}{\sqrt
+{f^{\prime}(x)}}}{\left(  \frac{f(x)}{\sqrt{f^{\prime}(x)}}\right)  ^{\prime}%
+}\\
+&  =x-\frac{f(x)}{f^{\prime}(x)-\frac{1}{2}\frac{f(x)f^{\prime\prime}%
+(x)}{f^{\prime}(x)}}=x-\frac{f(x)}{f^{\prime}(x)\left[  1-\frac{f(x)f^{\prime
+\prime}(x)}{2f^{\prime2}(x)}\right]  }.
+\end{align*}
+adic\u{a},%
+\begin{equation}
+x_{n+1}=x_{n}-\frac{f(x_{n})}{f^{\prime}(x_{n})-\frac{1}{2}\frac
+{f(x_{n})f^{\prime\prime}(x_{n})}{f^{\prime}(x_{n})}}\label{fHalley}%
+\end{equation}
+(2p) Ordinul de convergen\c{t}\u{a}: Fie $\alpha$ r\u{a}d\u{a}cina lui
+$f(x)=0$. Se observ\u{a} c\u{a} $\varphi(\alpha)=\alpha$ \c{s}i c\u{a}
+\begin{align*}
+\varphi^{\prime}(\alpha) &  =-{\frac{f^{2}\left(  \alpha\right)  \left[
+2\,f^{\prime\prime\prime}\left(  \alpha\right)  f^{\prime}\left(
+\alpha\right)  -3\,\left(  f^{\prime\prime}\left(  \alpha\right)  \right)
+^{2}\right]  }{\left[  2\,f^{\prime}\left(  \alpha\right)  ^{2}-f\left(
+\alpha\right)  f^{\prime\prime}\left(  \alpha\right)  \right]  ^{2}}=0}\\
+\varphi^{\prime\prime}(\alpha) &  =-2\,{\frac{f\left(  \alpha\right)
+G(x)}{\left[  2\,\left(  f^{\prime}\left(  \alpha\right)  \right)
+^{2}-f\left(  \alpha\right)  f^{\prime\prime}\left(  \alpha\right)  \right]
+^{3}}=0}\\
+\varphi^{\prime\prime\prime}(\alpha) &  ={\frac{-2\,f^{\prime\prime\prime
+}\left(  \alpha\right)  f^{\prime}\left(  \alpha\right)  +3\,\left(
+f^{\prime\prime}\left(  \alpha\right)  \right)  ^{2}}{3f^{\prime2}\left(
+\alpha\right)  }\neq0,}%
+\end{align*}
+deci dac\u{a} r\u{a}d\u{a}cina este simpl\u{a} ordinul de convergen\c{t}\u{a}
+este $p=3$, dar putem avea $p>3$ dac\u{a}%
+\[
+{\frac{-2\,f^{\prime\prime\prime}\left(  \alpha\right)  f^{\prime}\left(
+\alpha\right)  +3\,\left(  f^{\prime\prime}\left(  \alpha\right)  \right)
+^{2}}{3f^{\prime2}\left(  \alpha\right)  }}=0
+\]
+
+
+\item[(b)] (2p) Aleg\^{a}nd $f(x)=x^{2}-a$, din (\ref{fHalley}) se ob\c{t}ine%
+\[
+x_{n+1}=\frac{x_{n}\left(  x_{n}^{2}+3a\right)  }{3x_{n}^{2}+a}.
+\]
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Fie $f\in C^{4}[-1,1]$. Determina\c{t}i un polinom de interpolare $P$ de grad
+minim care verific\u{a} condi\c{t}iile
+\[
+P(-1)=f(-1),~~P(0)=f(0),~P(1)=f(1),P^{\prime}(1)=f^{\prime}(1).
+\]
+\c{s}i determina\c{t}i expresia restului. (3p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie](1.5p) Folosim metoda diferen\c{t}elor divizate: $x_{0}:=-1$,
+$r_{0}=0$, $x_{1}=0$, $r_{0}=0$, $x_{2}=1$, $r_{2}=1$. Gradul polinomului este
+$n=\sum(r_{i}+1)-1=3$. Tabela diferen\c{t}elor divizate%
+
+\begin{tabular}
+[c]{r|cccc}
+& $D^{0}$ & $D^{1}$ & $D^{2}$ & $D^{3}$\\\hline
+$-1$ & \multicolumn{1}{|l}{$f(-1)$} & \multicolumn{1}{l}{$f(0)-f(-1)$} &
+\multicolumn{1}{l}{$\frac{f(1)-2f(0)+f(-1)}{2}$} & \multicolumn{1}{l}{$\frac
+{2f^{\prime}(1)-3f(1)+4f(0)-f(-1)}{4}$}\\
+$0$ & \multicolumn{1}{|l}{$f(0)$} & \multicolumn{1}{l}{$f(1)-f(0)$} &
+\multicolumn{1}{l}{$f^{\prime}(1)-f(1)+f(0)$} & \multicolumn{1}{l}{}\\
+$1$ & \multicolumn{1}{|l}{$f(1)$} & \multicolumn{1}{l}{$f^{\prime}(1)$} &
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{}\\
+$1$ & \multicolumn{1}{|l}{$f(1)$} & \multicolumn{1}{l}{} &
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{}%
+\end{tabular}
+
+
+(0.5p) Polinomul de interpolare%
+\begin{align*}
+\left(  H_{3}f\right)  (x)  &  =f(-1)+(t+1)\left[  f(0)-f(-1)\right]
++(t+1)t\left[  \frac{f(1)-2f(0)+f(-1)}{2}\right] \\
+&  +(t+1)t(t-1)\left[  \frac{2f^{\prime}(1)-3f(1)+4f(0)-f(-1)}{4}\right]  .
+\end{align*}
+(1p) Restul%
+\[
+\left(  R_{3}f\right)  (x)=\frac{(t+1)t(t-1)^{2}}{4!}f^{(4)}(\xi).
+\]
+
+\end{proof}
+
+
+\end{document} 

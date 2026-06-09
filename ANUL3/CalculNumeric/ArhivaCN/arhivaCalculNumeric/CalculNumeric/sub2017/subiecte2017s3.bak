@@ -1,0 +1,245 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Thursday, June 08, 2017 12:02:06}
+%TCIDATA{LastRevised=Thursday, June 08, 2017 20:33:25}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section{Subiectul 5}
+
+\begin{problem}
+\label{Gautschip4.31}Ecua\c{t}ia urm\u{a}toare se folose\c{s}te \^{\i}n
+inginerie la determinarea vitezelor unghiulare critice pentru axe circulare:%
+\[
+f(x)=0,\quad f(x)=\tan x+\tanh x,~x>0.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i c\u{a} are o infinitate de r\u{a}d\u{a}cini
+pozitive, exct c\^{a}te una, $\alpha_{n}$, \^{\i}n fiecare interval de forma
+$\left[  \left(  n-\frac{1}{2}\right)  \pi,n\pi\right]  $, $n=1,2,3,\dots$ (1p)
+
+\item[(b)] Determina\c{t}i $\lim_{n\rightarrow\infty}\left(  n\pi-\alpha
+_{n}\right)  $. (1p)
+
+\item[(c)] Discuta\c{t}i convergen\c{t}a metodei lui Newton dac\u{a} se
+porne\c{s}te cu $x_{0}=n\pi$. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+
+
+\begin{enumerate}
+\item[(a)] Stabili\c{t}i o formul\u{a} de cuadratur\u{a} cu dou\u{a} noduri
+\c{s}i cu grad maxim de exactitate
+\[
+\int_{0}^{1}\sqrt{x}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}f(x_{2})+R(f)
+\]
+reduc\^{a}nd cuadratura la o cuadratur\u{a} de tip Gauss-Jacobi. (3p)
+
+\item[(b)] Folosind ideea de la (a), calcula\c{t}i
+\[
+\int_{0}^{1}\frac{\cos x}{\sqrt{x}}\mathrm{d}\,x
+\]
+cu 8 zecimale exacte (2p)
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section{Subiectul 6}
+
+\begin{problem}
+\label{Gautschip4.41}Ecua\c{t}ia $f(x)=x^{2}-3x+2=0$ are r\u{a}d\u{a}cinile 1
+\c{s}i 2. Scris\u{a} sub forma de punct fix, $x=\frac{1}{\omega}\left[
+x^{2}-\left(  3-\omega\right)  x+2\right]  $, $\omega\neq0$, sugereaz\u{a}
+itera\c{t}ia%
+\[
+x_{n+1}=\frac{1}{\omega}\left[  x_{n}^{2}-\left(  3-\omega\right)
+x_{n}+2\right]  ,\quad n=1,2,\dots~(\omega\neq0)
+\]
+
+
+\begin{enumerate}
+\item[(a)] Determina\c{t}i un interval pentru $\omega$ astfel ca pentru orice
+$\omega$ din acest interval procesul iterativ s\u{a} convearg\u{a} c\u{a}tre 1
+(c\^{a}nd $x_{0}\neq1$ este ales adecvat). (1p)
+
+\item[(b)] Face\c{t}i acela\c{s}i lucru ca la (a), dar pentru r\u{a}d\u{a}cina
+2 (\c{s}i $x_{0}\neq2$). (1p)
+
+\item[(c)] Pentru ce valori ale lui $\omega$ itera\c{t}ia converge
+p\u{a}tratic c\u{a}tre 1? (1p)
+
+\item[(d)] Interpreta\c{t}i algoritmul de la (c) ca o aplicare a metodei lui
+Newton pentru o ecua\c{t}ie $F(x)=0$ \c{s}i determina\c{t}i $F$. Pentru ce
+valori in\c{t}iale $x_{0}$ metoda este convergent\u{a}? (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+
+
+\begin{enumerate}
+\item[(a)] Stabili\c{t}i o formul\u{a} de cuadratur\u{a} cu dou\u{a} noduri
+\c{s}i cu grad maxim de exactitate
+\[
+\int_{0}^{1}\frac{f(x)}{\sqrt{x}}\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}%
+f(x_{2})+R(f)
+\]
+reduc\^{a}nd cuadratura la o cuadratur\u{a} de tip Gauss-Legendre. (2p)
+
+\item[(b)] Folosind ideea de la (a), calcula\c{t}i
+\[
+\int_{0}^{1}\frac{\cos x}{\sqrt{x}}\mathrm{d}\,x
+\]
+cu 8 zecimale exacte (2p).
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section{Subiectul 7}
+
+\begin{problem}
+\label{Gautschip2.73}Fie $\Delta:$ $a=x_{1}<x_{2}<x_{3}<\dots<x_{n-1}<x_{n}=b$
+o diviziune a intervalului $[a,b]$ cu $n-1$ subintervale. Presupunem c\u{a} se
+dau valorile $f_{i}=f(x_{i})$ ale unei func\c{t}ii $f(x)$ \^{\i}n punctele
+$x=x_{i}$ , $i=1,2,\dots,n$. \^{I}n aceast\u{a} problem\u{a} $s$ $\in$
+$\mathbb{S}_{2}^{1}(\Delta)$ este un spline p\u{a}tratic din $C^{1}[a,b]$ care
+interpoleaz\u{a} $f$ pe $\Delta$, adic\u{a}, $s(x_{i})=f_{i}$, $i=1,2,\dots,n$.
+
+\begin{enumerate}
+\item[(a)] Explica\c{t}i de ce este necesar\u{a} o condi\c{t}ie
+suplimentar\u{a} pentru a determina pe $s$ unic. (1p)
+
+\item[(b)] Definim $m_{i}=s^{\prime}(x_{i})$, $i=1,2,\dots,n-1$.
+Determina\c{t}i $p_{i}$ $=\left.  s\right\vert _{[x_{i},x_{i+1}]}$,
+$i=1,2,\dots,n-1$, \^{\i}n func\c{t}ie de $f_{i}$, $f_{i+1}$ \c{s}i $m_{i}$. (1p)
+
+\item[(c)] Presupunem c\u{a} lu\u{a}m $m_{1}=f^{\prime}(a)$. (Conform lui (a),
+aceasta determin\u{a} $s$ \^{\i}n mod unic.) Ar\u{a}ta\c{t}i cum se poate
+calcula $m_{2}$, $m_{3}$, $\dots$, $m_{n-1}$. (1p)
+
+\item[(d)] Implementa\c{t}i metoda de calcul a spline-ului de la (a), (b), (c)
+\^{\i}n MATLAB. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+\label{pb4.37} 
+
+\begin{enumerate}
+
+
+\item[(a)] Fie $w(t)$ o func\c{t}ie pondere par\u{a} pe $[a,b]$, $a<b$,
+$a+b=0$, adic\u{a} $w(-t)=w(t)$ pe $[a,b]$. Ar\u{a}ta\c{t}i c\u{a}
+$(-1)^{n}\pi_{n}(-t;w)=\pi_{n}(t,w)$, adic\u{a} polinomul ortogonal monic de
+grad $n$ \^{\i}n raport cu ponderea $w$ este par (impar) dac\u{a} $n$ este par (impar).
+
+\item[(b)] Ar\u{a}ta\c{t}i c\u{a} formula gaussian\u{a}
+\[
+\int_{a}^{b}f(t)w(t)dt=\sum_{\nu=1}^{n}A_{\nu}f(t_{\nu})+R_{n}(f),
+\]
+pentru o pondere $w$ par\u{a} este simetric\u{a}, i.e.
+\[
+t_{n+1-\nu}=-t_{\nu},\qquad A_{n+1-\nu}=A_{\nu},~\nu=1,\dots,n.
+\]
+
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} gaussian\u{a} de forma%
+\[
+\int_{-\infty}^{\infty}e^{-|x|}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}%
+f(x_{2})+A_{3}f(x_{3})+R(f).
+\]
+Folosi\c{t}i (a) \c{s}i (b) pentru a simplifica calculele. 
+\end{enumerate}
+\end{problem}
+
+\newpage
+
+\section{Subiectul 8}
+
+\begin{problem}
+\label{Subbotinspline}Presupunem c\u{a} se d\u{a} diviziunea $\Delta
+:a=t_{0}<t_{1}<\dots<t_{n}=b$ ; fie nodurile
+\begin{align*}
+\tau_{0}  &  =t_{0},~\tau_{n+1}=t_{n}\\
+\tau_{i}  &  =\frac{1}{2}\left(  t_{i}+t_{i-1}\right)  ,\quad i=1,\dots,n.
+\end{align*}
+Determina\c{t}i un spline p\u{a}tratic $Q\in S_{2}^{1}(\Delta)$ care \^{\i}n
+nodurile date ia ni\c{s}te valori prescrise:%
+\[
+Q(\tau_{i})=y_{i},\quad i=0,1,\dots,n.
+\]
+Implementa\c{t}i metoda de calcul a spline-ului \^{\i}n MATLAB.
+\end{problem}
+
+\begin{problem}
+\label{pb4.37b} 
+
+\begin{enumerate}
+
+
+\item[(a)] Fie $w(t)$ o func\c{t}ie pondere par\u{a} pe $[a,b]$, $a<b$,
+$a+b=0$, adic\u{a} $w(-t)=w(t)$ pe $[a,b]$. Ar\u{a}ta\c{t}i c\u{a}
+$(-1)^{n}\pi_{n}(-t;w)=\pi_{n}(t,w)$, adic\u{a} polinomul ortogonal monic de
+grad $n$ \^{\i}n raport cu ponderea $w$ este par (impar) dac\u{a} $n$ este par (impar).
+
+\item[(b)] Ar\u{a}ta\c{t}i c\u{a} formula gaussian\u{a}
+\[
+\int_{a}^{b}f(t)w(t)dt=\sum_{\nu=1}^{n}A_{\nu}f(t_{\nu})+R_{n}(f),
+\]
+pentru o pondere $w$ par\u{a} este simetric\u{a}, i.e.
+\[
+t_{n+1-\nu}=-t_{\nu},\qquad A_{n+1-\nu}=A_{\nu},~\nu=1,\dots,n.
+\]
+
+
+\item[(c)] Ob\c{t}ine\c{t}i o formul\u{a} gaussian\u{a} de forma%
+\[
+\int_{-1}^{1}\left\vert x\right\vert f(x)\mathrm{d}\,x=A_{1}f(x_{1}%
+)+A_{2}f(x_{2})+A_{3}f(x_{3})+R(f).
+\]
+Folosi\c{t}i (a) \c{s}i (b) pentru a simplifica calculele. 
+\end{enumerate}
+\end{problem}
+
+
+\end{document}

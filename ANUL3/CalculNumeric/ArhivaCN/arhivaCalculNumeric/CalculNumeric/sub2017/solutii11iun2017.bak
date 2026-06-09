@@ -1,0 +1,316 @@
+\documentclass[a4paper]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Friday, June 09, 2017 22:43:27}
+%TCIDATA{LastRevised=Sunday, June 11, 2017 10:45:42}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section*{Subiectul 9}
+
+\begin{problem}
+\label{pb4.35}
+
+\begin{enumerate}
+\item[(a)] Fie $\mathrm{d\,}\lambda$ o m\u{a}sur\u{a} simetric\u{a} pe
+$[-a,a]$, $0<a\leq\infty$ \c{s}i
+\[
+\pi_{2k}(t;\mathrm{d\,}\lambda)=\pi_{k}^{+}(t^{2}).
+\]
+Ar\u{a}ta\c{t}i c\u{a} $\{\pi_{k}^{+}\}$ sunt polinoame ortogonale monice pe
+$[0,a^{2}]$\ \^{\i}n raport cu m\u{a}sura $\mathrm{d\,}\lambda^{+}%
+(t)=t^{-1/2}w(t^{1/2})\mathrm{d\,}t$. (1p)
+
+\item[(b)] Aplica\c{t}i acest rezultat la calculul polinoamelor ortogonale pe
+$[0,1]$ \^{\i}n raport cu ponderea $w(t)=\frac{1}{\sqrt{t}}$. (1p)
+
+\item[(c)] Genera\c{t}i o formul\u{a} de cuadratur\u{a} de tip Gauss cu
+dou\u{a} noduri pentru aceast\u{a} pondere. (4p)\newline
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Deoarece%
+\begin{align*}
+0  & =\int_{-a}^{a}w(t)\pi_{2k}(t)\pi_{2j}(t)\mathrm{d}\,t=2\int_{0}%
+^{a}w(t)\pi_{k}^{+}(t^{2})\pi_{j}^{+}(t^{2})\mathrm{d}\,t\\
+& =2\int_{0}^{a^{2}}\frac{1}{2}\frac{w\left(  \sqrt{u}\right)  \pi_{k}%
+^{+}(u)\pi_{j}^{-}\left(  u\right)  }{\sqrt{u}}du,
+\end{align*}
+rezult\u{a} c\u{a} polinoamele $\left(  \pi_{n}^{+}\right)  $ sunt ortogonale
+pe $[0,a^{2}]$ \^{\i}n raport cu ponderea $w^{+}(t)=t^{-1/2}w(t^{1/2})$.
+
+\item[(b)] Polinoamele Legendre $\left(  \pi_{n}\right)  $ sunt ortogonale pe
+$[-1,1]$ \^{\i}n raport cu ponderea $w(t)=1$, deci $\left(  \pi_{n}%
+^{+}\right)  $ vor fi ortogonale pe [0,1] \^{\i}n raport cu $w^{+}(t)=\frac
+{1}{\sqrt{t}}$. Conform punctului (a), $\pi_{k}^{+}(u)$ se ob\c{t}ine din
+$\pi_{2k}(t)$ \^{\i}nlocuind $t^{2}=u$.
+\[
+\pi_{k}^{+}(u)=\left.  \pi_{2k}(t)\right\vert _{t^{2}=u}%
+\]
+
+
+\item[(c)] Calcul\u{a}m polinomul Legendre de grad 4%
+\[
+\pi_{4}(t)=t^{4}-\frac{6}{7}t^{2}+\frac{3}{35}.
+\]
+Polinomul c\u{a}utat $\pi_{2}^{+}$ se ob\c{t}ine \^{\i}nlocuint $t^{2}=u$
+\^{\i}n $\pi_{4}$%
+\[
+\pi_{2}^{+}(u)=u^{2}-\frac{6}{7}u+\frac{3}{35}.
+\]
+Nodurile sunt r\u{a}d\u{a}cinile lui $\pi_{2}^{+}$, $u_{1}=\frac{3}{7}%
+-\frac{2}{35}\sqrt{30}$ \c{s}i $u_{2}=\frac{3}{7}+\frac{2}{35}\sqrt{30}$.
+Coeficien\c{t}ii se ob\c{t}in din condi\c{t}iile%
+\begin{align*}
+A_{1}+A_{2}  & =\int_{0}^{1}\frac{1}{\sqrt{u}}\mathrm{d}\,u=2\\
+A_{1}u_{1}+A_{2}u_{2}  & =\int_{0}^{1}\frac{u}{\sqrt{u}}\mathrm{d}\,u=\frac
+{2}{3}%
+\end{align*}
+Rezolv\^{a}nd sistemul se ob\c{t}ine%
+\[
+A_{1}=1-\frac{1}{18}\sqrt{30},\quad A_{2}=1+\frac{1}{18}\sqrt{30}.
+\]
+Restul%
+\begin{align*}
+R(f)  & =\frac{f^{(4)}(\xi)}{4!}\int_{0}^{1}\frac{1}{\sqrt{u}}\left(  \pi
+_{2}^{+}(u)\right)  ^{2}\mathrm{d}\,u=\frac{f^{(4)}(\xi)}{4!}\int_{0}^{1}%
+\frac{1}{\sqrt{u}}\left(  u^{2}-\frac{6}{7}u+\frac{3}{35}\right)
+^{2}\mathrm{d}\,u\\
+& =\frac{16}{33\,075}f^{(4)}(\xi)
+\end{align*}
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+\label{Gautschip4.27}Consider\u{a}m ecua\c{t}iile echivalente%
+\[
+(A)~x\ln x-1=0;\quad(B)~\ln x-\frac{1}{x}=0.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i c\u{a} au exact o r\u{a}d\u{a}cin\u{a} pozitiv\u{a}
+\c{s}i determina\c{t}i un interval care o con\c{t}ine. (1p)
+
+\item[(b)] At\^{a}t pentru (A) c\^{a}t \c{s}i pentru (B), determina\c{t}i cel
+mai mare interval pe care metoda lui Newton converge. (\emph{Indica\c{t}ie}:
+studia\c{t}i convexitatea celor dou\u{a} func\c{t}ii care apar \^{\i}n
+ecua\c{t}ii.) (1p)
+
+\item[(c)] Care din cele dou\u{a} itera\c{t}ii converge asimptotic mai repede? (1p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Graficele lui $y=\ln x$ \c{s}i  $y=1/x$ se intersecteaz\u{a}
+\^{\i}n exact un punct cu abscisa cuprins\u{a} \^{\i}ntre 1 \c{s}i 2 (deoarece
+$\ln2>1/2$ ).
+
+\item[(b)] Fie $f(x)=x\ln x-1$. Avem $f^{\prime}(x)=\ln x+1$, $f^{\prime
+\prime}(x)=\frac{1}{x}$, deci $f$ este convex\u{a} pe $\mathbb{R}_{+}$. Pentru
+orice $x_{0}$ din intervalul $(0,e^{-1})$, deoarece $f$ este
+descresc\u{a}toare, metoda lui Newton produce un $x_{1}$ negativ,
+inacceptabil. Pe de alt\u{a} parte, datorit\u{a} convexit\u{a}\c{t}ii lui
+$f$, metoda lui Newton converge monoton descresc\u{a}tor (except\^{a}nd,
+eventual, primul pas) pentru orice $x_{0}\in(e^{-1},\infty)$. Fie $g(x)=\ln
+x-\frac{1}{x}$. Avem, $g^{\prime}(x)=x^{-2}(x+1)$, $g^{\prime\prime
+}(x)=-x^{-3}(x+2)$, deci $g$ este cresc\u{a}toare \c{s}i ia valori de la
+$-\infty$ la $+\infty$ \c{s} este concav\u{a} pe $\mathbb{R}+$. Pentru orice
+$x_{0}<\alpha$, metoda lui Newton va converge monoton cresc\u{a}tor. Dac\u{a}
+$x_{0}>\alpha$, trebuie s\u{a} ne asigur\u{a}m c\u{a}  $x_{1}>0$. Deoarece%
+\[
+x_{1}=x_{0}-\frac{\ln x_{0}-x_{0}^{-1}}{x_{0}^{-2}(x_{0}+1)}=x_{0}\frac
+{x_{0}+2-x_{0}\ln x_{0}}{x_{0}+1},
+\]
+trebuie s\u{a} avem $x_{0}+2-x_{0}\ln x_{0}>0$, adic\u{a}, $x_{0}<x_{\ast}$
+unde
+\[
+x_{\ast}\ln x_{\ast}-x_{\ast}-2=0.
+\]
+Aceasta are o solu\c{t}ie unic\u{a} \^{\i}ntre  4 \c{s}i 5, care se poate
+ob\c{t}ine cu metoda lui Newton. Rezultatul este  $x=4.319136566\dots.$
+
+\item[(c)] Constantele asimptotice de eroare sunt%
+\begin{align*}
+c_{f} &  =\left.  \frac{f^{\prime\prime}(x)}{2f^{\prime}(x)}\right\vert
+_{x=\alpha}=\left.  \frac{1}{2x\left(  \ln x+1\right)  }\right\vert
+_{x=\alpha}=\frac{1}{2\left(  \alpha+1\right)  }.\\
+c_{g} &  =\left.  \frac{g^{\prime\prime}(x)}{2g^{\prime}(x)}\right\vert
+_{x=\alpha}=-\frac{\alpha+2}{2\alpha(\alpha+1)}%
+\end{align*}
+Avem%
+\[
+\frac{c_{f}}{\left\vert c_{g}\right\vert }=\frac{1}{2\left(  \alpha+1\right)
+}\cdot\frac{2\alpha(\alpha+1)}{\alpha+2}=\frac{1}{1+\frac{2}{a}}.
+\]
+Deoarecece $1+\frac{2}{a}>2$, are loc $c_{f}<1/2|c_{g}|$, deci metoda lui
+Newton pentru (A) asimptotic mai repede cu un factor mai mare dec\^{a}t 2.
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+\section*{Subiectul 10}
+
+\begin{problem}
+\label{pb4.35b}
+
+\begin{enumerate}
+\item[(a)] Fie $\mathrm{d\,}\lambda$ o m\u{a}sur\u{a} simetric\u{a} pe
+$[-a,a]$, $0<a\leq\infty$ \c{s}i
+\[
+\pi_{2k+1}(t;\mathrm{d\,}\lambda)=t\pi_{k}^{-}(t^{2}).
+\]
+Ar\u{a}ta\c{t}i c\u{a} $\{\pi_{k}^{-}\}$ sunt polinoame ortogonale monice pe
+$[0,a^{2}]$\ \^{\i}n raport cu m\u{a}sura $\mathrm{d\,}\lambda^{-}%
+(t)=t^{+1/2}w(t^{1/2})\mathrm{d\,}t$. (1p)
+
+\item[(b)] Aplica\c{t}i acest rezultat la calculul polinoamelor ortogonale pe
+$[0,1]$ \^{\i}n raport cu ponderea $w(t)=\sqrt{t}$. (1p)
+
+\item[(c)] Genera\c{t}i o formul\u{a} de cuadratur\u{a} de tip Gauss cu
+dou\u{a} noduri pentru aceast\u{a} pondere. (4p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Deoarece%
+\begin{align*}
+0  & =\int_{-a}^{a}w(t)\pi_{2k+1}(t)\pi_{2j+1}(t)\mathrm{d}\,t=2\int_{0}%
+^{a}t^{2}\pi_{k}^{-}(t^{2})\pi_{j}^{-}\left(  t^{2}\right)  \mathrm{d}\,t\\
+& =2\int_{0}^{a^{2}}\frac{1}{2}\sqrt{u}w\left(  \sqrt{u}\right)  \pi_{k}%
+^{-}(u)\pi_{j}^{-}\left(  u\right)  \mathrm{d}\,u
+\end{align*}
+rezult\u{a} c\u{a} polinoamele $\left(  \pi_{n}^{-}\right)  $ sunt ortogonale
+pe $[0,a^{2}]$ \^{\i}n raport cu ponderea $w^{-}(t)=t^{1/2}w(t^{1/2})$.
+
+\item[(b)] Lu\^{a}n $a=-1$ \c{s}i $w(t)=1$, polinoamele ortogonale pe $[0,1]$
+\^{\i}n raport cu ponderea $w^{+}(t)=\sqrt{t}$ se ob\c{t}in din polinoamele
+Legendre: calcul\u{a}m $\pi_{2k+1}(t)/t$, \^{\i}nlocuim $t^{2}=u$ \c{s}i am
+ob\c{t}inut astfel $\pi_{k}^{-}(u)$%
+\[
+\pi_{k}^{-}(u)=\left.  \frac{\pi_{2k+1}(t)}{t}\right\vert _{t^{2}=u}%
+\]
+
+
+\item[(c)] Calcul\u{a}m polinomul Legendre de grad 5
+\[
+\pi_{5}(t)=t^{5}-\frac{10}{9}t^{3}+\frac{5}{21}t
+\]
+Polinomul ortogonal c\u{a}utat este%
+\[
+\pi_{2}^{-}(u)=u^{2}-\frac{10}{9}u+\frac{5}{21}.
+\]
+R\u{a}dacinile lui vor fi nodurile formulei de cuadratura $u_{1}=\frac{5}%
+{9}-\frac{2}{63}\sqrt{70}$, $u_{2}=\frac{5}{9}+\frac{2}{63}\sqrt{70}$.
+Coeficien\c{t}ii se ob\c{t}in din condi\c{t}iile%
+\begin{align*}
+A_{1}+A_{2}  & =\int_{0}^{1}\sqrt{u}\mathrm{d}\,u=\frac{2}{3}\\
+A_{1}u_{1}+A_{2}u_{2}  & =\int_{0}^{1}u\sqrt{u}\mathrm{d}\,u=\frac{2}{5}%
+\end{align*}
+Rezolv\^{a}nd sistemul se ob\c{t}ine%
+\[
+A_{1}=\frac{1}{3}-\frac{1}{150}\sqrt{70},\quad A_{2}=\frac{1}{3}+\frac{1}%
+{150}\sqrt{70}.
+\]
+Restul%
+\begin{align*}
+R(f)  & =\frac{f^{(4)}(\xi)}{4!}\int_{0}^{1}\sqrt{u}\left(  \pi_{2}%
+^{-}(u)\right)  ^{2}\mathrm{d}\,u=\frac{f^{(4)}(\xi)}{4!}\int_{0}^{1}\sqrt
+{u}\left(  u^{2}-\frac{10}{9}u+\frac{5}{21}\right)  ^{2}\mathrm{d}\,u\\
+& =\frac{16}{130\,977}f^{(4)}(\xi).
+\end{align*}
+: 
+\end{enumerate}
+
+
+\end{proof}
+
+\begin{problem}
+\label{Gautschip4.30}Ecua\c{t}ia
+\[
+\cos x\cosh x-1=0
+\]
+are exact dou\u{a} r\u{a}d\u{a}cini $\alpha_{n}$ $<\beta_{n}$ \^{\i}n fiecare
+interval $\left[  -\frac{\pi}{2}+2n\pi,\frac{\pi}{2}+2n\pi\right]  $,
+$n=1,2,3,\dots$ (1p) Ar\u{a}ta\c{t}i c\u{a} metoda lui Newton aplicat\u{a}
+aceste ecua\c{t}ii converge c\u{a}tre $\alpha_{n}$ c\^{a}nd se ia valoarea de
+pornire $x_{0}=-\frac{\pi}{2}+2n\pi$ (1p) \c{s}i c\u{a}tre $\beta_{n}$
+c\^{a}nd se ia valoarea de pornire $x_{0}=\frac{\pi}{2}+2n\pi$. (1p)
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]Avem%
+\begin{align*}
+f(x) &  =\cos x\cosh x-1\\
+f^{\prime}(x) &  =\cos x\sinh x-\sin x\cosh x\\
+f^{\prime\prime}(x) &  =-2\sin x\sinh x
+\end{align*}
+Observ\u{a}m c\u{a}  $f^{\prime\prime}(x)>0$ pe $\left[  -\frac{\pi}{2}%
++2n\pi,2n\pi\right]  $ \c{s}i $f^{\prime\prime}(x)<0$ pe $\left[  2n\pi
+,\frac{\pi}{2}+2n\pi\right]  $. Mai mult, $f\left(  -\frac{\pi}{2}%
++2n\pi\right)  =f\left(  \frac{\pi}{2}+2n\pi\right)  =-1$ \c{s}i
+$f(2n\pi)=\cosh(2n\pi)>1$. Deoarece $f$ este convex\u{a} pe jum\u{a}tatea
+st\^{a}ng\u{a} a intervalului $\left[  -\frac{\pi}{2}+2n\pi,\frac{\pi}%
+{2}+2n\pi\right]  $, metoda lui Newton cu  $x_{0}=-\frac{\pi}{2}+2n\pi$ \c{s}i
+valoarea de pornire $x_{1}$ converge monoton descresc\u{a}tor c\u{a}tre
+$\alpha_{n}$, dac\u{a} $x_{1}$ este situat\u{a} \^{\i}n st\^{a}nga mijlocului
+intervalului. \^{I}ntr-adev\u{a}r, pentru $x_{0}=-\frac{\pi}{2}+2n\pi$, avem,
+pentru $n\geq1$,
+\begin{align*}
+x_{1} &  =x_{0}-\frac{f(x_{0})}{f^{\prime}(x_{0})}=-\frac{\pi}{2}+2n\pi
++\frac{1}{\cosh\left(  -\frac{\pi}{2}+2n\pi\right)  }\\
+&  <-\frac{\pi}{2}+2n\pi+\frac{1}{\cosh\left(  \frac{3\pi}{2}\right)  }%
+=2n\pi-1.55283...<2n\pi.
+\end{align*}
+Deoarece $f$ este concav\u{a} pe jum\u{a}tatea dreapt\u{a} a intervalului,
+metoda lui Newton cu valoarea de pornire egal\u{a} cu cap\u{a}tul drept
+converge monoton descresc\u{a}tor c\u{a}tre  $\beta_{n}$.
+\end{proof}
+
+
+\end{document}

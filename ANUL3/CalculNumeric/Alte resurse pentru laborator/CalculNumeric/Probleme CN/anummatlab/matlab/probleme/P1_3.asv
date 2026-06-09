@@ -1,0 +1,39 @@
+function  P1_3(n)
+%P1_3
+q=floor(n/1000);
+r=mod(n,1000)
+if q>=1
+    rez=double('M')*ones(1,q);
+end
+if r>=900
+    r=r-900;
+    rez=[rez,double('C'),double('M')];
+elseif r>=500
+    r=r-500;
+    rez=[rez,double('D')];
+end
+q=floor(r/100);
+r2=mod(r,100);
+if q>=1
+    rez=[rez,double('C')*ones(1,q)];
+end
+if r2>=90
+    r2=r2-90;
+    rez=[rez,double('X'),double('C')];
+elseif r2>=50
+    r2=r2-50;
+    rez=[rez,double('L')];
+end
+q=floor(r2/10);
+r3=mod(r,10);
+if q>=1
+    rez=[rez,double('X')*ones(1,q)];
+end
+if r3>=9
+    r3=r3-9;
+    rez=[rez,double('I'),double('X')];
+elseif r2>=5
+    r3=r3-5;
+    rez=[rez,double('L')];
+end
+fprintf('%s\n',char(rez))

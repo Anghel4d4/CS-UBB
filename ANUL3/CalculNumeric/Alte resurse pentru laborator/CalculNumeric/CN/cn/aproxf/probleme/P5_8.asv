@@ -1,0 +1,13 @@
+%P5_7
+f=@(x) exp(x.^2);
+fd=@(x) 2*x.*exp(x.^2);
+x=linspace(0,1,5);
+t=linspace(0,1,100);
+y=f(x); yd=fd(x);
+[a,b,c,d]=Hermitespline(x,y,yd);
+yg=valspline(x,a,b,c,d,t);
+k=1:5;
+x2=cos((2*k-1)*pi/(2*n));
+x2=(x2+1)/2;
+plot(t,f(t),t,yg)
+legend('f','spline Hermite',0)

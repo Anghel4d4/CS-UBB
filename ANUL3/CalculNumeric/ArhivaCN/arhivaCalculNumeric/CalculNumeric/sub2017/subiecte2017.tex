@@ -1,0 +1,258 @@
+\documentclass[12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Wednesday, May 31, 2017 13:26:34}
+%TCIDATA{LastRevised=Wednesday, June 07, 2017 21:02:52}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section{Subiectul 1}
+
+\begin{problem}
+\begin{enumerate}
+\item[(a)] S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma%
+\[
+\int_{0}^{1}\frac{1}{\sqrt{x(1-x)}}f(x)\mathrm{d}\,x=\sum_{k=1}^{n}%
+A_{k}f(x_{k})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate. (4p)
+
+\item[(b)] Folosind formula de la punctul (a), s\u{a} se scrie cod MATLAB care
+calculeaz\u{a}%
+\[
+\int_{0}^{1}\frac{1}{\sqrt{x(1-x)}}\sin(\pi x)\mathrm{d}\,x
+\]
+cu o precizie dat\u{a}. (Se pot folosi func\c{t}ii de la laborator) (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Efectu\^{a}nd schimbarea de variabil\u{a} $x=\frac{t+1}{2}$,
+integrala din enun\c{t} devine%
+\[
+\int_{0}^{1}\frac{1}{\sqrt{x(1-x)}}f(x)\mathrm{d}\,x=\int_{-1}^{1}%
+\frac{f\left(  \frac{t+1}{2}\right)  }{\sqrt{1-t^{2}}}\mathrm{d}\,t\text{.}%
+\]
+Vom folosi o formul\u{a} de tip Gauss cu ponderea $w(t)=\frac{1}{\sqrt
+{1-t^{2}}}$. Formula va fi
+\[
+\int_{0}^{1}\frac{1}{\sqrt{x(1-x)}}f(x)\mathrm{d}\,x=\sum_{k=1}^{n}%
+A_{k}f(x_{k})+R(f)
+\]
+cu
+\[
+A_{k}=\frac{\pi}{n},x_{k}=\frac{1+\cos\frac{2k-1}{2n}\pi}{2},
+\]
+iar restul%
+\[
+R_{n}(f)=\frac{f^{(2n)}(\xi)}{(2n)!}\int_{-1}^{1}T_{n}^{2}(t)\mathrm{d}%
+\,t=\frac{1}{(2)^{2n}(2n)!}\frac{\pi}{2^{2n+1}}f^{(2n)}(\xi).
+\]
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+\label{Gautschip4.19}Se consider\u{a} ecua\c{t}ia
+\[
+\tan x+\lambda x=0,\quad0<\lambda<1.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Ar\u{a}ta\c{t}i c\u{a} \^{\i}n intervalul $\left[  \frac{1}{2}%
+\pi,\pi\right]  $, ecua\c{t}ia are exact o r\u{a}d\u{a}cin\u{a}, $\alpha$. (1p)
+
+\item[(b)] Converge metoda lui Newton c\u{a}tre $\alpha\in\left[  \frac{1}%
+{2}\pi,\pi\right]  $, dac\u{a} aproxima\c{t}ia ini\c{t}ial\u{a} este
+$x_{0}=\pi$? Justifica\c{t}i r\u{a}spunsul. (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Graficele lui $y=\tan x$ \c{s}i $y=-\lambda x$ pentru $x>0$ se
+intersecteaz\u{a} \^{\i}ntr-un punct situat \^{\i}ntre $\frac{1}{2}\pi$ \c{s}i
+$\pi$, a c\u{a}rui abscis\u{a} este r\u{a}d\u{a}cina ecua\c{t}iei. Este
+singura r\u{a}d\u{a}cin\u{a} \^{\i}n acel interval.
+
+\item[(b)] Pentru $f(x)=\tan x+x$, avem, pe $\left[  \frac{1}{2}\pi
+,\pi\right]  $,%
+\begin{align*}
+f\left(  \frac{\pi}{2}+0\right)   &  =-\infty,~f\left(  \pi\right)
+=\lambda\pi\\
+f^{\prime}\left(  x\right)   &  =\frac{1}{\cos^{2}x}+\lambda>0,\\
+f^{\prime\prime}(x) &  =\frac{d}{dx}\left(  \frac{1}{\cos^{2}x}\right)
+=\frac{2}{\cos^{3}x}\sin x<0,
+\end{align*}
+deci  $f$ este cresc\u{a}toare \c{s}i concav\u{a}. Dac\u{a} metoda lui Newton
+se aplic\u{a} pentru  $x_{0}=$ $\pi$, atunci \c{s}irul aproximantelor este
+monoton cresc\u{a}tor dac\u{a} $x_{1}>\frac{\pi}{2}$. Dar,
+\[
+x_{1}=\pi-\frac{f\left(  \pi\right)  }{f^{\prime}\left(  \pi\right)  }%
+=\frac{\pi}{1+\lambda}>\frac{\pi}{2},
+\]
+c\u{a}ci $\lambda\in\lbrack0,1]$.
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+\section{Subiectul 2}
+
+\begin{problem}
+
+
+\begin{enumerate}
+\item[(a)] S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma%
+\[
+\int_{0}^{1}\sqrt{x(1-x)}f(x)\mathrm{d}\,x=A_{1}f(x_{1})+A_{2}f(x_{2}%
+)+A_{3}f(x_{3})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate. (3p)
+
+\item[(b)] Folosind formula de la punctul (a) pentru $n$ noduri, s\u{a} se
+scrie cod MATLAB care calculeaz\u{a}%
+\[
+\int_{0}^{1}\sqrt{x(1-x)}\sin(\pi x)\mathrm{d}\,x
+\]
+cu o precizie dat\u{a}. (Se pot folosi func\c{t}ii de la laborator). (2p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] Efectu\^{a}nd schimbarea de variabil\u{a} $x=\frac{t+1}{2}$,
+integrala din enun\c{t} devine%
+\[
+\int_{0}^{1}\sqrt{x(1-x)}f(x)\mathrm{d}\,x=\frac{1}{4}\int_{-1}^{1}%
+\sqrt{1-t^{2}}f\left(  \frac{t+1}{2}\right)  \mathrm{d}\,t
+\]
+Este o cuadratur\u{a} Gauss-Ceb\^{\i}\c{s}ev de spe\c{t}a a doua. Polinomul
+ortogonal este%
+\[
+\pi_{3}(x)=t^{3}-\frac{1}{2}t
+\]
+cu r\u{a}d\u{a}cinile $-\frac{1}{2}\sqrt{2}$, $0$, $\frac{1}{2}\sqrt{2}$
+($t_{k}=\cos\frac{k\pi}{n+1}$, $k=1,3$). Nodurile vor fi $t_{k}$, iar
+coeficien\c{t}ii
+\[
+A_{1}=\frac{\pi}{8},A_{2}=\frac{\pi}{4},A_{3}=\frac{\pi}{8}.
+\]
+Restul
+\[
+R(f)=\frac{f^{(6)}(\xi)}{6!}\int_{-1}^{1}\sqrt{1-t^{2}}\left(  t^{3}-\frac
+{1}{2}t\right)  ^{2}\mathrm{d}\,t=\frac{\pi}{92\,160}f^{(6)}(\xi)
+\]
+Revenind la substitu\c{t}ie, avem%
+\begin{align*}
+\int_{0}^{1}\sqrt{x(1-x)}f(x)\mathrm{d}\,x  & =\frac{1}{4}\left[  \frac{\pi
+}{8}f\left(  \frac{1-\frac{\sqrt{2}}{2}}{2}\right)  +\frac{\pi}{4}f\left(
+\frac{1}{2}\right)  +\frac{\pi}{8}f\left(  \frac{1+\frac{\sqrt{2}}{2}}%
+{2}\right)  \right.  \\
+& \left.  +\frac{\pi}{92\,160\cdot2^{6}}f^{(6)}(\zeta)\right]
+\end{align*}
+
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+Dac\u{a} $A>0$, atunci $\alpha=\sqrt{A}$ este r\u{a}d\u{a}cin\u{a} a
+ecua\c{t}iilor
+\[
+x^{2}-A=0,\qquad\frac{A}{x^{2}}-1=0.
+\]
+
+
+\begin{enumerate}
+\item[(a)] Explica\c{t}i de ce metoda lui Newton aplicat\u{a} primei
+ecua\c{t}ii converge pentru o valoare de pornire arbitrar\u{a} $x_{0}>0$.(1p)
+
+\item[(b)] Explica\c{t}i de ce metoda lui Newton aplicat\u{a} la a doua
+ecua\c{t}ie produce iterate pozitive $(x_{n})$ ce converg la $\alpha$ numai
+dac\u{a} $x_{0}$ este situat \^{\i}ntr-un interval $0<x_{0}<b$.
+Determina\c{t}i $b$. (2p)
+
+\item[(c)] Descrie\c{t}i \^{\i}n fiecare caz algoritmul (itera\c{t}ia,
+criteriul de oprire, valoarea de pornire).(1p)
+\end{enumerate}
+\end{problem}
+
+\begin{proof}
+[Solu\c{t}ie]
+
+\begin{enumerate}
+\item[(a)] \^{I}n primul caz,  $f(x)=x^{2}-A$ este convex\u{a} pe
+$\mathbb{R}_{+}$ \c{s}i cresc\u{a}toare pe $(0,\infty)$. Newton coverge pentru
+orice $x_{0}>0$. Altfel: dac\u{a} $x_{0}>\alpha$, atunci $\left(
+x_{n}\right)  $ converge monoton descresc\u{a}tor c\u{a}tre $\alpha$. Dac\u{a}
+$0<x_{0}<\alpha$, atunci $x_{1}>\alpha$, \c{s}i se ra\c{t}ioneaz\u{a} la fel.,
+pentru $n>1$. 
+
+\item[(b)] \^{I}n al doilea caz, $f(x)=$ $\frac{A}{x^{2}}-1$ este convex\u{a}
+$\mathbb{R}_{+}$ \c{s}i descrec\u{a}toare ($\lim_{x\searrow0}f(x)=\infty$ to
+$\lim_{x\rightarrow\infty}f(x)=-1$). Dac\u{a} $0<x_{0}<\alpha$, atunci
+$\left(  x_{n}\right)  $ converge  monoton cresc\u{a}tor c\u{a}tre $\alpha$.
+Dac\u{a} $x_{0}>\alpha$, trebui s\u{a} ne asigur\u{a}m c\u{a} $x_{1}>0$, ceea
+ce \^{\i}nseamn\u{a} c\u{a}
+\begin{align*}
+x_{1} &  =x_{0}-\frac{\frac{A}{x_{0}^{2}}-1}{-2\frac{A}{x_{0}^{3}}}>0,\quad
+x_{0}+x_{0}\frac{A-x_{0}^{2}}{2A}>0\\
+x_{0}\left(  3A-x_{0}^{2}\right)   &  >0,~x_{0}<\sqrt{3A}=:b.
+\end{align*}
+
+
+\item[(c)] Se alege $x_{0}\in(0,b)$, itera\c{t}ia
+\[
+x_{n+1}=x_{n}+x_{n}\frac{A-x_{0}^{2}}{2A}%
+\]
+criteriul%
+\[
+|x_{n+1}-x_{n}|<\varepsilon.
+\]
+
+\end{enumerate}
+\end{proof}
+
+
+\end{document}

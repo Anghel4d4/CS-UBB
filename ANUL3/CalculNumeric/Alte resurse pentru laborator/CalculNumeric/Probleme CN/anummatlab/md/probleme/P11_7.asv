@@ -1,0 +1,20 @@
+function P11_7
+f=@(x,y) y.*cos(x.^2);
+c=@(x) zeros(size(x));
+d=@(x) 1-x;
+%punctul a - reprezentarea
+x=[0,1,0]; y=[0,0,1]; niv=4;
+[lx,ly]=subdivizare(x,y,niv);
+tri = delaunay(lx,ly);
+Z=f(lx,ly);
+T=delaunay(lx,ly);
+trisurf(tri,lx,ly,Z)
+%punctul b - integrala pe patrat
+vi1=dblquad(iintgr
+%punctul c - integrala pe triunghi
+vi2=quaddblsx(f,0,1,c,d,1e-10)
+function z=intgr(x,y,f)
+%integrandul f(x,y) pe triunghi, zero inafara
+z=zeros(size(x));
+idom=find((x>=0) & (x<=1) & (y<=1-x));
+z(idom)=f(x(idom),y(idom));

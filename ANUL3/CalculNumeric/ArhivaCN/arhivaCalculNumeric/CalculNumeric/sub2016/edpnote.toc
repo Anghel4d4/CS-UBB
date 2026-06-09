@@ -1,0 +1,5 @@
+\contentsline {chapter}{Introduction}{vii}
+\contentsline {part}{I\hspace {1em}Ecua\c {t}ii cu derivate par\c {t}iale}{1}
+\contentsline {chapter}{\numberline {1}Introducere}{3}
+\contentsline {chapter}{\numberline {A}The First Appendix}{5}
+\contentsline {chapter}{Afterword}{7}

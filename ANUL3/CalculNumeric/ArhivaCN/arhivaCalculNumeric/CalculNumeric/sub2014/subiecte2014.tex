@@ -1,0 +1,364 @@
+\documentclass{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, May 20, 2014 11:40:15}
+%TCIDATA{LastRevised=Tuesday, May 20, 2014 13:59:01}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+\section{Subiectul 1}
+ 
+\begin{problem}
+Se consider\u{a} sistemul%
+\[
+\left[
+\begin{array}
+[c]{cc}%
+2 & 1\\
+-1 & 2
+\end{array}
+\right]  x=\left[
+\begin{array}
+[c]{c}%
+3\\
+1
+\end{array}
+\right]  .
+\]
+
+
+\begin{enumerate}
+\item S\u{a} se studieze convergen\c{t}a metodei lui Jacobi.
+
+\item De c\^{a}te itera\c{t}ii este nevoie pentru a aproxima solu\c{t}ia cu
+eroarea absolut\u{a} $\varepsilon$ dat\u{a}, dac\u{a} se ia $x^{(0)}%
+=[0,0]^{T}.$
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma
+\[
+\int_{-1}^{1}\sqrt{1-x^{2}}f(x)\mathrm{d}\,x=A_{1}f(1)+A_{2}f(x_{1})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate.
+\end{problem}
+
+\begin{problem}
+\begin{enumerate}
+\item Se consider\u{a} ecua\c{t}ia \^{\i}n $\mathbb{R}$ $f(x)=0$ cu
+r\u{a}d\u{a}cina $\alpha$ \c{s}i o metod\u{a} cu ordinul de
+convergen\c{t}\u{a} $p$ \c{s}i eroarea asimptotic\u{a} $C_{p}$. Dac\u{a} se
+fac $N_{p}$ opera\c{t}ii pe pas \c{s}i opera\c{t}iile de ini\c{t}ializare se
+ignor\u{a}, atunci num\u{a}rul total de opera\c{t}ii necesar pentru a aproxima
+solu\c{t}ia cu precizia $\varepsilon$ este%
+\begin{equation}
+T_{p}=\frac{N_{p}}{\log p}\log\left[  \frac{\frac{\log C_{p}}{p-1}%
++\log\varepsilon}{\frac{\log C_{p}}{p-1}+\log e_{0}}\right]  ,\tag{**}%
+\end{equation}
+unde baza logaritmului este arbitrar\u{a}, $e_{0}$ este eroarea ini\c{t}ial\u{a}.
+
+\item Se consider\u{a} calculul lui $\sqrt{a}$, $a>0$, cu metoda lui Newton, astfel:
+
+\begin{enumerate}
+\item Se pune $a=2^{2m}r$, $1/4\leq r<1$.
+
+\item Se calculeaz\u{a} $\sqrt{r}$ cu recuren\c{t}a
+\[
+x_{n+1}=\frac{1}{2}\left(  x_{n}+\frac{r}{x_{n}}\right)
+\]
+p\^{a}n\u{a} se atinge precizia $\varepsilon.$
+
+\item Rezultatul returnat este $z=2^{m}x_{N}$, unde $x_{N}$ este rezultatul de
+la punctul b.
+\end{enumerate}
+\end{enumerate}
+
+Da\c{t}i o margine superioar\u{a} a num\u{a}rului de itera\c{t}ii \c{s}i de
+opera\c{t}ii de la punctul (2.b) pentru a ob\c{t}ine precizia $eps$
+(epsilon-ul ma\c{s}inii) folosind formula (**).
+
+\emph{Indica\c{t}ie}: Fie $e_{n}=|x_{n}-\alpha|$ eroarea la pasul $n$. Se pune
+$e_{n+1}\approx C_{p}e_{n}^{p}$. Din condi\c{t}ia $e_{n}\approx\varepsilon$
+$\ $se scoate $n$. Eroarea asimptotic\u{a} pentru metoda lui Newton este
+$\frac{f^{\prime\prime}(\alpha)}{2f^{\prime}(\alpha)}$.
+\end{problem}
+
+\newpage
+
+\section{Subiectul 2}
+
+
+
+\begin{problem}
+Se consider\u{a} sistemul%
+\[
+\left[
+\begin{array}
+[c]{cc}%
+2 & 1\\
+1 & 2
+\end{array}
+\right]  x=\left[
+\begin{array}
+[c]{c}%
+3\\
+1
+\end{array}
+\right]  .
+\]
+
+
+\begin{enumerate}
+\item S\u{a} se studieze convergen\c{t}a metodei lui Jacobi.
+
+\item De c\^{a}te itera\c{t}ii este nevoie pentru a aproxima solu\c{t}ia cu
+eroarea absolut\u{a} $\varepsilon$ dat\u{a}, dac\u{a} se ia $x^{(0)}%
+=[0,0]^{T}.$
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma
+\[
+\int_{-1}^{1}\frac{1}{\sqrt{1-x^{2}}}f(x)\mathrm{d}\,x=A_{1}f(1)+A_{2}%
+f(x_{1})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate.
+\end{problem}
+
+\begin{problem}
+\begin{enumerate}
+\item Se consider\u{a} ecua\c{t}ia \^{\i}n $\mathbb{R}$ $f(x)=0$ cu
+r\u{a}d\u{a}cina $\alpha$ \c{s}i o metod\u{a} cu ordinul de
+convergen\c{t}\u{a} $p$ \c{s}i eroarea asimptotic\u{a} $C_{p}$. Dac\u{a} se
+fac $N_{p}$ opera\c{t}ii pe pas \c{s}i opera\c{t}iile de ini\c{t}ializare se
+ignor\u{a}, atunci num\u{a}rul total de opera\c{t}ii necesar pentru a aproxima
+solu\c{t}ia cu precizia $\varepsilon$ este%
+\begin{equation}
+T_{p}=\frac{N_{p}}{\log p}\log\left[  \frac{\frac{\log C_{p}}{p-1}%
++\log\varepsilon}{\frac{\log C_{p}}{p-1}+\log e_{0}}\right]  ,\tag{**}%
+\end{equation}
+unde baza logaritmului este arbitrar\u{a}, $e_{0}$ este eroarea ini\c{t}ial\u{a}.
+
+\item Se consider\u{a} calculul lui $\sqrt[3]{a}$, $a>0$, cu metoda lui
+Newton, astfel:
+
+\begin{enumerate}
+\item Se pune $a=2^{3m}r$, $1/8\leq r<1$.
+
+\item Se calculeaz\u{a} $\sqrt{r}$ cu recuren\c{t}a
+\[
+x_{n+1}=\frac{2}{3}\left(  x_{n}+\frac{r}{2x_{n}^{2}}\right)
+\]
+p\^{a}n\u{a} se atinge precizia $\varepsilon.$
+
+\item Rezultatul returnat este $z=2^{m}r_{N}$, unde $r_{N}$ este rezultatul de
+la punctul b.
+\end{enumerate}
+\end{enumerate}
+
+Da\c{t}i o margine superioar\u{a} a num\u{a}rului de itera\c{t}ii \c{s}i de
+opera\c{t}ii de la punctul (2.b) pentru a ob\c{t}ine precizia $eps$
+(epsilon-ul ma\c{s}inii) folosind formula (**).
+
+\emph{Indica\c{t}ie}: Fie $e_{n}=|x_{n}-\alpha|$ eroarea la pasul $n$. Se pune
+$e_{n+1}\approx C_{p}e_{n}^{p}$. Din condi\c{t}ia $e_{n}\approx\varepsilon$
+$\ $se scoate $n$. Eroarea asimptotic\u{a} pentru metoda lui Newton este
+$\frac{f^{\prime\prime}(\alpha)}{2f^{\prime}(\alpha)}$.
+\end{problem}
+
+\newpage
+
+\section{Subiectul 3}
+
+
+
+\begin{problem}
+Se consider\u{a} sistemul%
+\[
+\left[
+\begin{array}
+[c]{cc}%
+2 & 1\\
+1 & 2
+\end{array}
+\right]  x=\left[
+\begin{array}
+[c]{c}%
+3\\
+1
+\end{array}
+\right]  .
+\]
+
+
+\begin{enumerate}
+\item S\u{a} se studieze convergen\c{t}a metodei Gauss-Seidel.
+
+\item De c\^{a}te itera\c{t}ii este nevoie pentru a aproxima solu\c{t}ia cu
+eroarea absolut\u{a} $\varepsilon$ dat\u{a}, dac\u{a} se ia $x^{(0)}%
+=[0,0]^{T}.$
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma
+\[
+\int_{-1}^{1}\frac{1}{\sqrt{1-x^{2}}}f(x)\mathrm{d}\,x=A_{1}f(-1)+A_{2}%
+f(x_{1})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate.
+\end{problem}
+
+\begin{problem}
+\begin{enumerate}
+\item Se consider\u{a} ecua\c{t}ia \^{\i}n $\mathbb{R}$ $f(x)=0$ cu
+r\u{a}d\u{a}cina $\alpha$ \c{s}i o metod\u{a} cu ordinul de
+convergen\c{t}\u{a} $p$ \c{s}i eroarea asimptotic\u{a} $C_{p}$. Dac\u{a} se
+fac $N_{p}$ opera\c{t}ii pe pas \c{s}i opera\c{t}iile de ini\c{t}ializare se
+ignor\u{a}, atunci num\u{a}rul total de opera\c{t}ii necesar pentru a aproxima
+solu\c{t}ia cu precizia $\varepsilon$ este%
+\begin{equation}
+T_{p}=\frac{N_{p}}{\log p}\log\left[  \frac{\frac{\log C_{p}}{p-1}%
++\log\varepsilon}{\frac{\log C_{p}}{p-1}+\log e_{0}}\right]  ,\tag{**}%
+\end{equation}
+unde baza logaritmului este arbitrar\u{a}, $e_{0}$ este eroarea ini\c{t}ial\u{a}.
+
+\item Se consider\u{a} calculul lui $\frac{1}{a}$, $a>0$, cu metoda lui
+Newton, astfel:
+
+\begin{enumerate}
+\item Se pune $a=2^{m}r$, $1/2\leq r<1$.
+
+\item Se calculeaz\u{a} $1/r$ cu recuren\c{t}a
+\[
+x_{n+1}=x_{n}\left(  2-rx_{n}\right)
+\]
+p\^{a}n\u{a} se atinge precizia $\varepsilon.$
+
+\item Rezultatul returnat este $z=2^{-m}r_{N}$, unde $r_{N}$ este rezultatul
+de la punctul b.
+\end{enumerate}
+\end{enumerate}
+
+Da\c{t}i o margine superioar\u{a} a num\u{a}rului de itera\c{t}ii \c{s}i de
+opera\c{t}ii de la punctul (2.b) pentru a ob\c{t}ine precizia $eps$
+(epsilon-ul ma\c{s}inii) folosind formula (**).
+
+\emph{Indica\c{t}ie}: Fie $e_{n}=|x_{n}-\alpha|$ eroarea la pasul $n$. Se pune
+$e_{n+1}\approx C_{p}e_{n}^{p}$. Din condi\c{t}ia $e_{n}\approx\varepsilon$
+$\ $se scoate $n$. Eroarea asimptotic\u{a} pentru metoda lui Newton este
+$\frac{f^{\prime\prime}(\alpha)}{2f^{\prime}(\alpha)}$.
+\end{problem}
+
+\newpage
+
+\section{Subiectul 4}
+
+
+
+\begin{problem}
+Se consider\u{a} sistemul%
+\[
+\left[
+\begin{array}
+[c]{cc}%
+2 & 1\\
+-1 & 2
+\end{array}
+\right]  x=\left[
+\begin{array}
+[c]{c}%
+3\\
+1
+\end{array}
+\right]  .
+\]
+
+
+\begin{enumerate}
+\item S\u{a} se studieze convergen\c{t}a metodei Gauss-Seidel.
+
+\item De c\^{a}te itera\c{t}ii este nevoie pentru a aproxima solu\c{t}ia cu
+eroarea absolut\u{a} $\varepsilon$ dat\u{a}, dac\u{a} se ia $x^{(0)}%
+=[0,0]^{T}.$
+\end{enumerate}
+\end{problem}
+
+\begin{problem}
+S\u{a} se determine o formul\u{a} de cuadratur\u{a} de forma
+\[
+\int_{-1}^{1}\frac{1}{\sqrt{1-x^{2}}}f(x)\mathrm{d}\,x=A_{1}f(-1)+A_{2}%
+f(x_{1})+R(f)
+\]
+care s\u{a} aib\u{a} grad maxim de exactitate.
+\end{problem}
+
+
+
+\begin{problem}
+\begin{enumerate}
+\item Se consider\u{a} ecua\c{t}ia \^{\i}n $\mathbb{R}$ $f(x)=0$ cu
+r\u{a}d\u{a}cina $\alpha$ \c{s}i o metod\u{a} cu ordinul de
+convergen\c{t}\u{a} $p$ \c{s}i eroarea asimptotic\u{a} $C_{p}$. Dac\u{a} se
+fac $N_{p}$ opera\c{t}ii pe pas \c{s}i opera\c{t}iile de ini\c{t}ializare se
+ignor\u{a}, atunci num\u{a}rul total de opera\c{t}ii necesar apentru a
+aproxima solu\c{t}ia cu precizia $\varepsilon$ este%
+\begin{equation}
+T_{p}=\frac{N_{p}}{\log p}\log\left[  \frac{\frac{\log C_{p}}{p-1}%
++\log\varepsilon}{\frac{\log C_{p}}{p-1}+\log e_{0}}\right]  , \tag{**}%
+\end{equation}
+unde baza logaritmului este arbitrar\u{a}, $e_{0}$ este eroarea ini\c{t}ial\u{a}.
+
+\item Compara\c{t}i urm\u{a}toarele dou\u{a} metode pentru calculul \ lui
+$\sqrt{r}$ (num\u{a}rul de opera\c{t}ii) folosind formula (**). C\^{a}nd este
+de preferat una alteia?%
+\begin{align*}
+x_{n+1}  & =\frac{1}{2}\left(  x_{n}+\frac{r}{x_{n}}\right)  ,~p=2\\
+y_{n+1}  & =\frac{y_{n}\left(  y_{n}^{2}+r\right)  }{3y_{n}^{2}+r},~p=3
+\end{align*}
+
+\end{enumerate}
+
+\emph{Indica\c{t}ie}: Fie $e_{n}=|x_{n}-\alpha|$ eroarea la pasul $n$. Se pune
+$e_{n+1}\approx C_{p}e_{n}^{p}$. Din condi\c{t}ia $e_{n}\approx\varepsilon$
+$\ $se scoate $n$. Eroarea asimptotic\u{a} pentru metoda lui Newton este
+$\frac{f^{\prime\prime}(\alpha)}{2f^{\prime}(\alpha)}$.
+\end{problem}
+
+
+\end{document}

@@ -1,0 +1,3 @@
+Am facut la laborator rezolvaGaussSeidel si rezolvaJacobi, dar cand am vrut sa rulez pt exemplul din problema 2.35, da ceva eroare la inversa..
+Fisierul Jacobi.m l-am luat din cartea profului.
+Poate te ajuta.. sa vezi care e eroarea si de ce..

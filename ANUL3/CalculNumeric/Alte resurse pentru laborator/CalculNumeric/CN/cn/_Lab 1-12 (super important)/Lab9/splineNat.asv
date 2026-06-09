@@ -1,0 +1,12 @@
+function yi=splineNat(x, y, xi)
+a=sistem1(x,y)';
+yi=zeros(1, length(xi));
+for i=1:length(xi)
+    kf=find(xi(i)>x);
+    disp()
+    if ~isempty(kf)
+        k = kf(1);
+        disp(k)
+        yi(i)=polyval(a(4*k-3:4*k),xi(i));
+    end
+end

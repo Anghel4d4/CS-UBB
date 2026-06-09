@@ -1,0 +1,17 @@
+function [c,cc,er1,er2]=sphynxmoth
+load sphynx
+[w,ii]=sort(sphynx(:,1)); 
+r=sphynx(ii,2);
+lW=log(w);
+lr=log(r);
+A=[lW,ones(length(w),1)]
+c=A\lr;
+plot(w,r,'o',w,)
+A=[lW.^2,A];
+cc=A\lr;
+figure(2)
+vr2=polyval(cc,lW)
+plot(lW,lr,'o',lW,vr)
+er2=r-wr
+figure(3)
+plot(w,r,'o',w,exp(vr));

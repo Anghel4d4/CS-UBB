@@ -1,0 +1,581 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+   
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>FLOATING POINT DEMO</title>
+      <meta name="generator" content="MATLAB 7.8">
+      <meta name="date" content="2010-02-25">
+      <meta name="m-file" content="fpdemo"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body>
+      <div class="content">
+         <h1>FLOATING POINT DEMO</h1>
+         <!--introduction-->
+         <p>Shows several MATLAB floating point facilities such as: overflow,underflow, cancellation, machine epsilon, special quantities
+            IEEE standard
+         </p>
+         <!--/introduction-->
+         <h2>Contents</h2>
+         <div>
+            <ul>
+               <li><a href="#1">Floating Point Demo</a></li>
+               <li><a href="#2">Overflow/underflow</a></li>
+               <li><a href="#3">Cancellation</a></li>
+               <li><a href="#4">Epsilon</a></li>
+               <li><a href="#5">Signed zeros</a></li>
+               <li><a href="#6">Infinity</a></li>
+               <li><a href="#7">NaN</a></li>
+               <li><a href="#8">Check for NaN</a></li>
+               <li><a href="#9">Round to even</a></li>
+               <li><a href="#10">View hex/bin representations</a></li>
+            </ul>
+         </div>
+         <h2>Floating Point Demo<a name="1"></a></h2><pre class="codeinput">format <span class="string">long</span>
+format <span class="string">compact</span>
+</pre><h2>Overflow/underflow<a name="2"></a></h2><pre class="codeinput">1
+-1
+1e100
+1e-100
+1e400
+1e-400
+</pre><pre class="codeoutput">ans =
+     1
+ans =
+    -1
+ans =
+    1.000000000000000e+100
+ans =
+    1.000000000000000e-100
+ans =
+   Inf
+ans =
+     0
+</pre><h2>Cancellation<a name="3"></a></h2><pre class="codeinput">x=rand
+y=rand
+z=x-y
+
+x1=x+1e10
+y1=y+1e10
+z1=x1-y1
+
+z1-z
+</pre><pre class="codeoutput">x =
+   0.814723686393179
+y =
+   0.905791937075619
+z =
+  -0.091068250682440
+x1 =
+    1.000000000081472e+010
+y1 =
+    1.000000000090579e+010
+z1 =
+  -0.091068267822266
+ans =
+   -1.713982533679825e-008
+</pre><h2>Epsilon<a name="4"></a></h2><pre class="codeinput">1+1e-20
+(1+1e-20)-1
+1+1e-16
+1+2e-16
+(1+2e-16)-1
+
+e=1;
+<span class="keyword">while</span> (1+e&gt;1) e=e/2, <span class="keyword">end</span> <span class="comment">% Don't optimize!</span>
+eps
+b=2^50
+(b+e*b)-b
+</pre><pre class="codeoutput">ans =
+     1
+ans =
+     0
+ans =
+     1
+ans =
+   1.000000000000000
+ans =
+    2.220446049250313e-016
+e =
+   0.500000000000000
+e =
+   0.250000000000000
+e =
+   0.125000000000000
+e =
+   0.062500000000000
+e =
+   0.031250000000000
+e =
+   0.015625000000000
+e =
+   0.007812500000000
+e =
+   0.003906250000000
+e =
+   0.001953125000000
+e =
+    9.765625000000000e-004
+e =
+    4.882812500000000e-004
+e =
+    2.441406250000000e-004
+e =
+    1.220703125000000e-004
+e =
+    6.103515625000000e-005
+e =
+    3.051757812500000e-005
+e =
+    1.525878906250000e-005
+e =
+    7.629394531250000e-006
+e =
+    3.814697265625000e-006
+e =
+    1.907348632812500e-006
+e =
+    9.536743164062500e-007
+e =
+    4.768371582031250e-007
+e =
+    2.384185791015625e-007
+e =
+    1.192092895507813e-007
+e =
+    5.960464477539063e-008
+e =
+    2.980232238769531e-008
+e =
+    1.490116119384766e-008
+e =
+    7.450580596923828e-009
+e =
+    3.725290298461914e-009
+e =
+    1.862645149230957e-009
+e =
+    9.313225746154785e-010
+e =
+    4.656612873077393e-010
+e =
+    2.328306436538696e-010
+e =
+    1.164153218269348e-010
+e =
+    5.820766091346741e-011
+e =
+    2.910383045673370e-011
+e =
+    1.455191522836685e-011
+e =
+    7.275957614183426e-012
+e =
+    3.637978807091713e-012
+e =
+    1.818989403545857e-012
+e =
+    9.094947017729282e-013
+e =
+    4.547473508864641e-013
+e =
+    2.273736754432321e-013
+e =
+    1.136868377216160e-013
+e =
+    5.684341886080802e-014
+e =
+    2.842170943040401e-014
+e =
+    1.421085471520200e-014
+e =
+    7.105427357601002e-015
+e =
+    3.552713678800501e-015
+e =
+    1.776356839400251e-015
+e =
+    8.881784197001252e-016
+e =
+    4.440892098500626e-016
+e =
+    2.220446049250313e-016
+e =
+    1.110223024625157e-016
+ans =
+    2.220446049250313e-016
+b =
+    1.125899906842624e+015
+ans =
+     0
+</pre><h2>Signed zeros<a name="5"></a></h2><pre class="codeinput">0
++0
+-0
+</pre><pre class="codeoutput">ans =
+     0
+ans =
+     0
+ans =
+     0
+</pre><h2>Infinity<a name="6"></a></h2><pre class="codeinput">1/0
+-1/0
+0/0
+
+inf
+1/inf
+-1/inf
+-1/-inf
+
+2*inf
+inf+inf
+inf^inf
+</pre><pre class="codeoutput">ans =
+   Inf
+ans =
+  -Inf
+ans =
+   NaN
+ans =
+   Inf
+ans =
+     0
+ans =
+     0
+ans =
+     0
+ans =
+   Inf
+ans =
+   Inf
+ans =
+   Inf
+</pre><h2>NaN<a name="7"></a></h2><pre class="codeinput">inf-inf
+inf/inf
+0/0
+nan+123
+</pre><pre class="codeoutput">ans =
+   NaN
+ans =
+   NaN
+ans =
+   NaN
+ans =
+   NaN
+</pre><h2>Check for NaN<a name="8"></a></h2><pre class="codeinput">x=nan;
+x==nan
+x==x
+
+isnan([1,2,3,nan,inf])
+isinf([1,2,3,nan,inf])
+</pre><pre class="codeoutput">ans =
+     0
+ans =
+     0
+ans =
+     0     0     0     1     0
+ans =
+     0     0     0     0     1
+</pre><h2>Round to even<a name="9"></a></h2><pre class="codeinput">e=eps/2
+1+e
+1+2*e
+((1+2*e)-1)/e
+((1+3*e)-1)/e
+((1+4*e)-1)/e
+[0:16; ((1+(0:16)*e)-1)/e]'
+</pre><pre class="codeoutput">e =
+    1.110223024625157e-016
+ans =
+     1
+ans =
+   1.000000000000000
+ans =
+     2
+ans =
+     4
+ans =
+     4
+ans =
+     0     0
+     1     0
+     2     2
+     3     4
+     4     4
+     5     4
+     6     6
+     7     8
+     8     8
+     9     8
+    10    10
+    11    12
+    12    12
+    13    12
+    14    14
+    15    16
+    16    16
+</pre><h2>View hex/bin representations<a name="10"></a></h2><pre class="codeinput">format <span class="string">hex</span>
+
+0
+-0
+inf
+-inf
+nan
+-nan
+123123+nan
+1
+2
+(1:10)'
+
+xs=[0,-0,inf,-inf,nan,-nan,1:10,1+(0:10)*2^-23,2-(10:-1:0)*2^-23];
+format <span class="string">short</span>
+<span class="keyword">for</span> x=xs
+  fprintf(<span class="string">'%10.8g %s\n'</span>,x,num2bin(single(x),true));
+  <span class="comment">%pause</span>
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">ans =
+   0000000000000000
+ans =
+   8000000000000000
+ans =
+   7ff0000000000000
+ans =
+   fff0000000000000
+ans =
+   fff8000000000000
+ans =
+   7ff8000000000000
+ans =
+   fff8000000000000
+ans =
+   3ff0000000000000
+ans =
+   4000000000000000
+ans =
+   3ff0000000000000
+   4000000000000000
+   4008000000000000
+   4010000000000000
+   4014000000000000
+   4018000000000000
+   401c000000000000
+   4020000000000000
+   4022000000000000
+   4024000000000000
+         0 0 00000000 00000000000000000000000
+        -0 0 00000000 00000000000000000000000
+       Inf 0 11111111 00000000000000000000000
+      -Inf 1 11111111 00000000000000000000000
+       NaN 1 11111111 10000000000000000000000
+       NaN 1 11111111 10000000000000000000000
+         1 0 01111111 00000000000000000000000
+         2 0 10000000 00000000000000000000000
+         3 0 10000000 10000000000000000000000
+         4 0 10000001 00000000000000000000000
+         5 0 10000001 01000000000000000000000
+         6 0 10000001 10000000000000000000000
+         7 0 10000001 11000000000000000000000
+         8 0 10000010 00000000000000000000000
+         9 0 10000010 00100000000000000000000
+        10 0 10000010 01000000000000000000000
+         1 0 01111111 00000000000000000000000
+ 1.0000001 0 01111111 00000000000000000000001
+ 1.0000002 0 01111111 00000000000000000000010
+ 1.0000004 0 01111111 00000000000000000000011
+ 1.0000005 0 01111111 00000000000000000000100
+ 1.0000006 0 01111111 00000000000000000000101
+ 1.0000007 0 01111111 00000000000000000000110
+ 1.0000008 0 01111111 00000000000000000000111
+  1.000001 0 01111111 00000000000000000001000
+ 1.0000011 0 01111111 00000000000000000001001
+ 1.0000012 0 01111111 00000000000000000001010
+ 1.9999988 0 01111111 11111111111111111110110
+ 1.9999989 0 01111111 11111111111111111110111
+  1.999999 0 01111111 11111111111111111111000
+ 1.9999992 0 01111111 11111111111111111111001
+ 1.9999993 0 01111111 11111111111111111111010
+ 1.9999994 0 01111111 11111111111111111111011
+ 1.9999995 0 01111111 11111111111111111111100
+ 1.9999996 0 01111111 11111111111111111111101
+ 1.9999998 0 01111111 11111111111111111111110
+ 1.9999999 0 01111111 11111111111111111111111
+         2 0 10000000 00000000000000000000000
+</pre><p class="footer"><br>
+            Published with MATLAB® 7.8<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+%% FLOATING POINT DEMO
+% Shows several MATLAB floating point facilities such as:
+% overflow,underflow, cancellation, machine epsilon, special quantities
+% IEEE standard
+
+%% Floating Point Demo
+% 
+
+format long
+format compact
+
+%% Overflow/underflow
+1
+-1
+1e100
+1e-100
+1e400
+1e-400
+
+%% Cancellation
+
+x=rand
+y=rand
+z=x-y
+
+x1=x+1e10
+y1=y+1e10
+z1=x1-y1
+
+z1-z
+
+%% Epsilon
+
+1+1e-20
+(1+1e-20)-1
+1+1e-16
+1+2e-16
+(1+2e-16)-1
+
+e=1;
+while (1+e>1) e=e/2, end % Don't optimize!
+eps
+b=2^50
+(b+e*b)-b
+
+%% Signed zeros
+
+0
++0
+-0
+
+%% Infinity
+
+1/0
+-1/0
+0/0
+
+inf
+1/inf
+-1/inf
+-1/-inf
+
+2*inf
+inf+inf
+inf^inf
+
+%% NaN
+
+inf-inf
+inf/inf
+0/0
+nan+123
+
+%% Check for NaN
+
+x=nan;
+x==nan
+x==x
+
+isnan([1,2,3,nan,inf])
+isinf([1,2,3,nan,inf])
+
+%% Round to even
+
+e=eps/2
+1+e
+1+2*e
+((1+2*e)-1)/e
+((1+3*e)-1)/e
+((1+4*e)-1)/e
+[0:16; ((1+(0:16)*e)-1)/e]'
+
+%% View hex/bin representations
+
+format hex
+
+0
+-0
+inf
+-inf
+nan
+-nan
+123123+nan
+1
+2
+(1:10)'
+
+xs=[0,-0,inf,-inf,nan,-nan,1:10,1+(0:10)*2^-23,2-(10:-1:0)*2^-23];
+format short
+for x=xs
+  fprintf('%10.8g %s\n',x,num2bin(single(x),true));
+  %pause
+end
+
+##### SOURCE END #####
+-->
+   </body></html>

@@ -1,0 +1,108 @@
+Traiectoria este o elipsa => ecuatia implicita x^2 = a* y^2 + b*x*y + c*x + d*y + e
+
+
+
+a * y1 ^ 2 + b * x1 * y1 + c * x1 + d * y1 + e = x1 ^2
+
+a* y2^2 + b*x2*y2 + c*x2 + d*y2 + e = x2 ^2
+.
+.
+.
+a* y10^2 + b * x10 * y10 + c * x10 + d * y10 + e = x10 ^2
+_________________________________________________________
+prea multe ecuatii(10)
+prea putine necunoscute(5)
+__________________________________________________________
+
+De obicei astfel de sisteme nu au solutie (Se numesc sisteme SUPRADIMENSIONATE)
+
+
+
+Se rezolva cu METODA CELOR MAI MICI PATRATE
+
+
+
+NOTATII 
+_______________________________________________________________
+x,y apartin  lui R ^ n -produs scalar euclidian  (x,y) indice 2 
+
+(x, y)2 = x1* y1 + x2 * y2 + .... + xn * yn = x ^ (-1) * y1
+
+ x, y vectori coloane  x=( x1, ..., x10) y=(y10....y10)
+
+NORMA EUCLIDIANA ||x|| indice 2 = sqrt( (x, x) indice 2) = sqrt( x1 ^ 2 + ... + xn ^ 2)
+ 
+A- matricea sistemului anterior
+L(alpha) - vector coloana (a;b;c;d;e)
+B(beta) - vector coloana (x1; x2; ...; x10)
+
+
+Sistemul poate fi scris ca A*L = B => sistem supradeterminat, in general, nu are solurie
+
+Cautam L^ in ||A * L^ - B || ^ 2 = min indice L ||A*L - B|| ^2 indice 2 => L^ este solutie a stistemului : (**) (A ^ t * A) * L^ = A ^t * B )
+
+																											in (**) A nu e alpha, B este beta
+
+_________________________________________________________________________________________________________________________________________________
+DEMONSTRATIE
+
+E(L) = ||A*L^-B|| ^ 2 indice 2 expresia careia vreau sa ii calculez minimul
+
+E(L^) = min E(L)
+
+E:R^5 -> R, cu L^punct de minim  => L^punct cirtic -> derivatele partiale ale lui R se anuleaza in L^ => Sistemul (**)
+
+
+
+
+prb 3 din lab
+Cum se aplica metoda 
+
+fie sistemul supradimensionat
+
+x1 + x2+ x3 = 89
+x1 + x2     = 67
+     x2+ x3 = 53
+x1          = 35
+         x3 = 20
+
+
+
+
+matricea
+1 1 1
+1 1 0
+0 1 1
+1 0 0
+0 0 1
+
+
+
+prb 1
+
+P1=fct polinomiala de grad <= n
+f:[a,b] : R
+
+
+Cautam fi^ = Pn ai dist(f, fi^) - in dist(f, fi) unde fi apartine lui Pn
+(cautam un polinom de grad cel mult n a. i distanta de la f la fi sa fie minima)
+
+In cazul discret
+t= vector coloana  *=(t1;...;tn )
+dist(f, fi) = ||f(t) - fi(t)|| indice 2 = sqrt ( (f(t1) - fi(t1)) ^2 +...+ f(tm) - fi(tm)) ^2
+
+fi apatine Pn => fi(x) = c0 +c1*x + ,,,+ cn* x^n
+								  n
+E(c0,....cn) = (dist (f, fi))^2 = sum (f(tk) - fi(tk))^20
+								  k=1
+fi(tk ) = c0+ c1 * tk + ... + cn * t;
+
+E(c0,....cn) = min E(c0,....cn)
+=> c^ punct de minim => c^ punct critic => E / ci (c^) = 0, i= 0...n 
+                                            (e in raport cu ci)
+
+											=> dist(f, c0^ + ... cn^ * x^n)
+
+ 
+
+

@@ -1,0 +1,36 @@
+function [L,U,P,Q]=luptpiv(A)
+%LUP2 descompunerea LUP a matricei A cu pivotare totala
+%apel [L,U,P,Q]=lup(A)
+%interschimbarea logica a liniilor
+
+[m,n]=size(A);
+P=zeros(m,n); Q=P;
+pivl=1:m; pivc=1:m;
+for i=1:m-1
+    %pivotare
+    [p,q]=findpiv(abs(A(pivl(i:n),pivc(i:n)))); %pivotare
+    p=p+i-1; q=q+i-1;
+    if p~=i %interschimbare linii
+        pivl([i,p])=pivl([p,i]);
+    end
+    if q~=i %interschimbare linii
+        pivc([i,q])=pivc([q,i]);
+    end
+    %complement Schur
+    lin=i+1:m;
+    A(pivl(lin),pivc(i))=A(pivl(lin),pivc(i))/A(pivl(i),pivc(i));
+    A(pivl(lin),pivc(lin))=A(pivl(lin),pivc(lin))-...
+        A(pivl(lin),pivc(i))*A(pivl(i),pivc(lin));
+end;
+for i=1:m
+    P(i,pivl(i))=1;
+end;
+for i=1:m
+    Q(i,pivc(i))=1;
+end;
+U=triu(A(pivl,pivc));
+L=tril(A(pivl,pivc),-1)+eye(m);
+
+function [i,j]=findpiv(A)
+u=max(A(:));
+[i,j]=find(A==u);

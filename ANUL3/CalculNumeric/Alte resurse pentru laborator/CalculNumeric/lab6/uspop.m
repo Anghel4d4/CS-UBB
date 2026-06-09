@@ -1,0 +1,13 @@
+f = @(x) 1./(1 + x.^2);
+n = 60;
+k=0:n;
+x =sort(5 * cos((2*k + 1)*pi/(2*n + 2)));
+y=f(x);
+%c = mcmmpd(x, y, 3);
+%m = mean(x);
+% s = std(x); 
+% t = (x-m)/s;
+t = linspace(-5, 5, 400);
+c = mcmmpd(x, y, 15);
+p = polyval(c, t);
+plot(x, y,'o', t, p);

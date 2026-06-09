@@ -1,0 +1,12 @@
+%P5_5
+n=input('n=');
+t=linspace(0,1,300);
+%noduri echidistante
+x1=linspace(0,1,n);
+Lu=Lebesgue(x1,t);
+k=1:n;
+x2=cos((2*k-1)*pi/(2*n));
+x2=sort((x2+1)/2);
+Lc=Lebesgue(x,t);
+plot(t,Lu,t,Lc);
+legend('echidistante','Cebisev')

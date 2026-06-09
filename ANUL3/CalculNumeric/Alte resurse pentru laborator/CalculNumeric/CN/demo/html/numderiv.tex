@@ -1,0 +1,147 @@
+
+% This LaTeX was auto-generated from an M-file by MATLAB.
+% To make changes, update the M-file and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\section*{Derivare numerica}
+
+
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Deducerea aproximarii
+   \item Exemplu
+   \item Precizia maxima
+   \item Sursa neplacerii
+   \item Conditionarea absoluta
+   \item Conditionarea relativa
+\end{itemize}
+
+
+\subsection*{Deducerea aproximarii}
+
+\begin{par}
+Utilizand formula lui Taylor
+\end{par} \vspace{1em}
+\begin{par}
+$$f(x+h) = f(x) +hf'(x) + \frac{h^2}{2}f''(\xi), \xi \in [x,x+h]$$
+\end{par} \vspace{1em}
+\begin{par}
+se obtine
+\end{par} \vspace{1em}
+\begin{par}
+$$f'(x) = \frac{f(x+h)-f(x)}{h}-\frac{h}{2}f''(\xi)$$
+\end{par} \vspace{1em}
+\begin{par}
+Termenul $-\frac{h}{2}f''(\xi)$ este \textbf{eroarea de trunchiere} sau \textbf{eroarea de discretizare} la aproximarea lui $f'(x)$ prin $\frac{f(x+h)-f(x)}{h}$. Eroarea este $O(h)$ si spunem ca precizia este de ordinul I. La derivarea numerica vom presupune ca $x+h$ si $x$ se reprezinta exact, iar erorile se comit doar la evaluarea lui $f(x+h)$ si $f(x)$. Ignorand erorile de rotunjire la scadere si impartire, se calculeaza
+\end{par} \vspace{1em}
+\begin{par}
+$$\frac{f(x+h)(1+\delta_{1})-f(x)(1+\delta_2)}{h}=\frac{f(x+h)-f(x)}{h}+ \frac{\delta_1f(x+h)-\delta_2f(x)}{h}$$
+\end{par} \vspace{1em}
+\begin{par}
+Deoarece $|\delta_1|<eps$ si $|\delta_2|<eps$, eroare de rotunjire este mai mica sau egala cu $2eps|f(x)|/h$, pentru $h$ mic. De notat ca eroarea de trunchiere este proportionala cu $h$, iar eroarea de rotunjire este proportionala cu $1/h$. Micsorarea lui $h$  micsoreaza eroare de trunchiere, dar creste eroarea de rotunjire.
+\end{par} \vspace{1em}
+
+
+\subsection*{Exemplu}
+
+\begin{par}
+Luam $f(x)=\sin x$ si $x=\pi/4$. Atunci $f'(x)=\cos x$ si $f''(x)=-\sin x$, deci eroarea de trunchiere este de aproximativ $\sqrt{2}h/4$, iar eroarea de rotunjire este de aproximativ $\sqrt{2} eps/h$
+\end{par} \vspace{1em}
+\begin{verbatim}
+x = pi/4;
+h = 10.^(-(1:16))';
+d = (sin(x+h)-sin(x))./h;
+[d, sqrt(2)/2*ones(size(d)), abs(d-cos(x))]
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}
+ans =
+
+    0.6706    0.7071    0.0365
+    0.7036    0.7071    0.0035
+    0.7068    0.7071    0.0004
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7071    0.7071    0.0000
+    0.7083    0.7071    0.0012
+    0.7105    0.7071    0.0034
+    0.7772    0.7071    0.0700
+    1.1102    0.7071    0.4031
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{Precizia maxima}
+
+\begin{par}
+Precizia maxima se obtine daca cele doua erori sunt aproximativ egale
+\end{par} \vspace{1em}
+\begin{par}
+$$\frac{\sqrt{2}h}{4} = \frac{\sqrt{2}eps}{h} \Rightarrow h=2\sqrt{eps}$$
+\end{par} \vspace{1em}
+\begin{par}
+Eroarea este de ordinul $\sqrt{eps}$
+\end{par} \vspace{1em}
+\begin{verbatim}
+ho = 2*sqrt(eps);
+do = (sin(x+ho)-sin(x))./ho;
+[ho, do]
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}
+ans =
+
+    0.0000    0.7071
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{Sursa neplacerii}
+
+\begin{par}
+Sursa neplacerii este \textit{algoritmul} nu problema determinarii
+\end{par} \vspace{1em}
+\begin{par}
+$$\frac{d}{dx}\left. \sin{x}\right|_{x=\pi/4} =\left. \cos x \right|_{x=\pi/4}=\frac{\sqrt{2}}{2}$$
+\end{par} \vspace{1em}
+\begin{par}
+care este bine conditionata
+\end{par} \vspace{1em}
+
+
+\subsection*{Conditionarea absoluta}
+
+\begin{par}
+$$\kappa(x)=\left| -\sin x\right|_{x=\pi/4}=\frac{\sqrt{2}}{2}$$
+\end{par} \vspace{1em}
+
+
+\subsection*{Conditionarea relativa}
+
+\begin{par}
+$$cond(f)(x)=\left | \frac{x \sin x}{\cos x}\right|_{x=\pi/4}=\frac{\pi}{4}.$$
+\end{par} \vspace{1em}
+
+
+
+\end{document}
+    

@@ -1,0 +1,39 @@
+function display(g)
+
+if isequal(get(0,'FormatSpacing'),'compact')
+    if numel(g) == 1
+      if (isempty(g))
+        disp([inputname(1) ' = empty fun'])
+      else
+        disp([inputname(1) ' = column fun'])
+        disp([g.vals])
+      end      
+    else
+        disp([inputname(1) ' = vector of funs'])
+        for k = 1:numel(g)
+            disp(['length of fun' num2str(k) ': ' num2str(length(g(k)))]);
+        end
+    end 
+else
+    if numel(g) == 1        
+        if (isempty(g))
+            disp(' ')
+            disp([inputname(1) ' = empty fun'])
+            disp(' ')
+        else
+          disp(' ')
+          disp([inputname(1) ' = column fun']);
+          disp(' ')
+          disp([g.vals])
+          disp(' ')
+        end
+    else
+        disp(' ')
+        disp([inputname(1) ' = vector of funs'])
+        disp(' ')
+        for k = 1:numel(g)
+            disp(['length of fun ' num2str(k) ': ' num2str(length(g(k)))]);
+        end
+        disp(' ')
+    end     
+end

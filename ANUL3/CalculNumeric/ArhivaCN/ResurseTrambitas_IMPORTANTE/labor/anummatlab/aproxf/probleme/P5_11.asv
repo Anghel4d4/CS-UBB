@@ -1,0 +1,10 @@
+%P5_5
+clf
+x=-5:5;
+y=[0,0,0,1,1,1,0,0,0,0,0];
+t=linspace(-5,5,200);
+c=polyfit(x,y,7);
+y1=polyval(c,t);
+y2=lagr(x,y,t);
+plot(x,y,'o't,y1,t,y2);
+legend('mcmmp','Lagrange',0)

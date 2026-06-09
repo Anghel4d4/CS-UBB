@@ -1,0 +1,7 @@
+%(a)
+%[z,ni]=Newton(@f,@fd,2)
+%Pt x_0=2 met lui Newton depaseste nr maxim de iteratii
+[z,ni]=Newton(@f,@fd,-1.3)
+%pt x_0 intre -1.3 si 1.3 metoda converge
+
+

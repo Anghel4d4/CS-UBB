@@ -1,0 +1,93 @@
+\documentclass{article}%
+\usepackage{amsmath}%
+\setcounter{MaxMatrixCols}{30}%
+\usepackage{amsfonts}%
+\usepackage{amssymb}%
+\usepackage{graphicx}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Wednesday, June 15, 2016 09:30:58}
+%TCIDATA{LastRevised=Wednesday, June 15, 2016 09:40:40}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+
+\begin{enumerate}
+\item[\textbf{P1}.] S\u{a} se stabileasc\u{a} formulele%
+\begin{align*}
+f^{\prime}(x)  & =\frac{f(x+h)-f(x-h)}{2h}+O(h^{2})\\
+f^{\prime\prime}(x)  & =\frac{f(x+h)-2f(x)+f(x-h)}{h^{2}}+O(h^{2})
+\end{align*}
+deriv\^{a}nd formula de interpolare a lui Lagrange.
+
+\item[\textbf{P2}.] 
+
+\begin{enumerate}
+\item[(a)] Consider\u{a}m itera\c{t}ia $x_{n+1}=F(x_{n})$ cu punctul fix
+$\alpha$, care diverge deoarece $|F^{\prime}(\alpha)|>1$. Ar\u{a}ta\c{t}i
+\ c\u{a} itera\c{t}ia%
+\[
+x_{n+1}=F^{-1}(x_{n})
+\]
+converge c\u{a}tre $\alpha$.
+
+\item[(b)] Aplica\c{t}i rezultatul de mai sus pentru a calcula cea mai
+mic\u{a} r\u{a}d\u{a}cin\u{a} pozitiv\u{a} a ecua\c{t}iei $x-\tan x=0.$
+\end{enumerate}
+\end{enumerate}
+
+\bigskip
+
+\begin{enumerate}
+\item[\textbf{P1}.] S\u{a} se stabileasc\u{a} formulele%
+\begin{align*}
+f^{\prime}(x)  & =\frac{f(x+h)-f(x-h)}{2h}+O(h^{2})\\
+f^{\prime\prime}(x)  & =\frac{f(x+h)-2f(x)+f(x-h)}{h^{2}}+O(h^{2})
+\end{align*}
+deriv\^{a}nd formula de interpolare a lui Lagrange.
+
+\item[\textbf{P2}.] 
+
+\begin{enumerate}
+\item[(a)] Consider\u{a}m itera\c{t}ia $x_{n+1}=F(x_{n})$ cu punctul fix
+$\alpha$, care diverge deoarece $|F^{\prime}(\alpha)|>1$. Ar\u{a}ta\c{t}i
+\ c\u{a} itera\c{t}ia%
+\[
+x_{n+1}=F^{-1}(x_{n})
+\]
+converge c\u{a}tre $\alpha$.
+
+\item[(b)] Aplica\c{t}i rezultatul de mai sus pentru a calcula cea mai
+mic\u{a} r\u{a}d\u{a}cin\u{a} pozitiv\u{a} a ecua\c{t}iei $x-\tan x=0.$
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

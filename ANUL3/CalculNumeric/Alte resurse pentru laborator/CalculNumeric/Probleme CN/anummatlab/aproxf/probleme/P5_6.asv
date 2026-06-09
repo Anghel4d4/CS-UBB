@@ -1,0 +1,12 @@
+%P5_6
+clf
+axis([0,1,0,1]); hold on
+[x,y]=ginput;
+n=length(x);
+tn=linspace(0,1,n);
+t=linspace(0,1,300);
+%cu interpolare lagrange
+xg=lagr(tn,x,t);
+yg=lagr(tn,y,t);
+plot(x,y,'o',xg,yg,'-')
+
